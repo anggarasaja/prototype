@@ -1,0 +1,10 @@
+RewriteEngine on
+
+ Rewriterule ^content/?                            \/menporamaps/cms/isi.php
+ Rewriterule ^proses/?                            \/menporamaps/cms/aksi.php
+
+ #Rewriterule ^api/?                            \/gundar/inaCorner/cms/api.php
+
+
+ Rewriterule ^login/?                            \/menporamaps/cms/core/login_proses.php
+ Rewriterule ^quit/?                            \/menporamaps/cms/logout.php
