@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Aceh",
-        "color": "#FF920A"
+        "color": "yellow"
       },
       "geometry": {
         "type": "MultiPolygon",

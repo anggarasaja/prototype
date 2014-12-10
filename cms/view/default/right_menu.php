@@ -49,7 +49,7 @@
                             <a href="<?=$url_rewrite?>content/home"><i class="fa fa-home  fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="<?=$url_rewrite?>content/today"><i class="fa fa-calendar  fa-fw"></i> Today's  Festivial</a>
+                            <a href="<?=$url_rewrite?>content/today"><i class="fa fa-user  fa-fw"></i> Input Data Atlet</a>
                         </li>
                         <li>
                              <a href="<?=$url_rewrite?>"><i class="fa fa-legal fa-fw"></i> About Indonesia<span class="fa arrow"></span></a>

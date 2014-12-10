@@ -28,17 +28,17 @@ $algoritma = "rijndael-256";
 $mode = "cfb";
 $secretkey = "menpora1234";
 $TITLE="CMS GIS V2";
-$url_rewrite = "http://localhost/menporamaps/cms/";
-$url_img = "http://localhost/menporamaps/cms/";
+$url_rewrite = "http://localhost/prototype/cms/";
+$url_img = "http://localhost/prototype/cms/";
 
-$REQUEST="menporamaps/cms/content";
-$PROSES_REQUEST="menporamaps/cms/proses";
+$REQUEST="prototype/cms/content";
+$PROSES_REQUEST="prototype/cms/proses";
 
 $domain = "localhost";
-$path="/srv/www/htdocs/menporamaps/cms/";
+$path="/srv/www/htdocs/prototype/cms/";
 
-$path_upload="/srv/www/htdocs/menporamaps/img/";
-$path_upload_album="/srv/www/htdocs/menporamaps/album";
+$path_upload="/srv/www/htdocs/prototype/img/";
+$path_upload_album="/srv/www/htdocs/prototype/album";
 
 class config {
 
@@ -46,7 +46,7 @@ class config {
      public $db_user = "root";
      public $db_pass = "";
      public $database = "gis_v2";
-     public $url_rewrite_class = "http://localhost/menporamaps/cms";
+     public $url_rewrite_class = "http://localhost/prototype/cms";
      public $session_expired_time = ""; //in second
      public $hashing_number = "d4t4b4s3_m3np0r41235";
      public $debug = 1;

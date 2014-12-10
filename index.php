@@ -242,20 +242,7 @@
     			createMarkersknpi(beach[0], beach[1], beach[2]);
     		}
 		}
-				
-		function load_map(dataValue) {
-      	var propinsi = dataValue.value;
-			$.ajax({
-				type:"POST",
-				url : "ajax/load_peta.php",
-				data: {propinsi : propinsi},
-				dataType: 'json',
-				success: function (loc) {
-	   			map.panTo(new google.maps.LatLng(loc.lat, loc.lng));
-   				map.setZoom(8);
-    			}
-			});
-		}	
+					
 		function toggle(source) {
   			checkboxes = document.getElementsByClassName('togglebox');
   			for(var i=0, n=checkboxes.length;i<n;i++) {
