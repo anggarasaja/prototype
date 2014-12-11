@@ -22,7 +22,7 @@ $data_form= array(
 );
 
 $DATA->insertAtletData($data_form);
-$UTILITY->location_goto("content/today/");
+$UTILITY->location_goto("content/data_atlet/");
 exit;
 } else {
 echo "data null";
