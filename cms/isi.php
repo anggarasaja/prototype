@@ -25,7 +25,7 @@ else
           case 'home':
                include "view/home.php";
                break;
-          case 'today':
+          case 'data_atlet':
                include "view/input_atlet.php";
                break;
 
