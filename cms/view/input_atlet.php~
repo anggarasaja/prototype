@@ -51,7 +51,7 @@
                      	<p>Informasi : Klik pada peta untuk menentukan posisi atlet secara otomatis</p>                               
                   	</div>
                   	<div id="inputatlet" style="height:100%px; width:100%; border-radius:10px; background-color:#F5F5F5; padding:20px 20px 20px 100px;">
-                  	<form action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
+                  	<form action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="GET">
                   		<table>
 					<tr>
 						<td>Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>

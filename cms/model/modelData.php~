@@ -203,8 +203,8 @@ class modelData extends mysql_db {
                          atlet='$atlet',
                          id_jk='$id_jk',
                          id_pelatih='$id_pelatih',
-                         lat= '$lat' ,   
-                         lng= '$lng' ";
+                         lat= $lat ,   
+                         lng= $lng ";
                     
          $result = $this->query($query);
 
