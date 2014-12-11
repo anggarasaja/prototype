@@ -14,6 +14,16 @@
       		center: new google.maps.LatLng(-1.5,117)
  			});
  		map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
+ 		$('#city_list').change(function(){
+      		var coordinate = $('option:selected',this).data('latlng')
+        		map.panTo(new google.maps.LatLng(coordinate[0],coordinate[1]));
+        		if (coordinate == '-1.5,117') {
+        			map.setZoom(5);
+        		}
+        		else {
+        			map.setZoom(8)
+        		}  		
+   	}).trigger('change');
 	} 		   
    </script>
 </head>
@@ -38,20 +48,7 @@
                   		<table>
 									<tr>
 									<td>Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="namaatlet"></td>
-									<td style="padding:10px 20px 10px 40px;">Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="lat" disabled></td>									
-									</tr>
-									<tr>
-									<td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td><td>
-									<select id="jkel" style="width:230px; height:34px;">
-										<option selected="selected">--Pilih Jenis Kelamin--</option>
-										<option>Laki-laki</option>
-										<option>Perempuan</option>
-									</select>									
-									</td>
-									<td style="padding:10px 20px 10px 40px;">Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="long" disabled></td>									
-									</tr>
-									<tr><td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="cabor"></td></tr>
-									<tr><td>Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>
+									<td style="padding:10px 20px 10px 40px;">Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>
 									<select id="city_list" style="width:230px; height:34px;">
 											<option selected="selected" data-latlng="[-1.5, 117]" id="valid2">--Peta Indonesia--</option>
 											<option data-latlng="[4.359558, 96.934570]" >Nanggroe Aceh Darussalam</option>x
@@ -89,6 +86,19 @@
                						<option data-latlng="[-4.385847,138.177246]" >Papua</option>
 										</select>									
 									</td></tr>
+									<tr>
+									<td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td><td>
+									<select id="jkel" style="width:230px; height:34px;">
+										<option selected="selected">--Pilih Jenis Kelamin--</option>
+										<option>Laki-laki</option>
+										<option>Perempuan</option>
+									</select>									
+									</td>
+									<td style="padding:10px 20px 10px 40px;">Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="lat" disabled></td>									
+									</tr>
+									<tr><td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="cabor"></td>
+									<td style="padding:10px 20px 10px 40px;">Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="long" disabled></td>									
+									</tr>
  									<tr><td>Nama Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td><td><input style="width:230px; height:34px;" type="text" name="pelatih"></td></tr>
  								</table>
                   	</div>
