@@ -224,7 +224,7 @@ class modelData extends mysql_db {
      	}
      	
      	public function readPelatihData($data){
-			$query = "select id_pelatih, pelatih from tbl_pelatih where id_cabor = '$data'";
+			$query = "select id_pelatih, pelatih from tbl_pelatih where id_cabor = $data";
           //Execute query
          $result = $this->query($query);
         //  echo $result;

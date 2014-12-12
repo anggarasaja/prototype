@@ -56,8 +56,10 @@
           }});
         }
      });
-      
-     	$('#city_list').change(function(){
+          
+	} 		   
+	
+	$('#city_list').change(function(){
    	var coordinate = $('option:selected',this).data('latlng')
    	map.panTo(new google.maps.LatLng(coordinate[0],coordinate[1]));
    	if (coordinate == '-1.5,117') {
@@ -66,10 +68,7 @@
    	else {
       	map.setZoom(8)
     	}
-	}).trigger('change');    
-	} 		   
-	
-
+	}).trigger('change');
 	
 
    </script>
