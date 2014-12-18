@@ -28,6 +28,9 @@ else
           case 'data_atlet':
                include "view/input_atlet.php";
                break;
+          case 'data_pelatih':
+               include "view/input_pelatih.php";
+               break;
 
           
 

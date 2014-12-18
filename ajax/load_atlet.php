@@ -17,9 +17,7 @@
 	if ($query) {
 		$jsonData = array();
 		while ($array = mysqli_fetch_assoc($query)) {
-			$lat = $array["lat"];
-   		$lng = $array["lng"];	
-   		$jsonData[] = [$array["atlet"],$lat,$lng,$array["jk"],$array["cabor"],$array["propinsi"],$array["pelatih"]];
+   		$jsonData[] = [$array["atlet"],$array["lat"],$array["lng"],$array["jk"],$array["cabor"],$array["propinsi"],$array["pelatih"]];
    	}
 		echo json_encode($jsonData);
 	}

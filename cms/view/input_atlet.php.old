@@ -3,19 +3,6 @@
 <head>
    <?php include "view/head.php";?>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" class="init">
-
-	$(document).ready(function() {
-		$('#example').dataTable( {
-			"processing": true,
-			"serverSide": true,
-			"ajax": "<?php echo $url_rewrite.'core/input_atlet/server_processing.php'; ?>"
-		});
-	});
-
-	</script>
    <script type="text/javascript">
    var map;
    function pageLoad(){
@@ -30,7 +17,7 @@
 			$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
 		});
-		map.data.loadGeoJson('../../json/indonesia.json');
+		map.data.loadGeoJson('json/indonesia.json');
 		map.data.setStyle(function(feature) {
     		return({
       		fillColor: feature.getProperty('color'),
@@ -50,7 +37,29 @@
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
           }});
-
+		
+		var oTable = $('#example').dataTable();
+		$.ajax({
+			url: "<?php echo $url_rewrite.'core/input_atlet/read_atlet.php'; ?>",
+			dataType: 'json',
+			success: function(s){
+			console.log(s);
+			oTable.fnClearTable();
+			for(var i = 0; i < s.length; i++) {
+				oTable.fnAddData([
+					s[i][0],
+					s[i][1],
+					s[i][2],
+					s[i][3],
+					s[i][4]
+				]);
+			} // End For
+			},
+			error: function(e){
+				console.log(e.responseText);
+			}
+		});
+          
     $('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
     $('#cabor').change(function(e) {
     //Grab the chosen value on first select list change
@@ -188,27 +197,31 @@
                   	<div class="informasibox" style="height:24px; width:100%; background-color:#FADAAA; text-align:center;">
                      	<p>Informasi : Daftar atlet yang sudah di data</p>                               
                   	</div>
-                  	<div style="padding:20px; width:100%; border-radius:0px 0px 10px 10px; background-color:#EAEAEA;">                	
+                  	<div style="padding:20px;height:100%; width:100%; border-radius:0px 0px 10px 10px; background-color:#EAEAEA;">                	
+                  	
+                  	
                   	<table id="example" class="display compact" cellspacing="0" width="100%">
-    						<thead>
-        					<tr style="background-color:lightgreen;">
-            				<th>Atlet</th>
-            				<th>Position</th>
-            				<th>Office</th>
-            				<th>Extn.</th>
-        		 			</tr>
-     						</thead>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Extn.</th>
+            <th>Start date</th>
+        </tr>
+    </thead>
  
-     						<tfoot>
-         					<tr style="background-color:lightblue;">
-             					<th>Name</th>
-             					<th>Position</th>
-             					<th>Office</th>
-             					<th>Extn.</th>
-        				 		</tr>
-     						</tfoot>
- 							</table>
- 						</div>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Extn.</th>
+            <th>Start date</th>
+        </tr>
+    </tfoot>
+</table>
+</div>
                	</div>
         			</div>
         		</div>

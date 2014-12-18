@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Aceh",
-        "color": "yellow"
+        "color": "aqua"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -16,7 +16,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Bali",
-        "color": "Blue"
+        "color": "aquamarine"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -27,7 +27,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Bangka Belitung",
-        "color": "red"
+        "color": "blue"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -38,7 +38,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Banten",
-        "color": "blue"
+        "color": "blueviolet"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -49,7 +49,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Bengkulu",
-        "color": "green"
+        "color": "cadetblue"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -60,7 +60,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Gorontalo",
-        "color": "red"
+        "color": "chartreuse"
       },
       "geometry": {
         "type": "Polygon",
@@ -71,7 +71,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Irian Jaya Barat",
-        "color": "blue"
+        "color": "cornflowerblue"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -82,7 +82,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Jakarta",
-        "color": "red"
+        "color": "crimson"
       },
       "geometry": {
         "type": "Polygon",
@@ -93,7 +93,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Jambi",
-        "color": "yellow"
+        "color": "cyan"
       },
       "geometry": {
         "type": "Polygon",
@@ -104,7 +104,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Jawa Barat",
-        "color": "yellow"
+        "color": "goldenrod"
       },
       "geometry": {
         "type": "Polygon",
@@ -126,7 +126,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Jawa Timur",
-        "color": "red"
+        "color": "greenyellow"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -137,7 +137,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Kalimantan Barat",
-        "color": "blue"
+        "color": "hotpink"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -148,7 +148,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Kalimantan Selatan",
-        "color": "red"
+        "color": "indigo"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -159,7 +159,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Kalimantan Tengah",
-        "color": "yellow"
+        "color": "lavender"
       },
       "geometry": {
         "type": "Polygon",
@@ -170,7 +170,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Kalimantan Timur",
-        "color": "green"
+        "color": "lemonchiffon"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -181,7 +181,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Kepulauan Riau",
-        "color": "green"
+        "color": "lightblue"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -192,7 +192,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Lampung",
-        "color": "red"
+        "color": "lightsteelblue"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -203,7 +203,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Maluku",
-        "color": "yellow"
+        "color": "lime"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -214,7 +214,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Maluku Utara",
-        "color": "red"
+        "color": "magenta"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -225,7 +225,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Nusa tenggara Barat",
-        "color": "yellow"
+        "color": "maroon"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -236,7 +236,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Nusa Tenggara Timur",
-        "color": "green"
+        "color": "mintcream"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -247,7 +247,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Papua",
-        "color": "green"
+        "color": "olive"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -258,7 +258,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Riau",
-        "color": "red"
+        "color": "orange"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -269,7 +269,7 @@
       "type": "Feature",
       "properties": {
         "letter": "Sulawesi Barat",
-        "color": "blue"
+        "color": "peachpuff"
       },
       "geometry": {
         "type": "Polygon",

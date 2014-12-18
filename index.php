@@ -15,10 +15,11 @@
 		<script src="js/modernizr.custom.js"></script>
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-		<script type="text/javascript" src="js/gmaps.js"></script>
+		<script type="text/javascript" src="js/markerclusterer.js"></script>
 		<script>
 
 		var map;
+		var markers = [];
 
 		function HybridControl(controlDiv, map) {
 	  		controlDiv.style.paddingTop = '5px';
@@ -149,8 +150,6 @@
   			});
 		}
 		
-		var infowindow = [];
-
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
 			var image = {
     			url: 'icon/icon.png',
@@ -159,12 +158,13 @@
       		position: new google.maps.LatLng(lat, lon),
         		map: map,
         		icon: image
-    		}); 
+    		});
+    		markers.push(newmarker); 
     		newmarker['infowindow'] = new google.maps.InfoWindow({
       		content: namatlet
       	});
       	google.maps.event.addListener(newmarker, 'click', function() {
-					details.innerHTML = '<h2>Profil</h2><table>'+
+					details.innerHTML = '<h2>Profil Atlet</h2><table>'+
 					'<tr><td>Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+namatlet+'</td></tr>'+
 					'<tr><td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+jkel+'</td></tr>'+
 					'<tr><td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+cabor+'</td></tr>'+
@@ -194,12 +194,14 @@
     			}
 			}); 
 		}
-		var j = 12;
+
 		function setMarkers(locations) {
 			for (var i = 0; i < locations.length; i++) {
     			var beach = locations[i];
     			createMarkers(beach[0], beach[1], beach[2],beach[3],beach[4],beach[5],beach[6]);
     		}
+			var mcOptions = {gridSize: 100, maxZoom: 7};
+   		var mc = new MarkerClusterer(map, markers, mcOptions);    		
 		}		
 		
 		function createMarkersknpi(lat, lon, loc) {
@@ -266,18 +268,7 @@
 								<li><span class="gn-icon gn-icon-download"><input id="toggleall" name="Profil Prov" type="checkbox" value="Profil Prov" onclick="toggle(this)" checked="active"> Select All</span>
 									<ul class="gn-submenu">
 										<li><span class="label" style="margin-left:60px;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/icon.png">Atlet</span></li>
-                              <!--<li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Kepadatan Pmd" type="checkbox" value="Kepadatan Pmd" onClick="ContextSelector_SetGroupStatus('0', '1', this.checked)" ><img width="14" height="14" src="icon/terrain_16.png">Kepadatan Pmd</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Angkatan Kerja" type="checkbox" value="Angkatan Kerja" onClick="ContextSelector_SetGroupStatus('0', '2', this.checked)" ><img width="14" height="14" src="icon/man.png">Angkatan Kerja</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Cabang Olahraga" type="checkbox" value="Cabang Olahraga" onClick="ContextSelector_SetGroupStatus('0', '3', this.checked)" ><img width="14" height="14" src="icon/olahraga.png">Cabang Olahraga</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="CABOR Unggulan" type="checkbox" value="CABOR Unggulan" onClick="ContextSelector_SetGroupStatus('0', '4', this.checked)" ><img width="14" height="14" src="icon/trophy.png">CABOR Unggulan</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Bantuan SOR" type="checkbox" value="Bantuan SOR" onClick="ContextSelector_SetGroupStatus('0', '5', this.checked)" ><img width="14" height="14" src="icon/SOR.png">Bantuan SOR</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Tkt Pendidikan" type="checkbox" value="Tkt Pendidikan" onClick="ContextSelector_SetGroupStatus('0', '6', this.checked)" ><img width="14" height="14" src="icon/pmd.png">Tkt Pendidikan</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="Tidak Mampu Baca" type="checkbox" value="Tidak Mampu Baca" onClick="ContextSelector_SetGroupStatus('0', '7', this.checked)" ><img width="14" height="14" src="icon/pencil.png">Tidak Mampu Baca</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="PON XVII 2008" type="checkbox" value="PON XVII 2008" onClick="ContextSelector_SetGroupStatus('0', '8', this.checked)" ><img width="14" height="14" src="icon/Logo_ponxvii.png">PON XVII 2008</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="POPNAS 2009" type="checkbox" value="POPNAS 2009" onClick="ContextSelector_SetGroupStatus('0', '9', this.checked)" ><img width="14" height="14" src="icon/porpn.png">POPNAS 2009</span></li>-->
-                              <li><span class="label" style="margin-left:60px;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png">KNPI</span></li>
-                              <!--<li><span class="label" style="margin-left:60px;"><input class="togglebox" name="OK Tkt Nasional" type="checkbox" value="OK Tkt Nasional" onClick="ContextSelector_SetGroupStatus('0', '11', this.checked)" ><img width="14" height="14" src="icon/okp.png">OK Tkt Nasional</span></li>
-                              <li><span class="label" style="margin-left:60px;"><input class="togglebox" name="OK Mahasiswa" type="checkbox" value="OK Mahasiswa" onClick="ContextSelector_SetGroupStatus('0', '12', this.checked)" ><img width="14" height="14" src="icon/OKP_mhs.png">OK Mahasiswa</span></li>-->
+										<li><span class="label" style="margin-left:60px;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png">KNPI</span></li>
 									</ul>
 								</li>
 								<li><a class="gn-icon gn-icon-cog">Settings</a></li>
@@ -289,13 +280,13 @@
 									</ul>
 								</li>
 							</ul>
-						</div><!-- /gn-scroller -->
+						</div>
 					</nav>
 				</li>
 				<li><a href="index.php">HOME</a></li>
 				<li><a id="aboutus">ABOUT US</a></li>
 				<li><a>Quick View
-				<select id="city_list" onchange="load_map(this)">
+				<select id="city_list">
 					<option selected="selected" data-latlng="[-1.5, 117]" id="valid2">--Peta Indonesia--</option>
 					<option data-latlng="[4.359558, 96.934570]" >Nanggroe Aceh Darussalam</option>x
                <option data-latlng="[2.264792,99.219727]" >Sumatera Utara</option>x
@@ -333,14 +324,13 @@
 				</select>
 				</a></li>
 				<li><a>Enable Layer <input id="enablelayer" type="checkbox" name="enable" checked="active"></a></li>
-				<!--<li><a>Enable Marker <input id="enablemarker" type="checkbox" name="enable" checked="active"></a></li>-->
 				<li><a class="codrops-icon codrops-icon-drop" href="#"><span>GIS Kemenpora V2</span></a></li>
 			</ul>
 			<div style="height:66px"></div>
-		</div><!-- /container -->
-		<div style="height:580px; width:100%;">
+		</div>
+		<div style="height:590px; width:100%;">
 		<div style="width: 70%; height: 100%;" id="gmap_city"></div>		
-		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-580px; height:580px; background-color:white; z-index:0;">
+		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
 			<div style="margin: 20px; border-width:1px; border-radius:20px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
 				<div id="details" style="padding:5px;"></div>			

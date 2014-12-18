@@ -2,94 +2,6 @@
 <html>
 <head>
    <?php include "view/head.php";?>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" class="init">
-
-	$(document).ready(function() {
-		$('#example').dataTable( {
-			"processing": true,
-			"serverSide": true,
-			"ajax": "<?php echo $url_rewrite.'core/input_atlet/server_processing.php'; ?>"
-		});
-	});
-
-	</script>
-   <script type="text/javascript">
-   var map;
-   function pageLoad(){
-  		map = new google.maps.Map(document.getElementById('gmap_city'),
-  			{
-      		zoom: 5,
-      		mapTypeId: google.maps.MapTypeId.ROADMAP,
-      		center: new google.maps.LatLng(-1.5,117)
- 			});
- 		map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
-	   google.maps.event.addListener(map, 'click', function(event) {
-			$('#lat').val(event.latLng.lat());
-			$('#lng').val(event.latLng.lng());
-		});
-		map.data.loadGeoJson('../../json/indonesia.json');
-		map.data.setStyle(function(feature) {
-    		return({
-      		fillColor: feature.getProperty('color'),
-      		strokeWeight: 1
-    		});
-  		});
-  		map.data.addListener('mouseover', function(event) {
-   		map.data.revertStyle();
-    		map.data.overrideStyle(event.feature, {strokeWeight: 2});
-  		});
-		$('#cabor').html('<option value="">--Loading--</option>');
-		$.ajax({url: "<?php echo $url_rewrite.'core/cabor/read_cabor.php'; ?>",
-             success: function(output) {
-                //alert(output);
-                $('#cabor').html(output);
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-
-    $('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-    $('#cabor').change(function(e) {
-    //Grab the chosen value on first select list change
-    var selectvalue = $(this).val();
- 
-    //Display 'loading' status in the target select list
-    $('#pelatih').html('<option value="">Loading...</option>');
- 
-    if (selectvalue == "") {
-        //Display initial prompt in target select if blank value selected
-       $('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-    } else {
-      //Make AJAX request, using the selected value as the GET
-      $.ajax({url: "<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>",
-      			type: 'POST',
-      			data: {id:selectvalue},
-             success: function(output) {
-                //alert(output);
-                $('#pelatih').html(output);
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-        }
-     });
-      
-     	$('#city_list').change(function(){
-   	var coordinate = $('option:selected',this).data('latlng')
-   	map.panTo(new google.maps.LatLng(coordinate[0],coordinate[1]));
-   	if (coordinate == '-1.5,117') {
-   		map.setZoom(5);
-    	}
-   	else {
-      	map.setZoom(8)
-    	}
-	}).trigger('change');    
-	} 		   
-	
-   </script>
 </head>
 <body onload="pageLoad()">
 	<div id="wrapper">
@@ -97,18 +9,14 @@
    	<div id="page-wrapper" style="min-height:850px;">
 	  		<div class="row">
    	   	<div class="col-lg-12"  style="margin-bottom:-20px;">
-             	<h1 class="page-header">Input Data Atlet</h1>
+             	<h1 class="page-header">Input Data Pelatih</h1>
          	</div>
       	</div>
       	<div class="row">
       		<div class="col-lg-12">
          		<div class="panel ">
             		<div class="panel-body">
-            			<div id="gmap_city" style="height:380px; width:100%; border-radius:10px 10px 0px 0px;"></div>
-      	      		<div class="informasibox" style="margin-bottom:10px;height:24px;border-radius:0px 0px 10px 10px;width:100%; background-color:#E7F7A7; text-align:center;">
-                     	<p>Informasi : Klik pada peta untuk menentukan lokasi atlet secara otomatis</p>                               
-                  	</div>
-                  	<div id="inputatlet" style="height:100%px; width:100%; border-radius:10px 10px 0px 0px; background-color:#F5F5F5; padding:20px 20px 20px 80px;">
+            			<div id="inputatlet" style="height:100%px; width:100%; border-radius:10px; background-color:#F5F5F5; padding:20px 20px 20px 80px;">
                   	<form action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
                   		<table>
 						<tr>
@@ -185,30 +93,6 @@
  				</table>
  			</form>
                   	</div>
-                  	<div class="informasibox" style="height:24px; width:100%; background-color:#FADAAA; text-align:center;">
-                     	<p>Informasi : Daftar atlet yang sudah di data</p>                               
-                  	</div>
-                  	<div style="padding:20px; width:100%; border-radius:0px 0px 10px 10px; background-color:#EAEAEA;">                	
-                  	<table id="example" class="display compact" cellspacing="0" width="100%">
-    						<thead>
-        					<tr style="background-color:lightgreen;">
-            				<th>Atlet</th>
-            				<th>Position</th>
-            				<th>Office</th>
-            				<th>Extn.</th>
-        		 			</tr>
-     						</thead>
- 
-     						<tfoot>
-         					<tr style="background-color:lightblue;">
-             					<th>Name</th>
-             					<th>Position</th>
-             					<th>Office</th>
-             					<th>Extn.</th>
-        				 		</tr>
-     						</tfoot>
- 							</table>
- 						</div>
                	</div>
         			</div>
         		</div>

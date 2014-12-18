@@ -52,6 +52,9 @@
                             <a href="<?=$url_rewrite?>content/data_atlet"><i class="fa fa-user  fa-fw"></i> Input Data Atlet</a>
                         </li>
                         <li>
+                            <a href="<?=$url_rewrite?>content/data_pelatih"><i class="fa fa-user  fa-fw"></i> Input Data Pelatih</a>
+                        </li>
+                        <li>
                              <a href="<?=$url_rewrite?>"><i class="fa fa-legal fa-fw"></i> About Indonesia<span class="fa arrow"></span></a>
                              
                              <ul class="nav nav-second-level">

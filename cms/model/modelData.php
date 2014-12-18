@@ -231,9 +231,25 @@ class modelData extends mysql_db {
           //Wrap Output Query
          //$data=$this->fetch_object($result);
          return $result;
-			
      	}
-		
+		public function readAtletData($data){
+			$query = sprintf("select tbl_atlet.*, tbl_propinsi.propinsi, tbl_cabor.*, tbl_jk.*, tbl_pelatih.*
+			  from tbl_atlet
+			  join tbl_jk
+			  on tbl_jk.id_jk = tbl_atlet.id_jk
+			  join tbl_pelatih
+			  on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih
+			  join tbl_propinsi
+			  on tbl_propinsi.id_propinsi = tbl_atlet.id_propinsi
+			  join tbl_cabor
+			  on tbl_cabor.id_cabor = tbl_atlet.id_cabor");
+          //Execute query
+         $result = $this->query($query);
+        //  echo $result;
+          //Wrap Output Query
+         //$data=$this->fetch_object($result);
+         return $result;
+     	}
 		
 }
 

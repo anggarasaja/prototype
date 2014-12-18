@@ -7,6 +7,7 @@ include "config/application.php";
 <title>CMS GIS V2</title>
 
 <!-- Core CSS - Include with every page -->
+<link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>font-awesome/css/font-awesome.css" rel="stylesheet">
 
