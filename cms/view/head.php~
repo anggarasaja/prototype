@@ -31,7 +31,6 @@ include "config/application.php";
      
       <script type="text/javascript" src="<?=$url_rewrite?>js/jquery-ui.js"></script> 
      <link href="<?=$url_rewrite?>css/jquery-ui.css" rel="stylesheet">
-     <link href="<?=$url_rewrite?>css/custom.css" rel="stylesheet">
      <script language="javaScript">
 var form_id;
 function confirm_delete(go_url)

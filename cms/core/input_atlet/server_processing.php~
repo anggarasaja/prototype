@@ -54,6 +54,9 @@ $sql_details = array(
 
 require( 'ssp.class.php' );
 $sJoin = "from `tbl_atlet` join `tbl_pelatih` on (`tbl_pelatih`.`id_pelatih` = `tbl_atlet`.`id_pelatih`) join `tbl_cabor` on (`tbl_cabor`.`id_cabor` = `tbl_atlet`.`id_cabor`) join `tbl_jk` on (`tbl_jk`.`id_jk` = `tbl_atlet`.`id_jk`) join tbl_propinsi on (`tbl_propinsi`.`id_propinsi` = `tbl_atlet`.`id_propinsi`)";
+";
 echo json_encode(
 	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,$sJoin )
 );
+
+
