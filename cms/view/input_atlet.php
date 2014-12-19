@@ -193,18 +193,18 @@
     						<thead>
         					<tr style="background-color:lightgreen;">
             				<th>Atlet</th>
-            				<th>Position</th>
-            				<th>Office</th>
-            				<th>Extn.</th>
+            				<th>Latitude</th>
+            				<th>Longitude</th>
+            				<th>Propinsi</th>
         		 			</tr>
      						</thead>
  
      						<tfoot>
          					<tr style="background-color:lightblue;">
-             					<th>Name</th>
-             					<th>Position</th>
-             					<th>Office</th>
-             					<th>Extn.</th>
+             					<th>Atlet</th>
+             					<th>Latitude</th>
+             					<th>Longitude</th>
+             					<th>Propinsi</th>
         				 		</tr>
      						</tfoot>
  							</table>
