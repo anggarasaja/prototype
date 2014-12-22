@@ -64,7 +64,7 @@ class modelAtlet extends mysql_db {
      	}
      	
      	public function readAllAtlet(){
-     		$query = "select tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi";
+     		$query = "select tbl_atlet.id_atlet, tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -75,7 +75,7 @@ class modelAtlet extends mysql_db {
      	}
      	
      	public function readAllAtlet_prop($id_propinsi){
-     		$query = "select tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_propinsi=$id_propinsi";
+     		$query = "select tbl_atlet.id_atlet, tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_propinsi=$id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -86,7 +86,7 @@ class modelAtlet extends mysql_db {
      	}
      	
      	public function readAllAtlet_cabor($id_cabor){
-     		$query = "select tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_cabor=$id_cabor";
+     		$query = "select tbl_atlet.id_atlet, tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_cabor=$id_cabor";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -97,7 +97,7 @@ class modelAtlet extends mysql_db {
      	}
 
      	public function readAllAtlet_caborProp($id_propinsi,$id_cabor){
-     		$query = "select tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_cabor=$id_cabor and tbl_atlet.id_propinsi=$id_propinsi";
+     		$query = "select tbl_atlet.id_atlet, tbl_atlet.atlet, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi, tbl_atlet.lat, tbl_propinsi.lng from tbl_atlet join tbl_pelatih on tbl_pelatih.id_pelatih = tbl_atlet.id_pelatih join tbl_cabor on tbl_cabor.id_cabor = tbl_atlet.id_cabor join tbl_jk on tbl_jk.id_jk = tbl_atlet.id_jk join tbl_propinsi on tbl_propinsi. id_propinsi = tbl_atlet.id_propinsi where tbl_atlet.id_cabor=$id_cabor and tbl_atlet.id_propinsi=$id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -106,6 +106,23 @@ class modelAtlet extends mysql_db {
          return $result;
      		
      	}		
+     	
+     	public function updateAtlet($data){
+     		$id_atlet = $data['id_atlet'];
+     		$id_propinsi = $data['id_propinsi'];
+			$id_cabor = $data['id_cabor'];
+			$atlet = $data['atlet'];
+			$id_jk = $data['id_jk'];
+			$id_pelatih = $data['id_pelatih'];
+			$lat = $data['lat'];
+			$lng = $data['lng'];  
+			
+			$query ="UPDATE tbl_atlet SET atlet = $atlet , id_pelatih = $id_pelatih , id_propinsi = $id_propinsi , id_cabor = $id_cabor , id_jk = $id_jk  lat= $lat , lng = $lng  WHERE id_atlet= $id_atlet";    	
+			
+			$result = $this->query($query);
+			
+     	}
+     	
 		
 }
 

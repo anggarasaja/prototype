@@ -7,18 +7,73 @@
 	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
-	$(document).ready(function() {
+	/*$(document).ready(function() {
 		$('#dataTablesAtlet').dataTable( {
 			"processing": true,
 			"serverSide": true,
 			"ajax": "<?php echo $url_rewrite.'core/input_atlet/server_processing.php'; ?>"
 		});
-	});
+	});*/
 
 	</script>
    <script type="text/javascript">
    var map;
+   var caborOutput;
    function pageLoad(){
+   	
+		var table;
+    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet"></table>' );
+ 		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
+      			type: 'POST',
+      			data: {id_propinsi:0},
+             success: function(output) {
+             	var op=JSON.parse(output);
+                //alert(output);
+                
+               // $('#dataTablesAtlet').html(output);
+                
+                
+          		//$('#dataTablesAtlet').DataTable();
+          	table = $('#dataTablesAtlet').DataTable( {
+          		 "language": {
+            "lengthMenu": "Tampilkan _MENU_ data per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Data tidak tersedia",
+            "search":         "Cari :",
+            "paginate": {
+        			"first":      "Awal",
+        			"last":       "Akhir",
+        			"next":       "selanjutnya",
+        			"previous":   "sebelumnya"
+    			},
+            "infoFiltered": "(filtered from _MAX_ total records)"
+        },
+        		
+        		"columns": [
+				{ "title": "ID" },
+            { "title": "Nama Atlet" },
+            { "title": "Cabang<br>Olahraga" },
+            { "title": "Nama Pelatih" },
+            { "title": "propinsi", "class": "center" },
+            { "title": "Jenis<br>Kelamin", "class": "center" },
+            { "title": "Posisi Lat", "class": "center" },
+            { "title": "Posisi Lng", "class": "center" },
+                    		{
+                
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": '<div class="details-control"></div.'
+            }
+        ],	
+        		"data" : op,
+		    });
+		    
+            },
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + " "+ thrownError);
+          }});   	
+   	
   		map = new google.maps.Map(document.getElementById('gmap_city'),
   			{
       		zoom: 5,
@@ -31,13 +86,24 @@
 			$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
 		});
-		
+		map.data.loadGeoJson('json/indonesia.json');
+			map.data.setStyle(function(feature) {
+    			return({
+      			fillColor: feature.getProperty('color'),
+      			strokeWeight: 1
+    			});
+  			});
+  			map.data.addListener('mouseover', function(event) {
+   	 	map.data.revertStyle();
+    		map.data.overrideStyle(event.feature, {strokeWeight: 2});
+  			});
 		$('.cabor').html('<option value="">--Loading--</option>');
  
 		$.ajax({url: "<?php echo $url_rewrite.'core/input_atlet/read_cabor.php'; ?>",
              success: function(output) {
                 //alert(output);
-                $('.cabor').html(output);
+                caborOutput = output;
+                $('.cabor').html(caborOutput);
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
@@ -68,59 +134,7 @@
           }});
         }
      });
-     	var table;
-    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="display compact" width="100%" id="dataTablesAtlet"></table>' );
- 		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-      			type: 'POST',
-      			data: {id_propinsi:0},
-             success: function(output) {
-             	var op=JSON.parse(output);
-                //alert(output);
-                
-               // $('#dataTablesAtlet').html(output);
-                
-                
-          		//$('#dataTablesAtlet').DataTable();
-          	table = $('#dataTablesAtlet').DataTable( {
-          		 "language": {
-            "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            "zeroRecords": "Tidak ada data yang ditampilkan",
-            "info": "Halaman _PAGE_ dari _PAGES_",
-            "infoEmpty": "Data tidak tersedia",
-            "search":         "Cari :",
-            "paginate": {
-        			"first":      "Awal",
-        			"last":       "Akhir",
-        			"next":       "selanjutnya",
-        			"previous":   "sebelumnya"
-    			},
-            "infoFiltered": "(filtered from _MAX_ total records)"
-        },
-        		"columns": [
-
-            { "title": "Atlet" },
-            { "title": "Cbng Olahraga" },
-            { "title": "Pelatih" },
-            { "title": "propinsi", "class": "center" },
-            { "title": "Jenis Kelamin", "class": "center" },
-            { "title": "Posisi Lat", "class": "center" },
-            { "title": "Posisi Lng", "class": "center" },
-                    		{
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            }
-        ],	
-			"processing": true,
-			"serverSide": true,
-			"ajax": "<?php echo $url_rewrite.'core/input_atlet/server_processing.php'; ?>"
-		    });
-		    
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
+     	
       
      	$('#city_list').change(function(){
    	var coordinate = $('option:selected',this).data('latlng');
@@ -139,8 +153,8 @@
              success: function(output) {
              	var op=JSON.parse(output);
                 //alert(output);
-                $('#dataTablesAtlet').DataTable().fnClearTable();
-                $('#dataTablesAtlet').DataTable().fnAddData(op);
+                $('#dataTablesAtlet').dataTable().fnClearTable();
+                $('#dataTablesAtlet').dataTable().fnAddData(op);
                // $('#dataTablesAtlet').html(output);
                 
                 
@@ -164,7 +178,7 @@
 		
 	});
 	
-     	$('#cabor').change(function(){
+     	$('#cabor-input').change(function(){
    	
    	var propinsiValue = $('#city_list').val();
    	var caborValue = $(this).val()
@@ -216,14 +230,80 @@
         if ( row.child.isShown() ) {
             // This row is already open - close it
             row.child.hide();
-            tr.removeClass('shown');
+            tr.removeClass('shown warning');
+            
         }
         else {
             // Open this row
             row.child( format(row.data()) ).show();
-            tr.addClass('shown');
+            tr.addClass('shown warning');
+            //alert(row.data()[2])
+            //$('#cabor-update').filter(function () { return $(this).html() == 'Atletik'; }).val();
+           // $('#cabor-update').find('option[text="Atletik"]').val();
+            //$("#cabor-update").val("23");
+            //$("#city_list-update").val("7");
+            var value = $("#cabor-update-"+row.data()[0] +" option").filter(function() {
+  									return $(this).text() == row.data()[2];
+								}).first().attr("value");
+				$("#cabor-update-"+row.data()[0] +"").val(value);
+				
+            var value2 = $("#city_list-update-"+row.data()[0] +" option").filter(function() {
+  									return $(this).text() == row.data()[4];
+								}).first().attr("value");
+				$("#city_list-update-"+row.data()[0] +"").val(value2);
+								
+				$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');	
+				
+				$("#cabor-update-"+row.data()[0] +"").change(function(e) {
+   			 //Grab the chosen value on first select list change
+   			var selectvalue = $(this).val();
+ 
+    				//Display 'loading' status in the target select list
+    					$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Loading...</option>');
+ 
+    						if (selectvalue == "") {
+       			 //Display initial prompt in target select if blank value selected
+      					 $('#pelatih-update-'+row.data()[0] +'').html('<option value="">! Pilih Cabang Olahraga ! </option>');
+   					} else {
+   				   //Make AJAX request, using the selected value as the GET
+   							   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
+      							type: 'POST',
+      						data: {id:selectvalue},
+      			       success: function(output) {
+      			          //alert(output);
+        				        $('#pelatih-update-'+row.data()[0] +'').html(output);
+     			       },
+     				     error: function (xhr, ajaxOptions, thrownError) {
+    			        alert(xhr.status + " "+ thrownError);
+    					      }});
+   				     }
+  				   });
+  				   
+  				   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
+      							type: 'POST',
+      						data: {id:value},
+      			       success: function(output) {
+      			          //alert(output);
+        				        $('#pelatih-update-'+row.data()[0] +'').html(output);
+        				        				 var value3 = $("#pelatih-update-"+row.data()[0] +" option").filter(function() {
+  									return $(this).text() == row.data()[3];
+								}).first().attr("value");
+				$("#pelatih-update-"+row.data()[0] +"").val(value3);
+				alert(value3);
+     			       },
+     				     error: function (xhr, ajaxOptions, thrownError) {
+    			        alert(xhr.status + " "+ thrownError);
+    					      }});
+				if(row.data()[5] == "Perempuan"){
+					$('#jenkel-update-'+row.data()[0] +'-perempuan').prop("checked", true);
+					
+				}else{
+					$('#jenkel-update-'+row.data()[0] +'-laki').prop("checked", true);
+				}
         }
-    });    
+    }); 
+    
+       
 	} 		   
 	
    </script>
@@ -287,7 +367,7 @@
 							</select>
                   		</div>
                   		<div class="col-md-6 text-center" >
-                  		<select required="required" id="cabor" name="cabor" class="cabor form-control" style="width:230px; height:34px;margin : 0 auto" ></select>
+                  		<select required="required" id="cabor-input" name="cabor" class="cabor form-control" style="width:230px; height:34px;margin : 0 auto" ></select>
                   		</div>
                   	</div>
 							<hr>
@@ -331,10 +411,12 @@
                   	<div class="informasibox" style="height:24px; width:100%; background-color:#FADAAA; text-align:center;">
                      	<p>Informasi : Daftar atlet yang sudah di data</p>                               
                   	</div>
-                  	<div style="padding:20px; width:100%; border-radius:0px 0px 10px 10px; background-color:#EAEAEA;">                	
+                  	               	
+
                   	<div class="row" id="datatable">
    
-                  	</div>
+                  	
+
  						</div>
                	</div>
         			</div>
@@ -430,39 +512,93 @@ $('#lat').keyup(function () {
     			});
     		}
     });
+
     function format ( d ) {
     // `d` is the original data object for the row
-    return '<form id="update-atlet-'+d[0] +'" action="<?php echo $url_rewrite.'core/input_atlet/update_atlet_controller.php'; ?>" method="POST">'+
-    '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    var tableString = '<form id="update-atlet-'+d[0] +'" action="<?php echo $url_rewrite.'core/input_atlet/update_atlet_controller.php'; ?>" method="POST">'+
+    '<table cellpadding="5" cellspacing="0" border="0"  class="table" style="padding-left:50px;border: 0;">'+
         '<tr>'+
-            '<td style="padding : 10px">Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[0]+'"></td>'+
-      		'<td style="padding : 10px">Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[1]+'"></td>'+
+        		'<td style="padding : 10px">ID Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="id-atlet" id="id-atlet" class="form-control" value="'+d[0]+'"></td>'+
+      		
+            '<td style="padding : 10px">Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><select required="required" id="cabor-update-'+d[0] +'" name="cabor" class="cabor form-control" >'+
+            caborOutput +
+            '</select></td>'+
   
         '</tr>'+
         '<tr>'+
-            '<td style="padding : 10px">Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[2]+'"></td>'+
-      		'<td style="padding : 10px">Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[3]+'"></td>'+
+        		'<td style="padding : 10px">Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[1]+'"></td>'+
+      		
+            '<td style="padding : 10px">Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><select required="required" id="city_list-update-'+d[0] +'"  name="propinsi" class="form-control">'+
+							'<option selected="selected" data-latlng="[-1.5, 117]" id="valid2" value="0">Pilih Propinsi</option>'+
+							'<option data-latlng="[4.359558, 96.934570]" value="1">Nanggroe Aceh Darussalam</option>'+
+       						'<option data-latlng="[2.264792,99.219727]" value="3" >Sumatera Utara</option>'+
+        						'<option data-latlng="[-0.973342,100.066002]" value="27" >Sumatera Barat</option>'+
+       						'<option data-latlng="[0.312010,101.582001]" value="26">Riau</option>'+
+        						'<option data-latlng="[-1.654310,102.790001]" value="28">Jambi</option>'+
+       						'<option data-latlng="[-3.245820,104.228996]" value="29">Sumatera Selatan</option>'+
+        						'<option data-latlng="[-3.837950,102.251999]" value="33">Bengkulu</option>'+
+        						'<option data-latlng="[-5.009961,105.152344]" value="31">Lampung</option>'+
+        						'<option data-latlng="[-2.715901,106.557495]" value="30">Kepulauan Bangka Belitung</option>'+
+       						'<option data-latlng="[3.829178,108.131836]" value="2">Kepulauan Riau</option>'+
+       						'<option data-latlng="[-6.211278,106.842316]" value="5">DKI Jakarta</option>'+
+        						'<option data-latlng="[-6.932970,107.602295]" value="6">Jawa Barat</option>'+
+       						'<option data-latlng="[-7.161940,110.184082]" value="7">Jawa Tengah</option>'+
+       						'<option data-latlng="[-7.894941,110.432373]" value="8">Daerah Istimewa Yogyakarta</option>'+
+        						'<option data-latlng="[-7.761069,112.645020]" value="9">Jawa Timur</option>'+
+       						'<option data-latlng="[-6.451230,106.112000]" value="4">Banten</option>'+
+       						'<option data-latlng="[-8.408255,115.170776]" value="10">Bali</option>'+
+        						'<option data-latlng="[-8.696155,117.499878]" value="11">Nusa Tenggara Barat</option>'+
+        						'<option data-latlng="[-8.647282,121.097900]" value="12">Nusa Tenggara Timur</option>'+
+        						'<option data-latlng="[0.129638,111.106934]" value="13">Kalimantan Barat</option>'+
+        						'<option data-latlng="[-1.518133,113.425049]" value="14">Kalimantan Tengah</option>'+
+        						'<option data-latlng="[-3.043977,115.479492]" value="15">Kalimantan Selatan</option>'+
+        						'<option data-latlng="[1.656507,116.545166]" value="19">Kalimantan Timur</option>'+
+        						'<option data-latlng="[0.678940,124.235596]" value="22">Sulawesi Utara</option>'+
+        						'<option data-latlng="[-1.430271,121.445068]" value="20">Sulawesi Tengah</option>'+
+        						'<option data-latlng="[-3.598949,120.247559]" value="16">Sulawesi Selatan</option>'+
+        						'<option data-latlng="[-4.129477,122.148193]" value="18">Sulawesi Tenggara</option>'+
+        						'<option data-latlng="[0.678940,122.455811]" value="21">Gorontalo</option>'+
+     	 						'<option data-latlng="[-2.183553,119.324707]" value="17">Sulawesi Barat</option>'+
+       						'<option data-latlng="[-3.320404,130.126465]" value="24">Maluku</option>'+
+       						'<option data-latlng="[1.423683,127.687500]" value="23">Maluku Utara</option>'+
+        						'<option data-latlng="[-2.067178,132.585205]" value="25">Irian Jaya Barat</option>'+
+        						'<option data-latlng="[-4.385847,138.177246]" value="32">Papua</option>'+
+							'</select>'+
+            '</td>'+
+  
+        '</tr>'+
+        '<tr>'+
+        		'<td style="padding : 10px">Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><select tabindex="3" required="required" name="pelatih" id="pelatih-update-'+d[0] +'" style="width:230px; height:34px;" class="form-control"></select></td>'+
+      		
+            '<td style="padding : 10px">Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><label class="radio-inline">'+
+ 										'<input tabindex="2"  type="radio" name="jenkel" id="jenkel-update-'+d[0] +'-laki" value="1"> Laki-laki</input>'+
+									'</label>'+
+									'<label class="radio-inline">'+
+  										'<input tabindex="2" type="radio" name="jenkel" id="jenkel-update-'+d[0] +'-perempuan" value="2"> Perempuan</input>'+
+									'</label></td>'+
   
         '</tr>'+
         '<tr>'+
             '<td style="padding : 10px">Lat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[5]+'"></td>'+
-      		'<td style="padding : 10px">Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[4]+'"></td>'+
+            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="lat" id="lat" class="form-control" value="'+d[6]+'"></td>'+
+				'<td style="padding : 10px">Lng</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" class="form-control" value="'+d[7]+'"></td>'+      		
+      		
   
         '</tr>'+
-        '<tr>'+
-            '<td style="padding : 10px">Lng</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[6]+'"></td>'+
-            '<td colspan="3" class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"></td>'+
-  
-        '</tr>'+
+            
     '</table>'+
+    '<div class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"></div>'+
+    '<div class="alert-update" width="100%"></div>'+
     '</form>';
+    
+    return tableString
 		}
 	</script>
 </body>

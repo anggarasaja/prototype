@@ -185,14 +185,6 @@
     				newmarker.setMap(null);
     			}
 			});
-			$('#toggleall').click(function(){
-    			if (this.checked) {
-        			newmarker.setMap(map);
-    			}
-    			else {
-    				newmarker.setMap(null);
-    			}
-			}); 
 		}
 
 		function setMarkers(locations) {
@@ -200,8 +192,24 @@
     			var beach = locations[i];
     			createMarkers(beach[0], beach[1], beach[2],beach[3],beach[4],beach[5],beach[6]);
     		}
-			var mcOptions = {gridSize: 100, maxZoom: 7};
-   		var mc = new MarkerClusterer(map, markers, mcOptions);    		
+			var mcOptions = {gridSize: 50, maxZoom: 7};
+   		var mc = new MarkerClusterer(map, markers, mcOptions);
+   		$('#atlet').click(function(){
+    			if (this.checked) {
+        			mc.addMarkers(markers);
+    			}
+    			else {
+    				mc.clearMarkers();
+    			}
+			});
+			$('#toggleall').click(function(){
+    			if (this.checked) {
+        			mc.addMarkers(markers);
+    			}
+    			else {
+    				mc.clearMarkers();
+    			}
+			});    		
 		}		
 		
 		function createMarkersknpi(lat, lon, loc) {

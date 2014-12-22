@@ -2,8 +2,8 @@
 
 include '../../config/application.php';
 
-if(isset($_POST['lat'])){
 $nama = $purifier->purify($_POST['namaatlet']);
+$id_atlet = $purifier->purify($_POST['id_atlet']);
 $jenkel = $purifier->purify($_POST['jenkel']);
 $cabor = $purifier->purify($_POST['cabor']);
 $propinsi = $purifier->purify($_POST['propinsi']);
@@ -13,6 +13,7 @@ $lng = $purifier->purify($_POST['lng']);
 
 $data_form= array(
 	"atlet"=> $nama,
+	"id_atlet"=> $id_atlet,
 	"id_jk"=> $jenkel,
 	"id_cabor" =>$cabor,
 	"id_propinsi" =>$propinsi,
@@ -21,11 +22,6 @@ $data_form= array(
 	"lng"=>$lng
 );
 
-$ATLET->insertAtletData($data_form);
-$UTILITY->location_goto("content/data_atlet/");
-exit;
-} else {
-echo "data null";
-}
+$ATLET->updateAtlet($data_form);
 
 
