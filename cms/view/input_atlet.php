@@ -35,6 +35,7 @@
                 
           		//$('#dataTablesAtlet').DataTable();
           	table = $('#dataTablesAtlet').DataTable( {
+          		"order": [[ 0, "desc" ]],
           		 "language": {
             "lengthMenu": "Tampilkan _MENU_ data per halaman",
             "zeroRecords": "Tidak ada data yang ditampilkan",
@@ -81,7 +82,7 @@
       		center: new google.maps.LatLng(-1.5,117)
  			});
  		map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
-	   	google.maps.event.addListener(map, 'click', function(event) {
+	   	google.maps.event.addListener(map, 'dblclick', function(event) {
 			//alert(event.latLng);
 			$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
@@ -96,6 +97,10 @@
   			map.data.addListener('mouseover', function(event) {
    	 	map.data.revertStyle();
     		map.data.overrideStyle(event.feature, {strokeWeight: 2});
+  			});
+  			map.data.addListener('dblclick', function(event) {
+			$('#lat').val(event.latLng.lat());
+			$('#lng').val(event.latLng.lng());
   			});
 		$('.cabor').html('<option value="">--Loading--</option>');
  
@@ -178,7 +183,7 @@
 		
 	});
 	
-     	$('#cabor-input').change(function(){
+     	$('#cabor').change(function(){
    	
    	var propinsiValue = $('#city_list').val();
    	var caborValue = $(this).val()
@@ -289,7 +294,7 @@
   									return $(this).text() == row.data()[3];
 								}).first().attr("value");
 				$("#pelatih-update-"+row.data()[0] +"").val(value3);
-				alert(value3);
+				//alert(value3);
      			       },
      				     error: function (xhr, ajaxOptions, thrownError) {
     			        alert(xhr.status + " "+ thrownError);
@@ -300,7 +305,71 @@
 				}else{
 					$('#jenkel-update-'+row.data()[0] +'-laki').prop("checked", true);
 				}
+        
+				$('#update-atlet-'+row.data()[0] +'').submit(function(event) {
+					      	event.preventDefault();
+      	$('#alert-update').empty();
+					      	var $form = $( this );
+          var url = $form.attr( 'action' );
+          
+
+          //alert($('#lng-update-'+row.data()[0] +'').val() );
+					var posting = $.post(url, {
+										id_atlet: row.data()[0], 
+										namaatlet: $('#nama-atlet-update-'+row.data()[0] +'').val(), 
+										jenkel: $('.jenkel-update-'+row.data()[0] +':checked').val(), 
+										cabor: $('#cabor-update-'+row.data()[0] +'').val(), 
+										propinsi: $('#city_list-update-'+row.data()[0] +'').val(), 
+										pelatih: $('#pelatih-update-'+row.data()[0] +'').val(), 
+										lat: $('#lat-update-'+row.data()[0] +'').val(), 
+										lng: $('#lng-update-'+row.data()[0] +'').val() 
+										} );
+
+      /* Alerts the results */
+      		posting.done(function( data ) {
+        		//alert('success');
+
+        		$('#alert-update-'+row.data()[0] +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil diubah.</div>');
+				          var jk;
+          if ($('.jenkel-update-'+row.data()[0] +':checked').val()==1) {
+          	jk = "Laki-laki";
+          } else {
+          	jk = "Perempuan";
+          }
+				$('#dataTablesAtlet').dataTable().fnUpdate( 
+								[
+									row.data()[0],
+									$('#nama-atlet-update-'+row.data()[0] +'').val(),
+									$('#cabor-update-'+row.data()[0] +' option:selected').text(), 
+									$('#pelatih-update-'+row.data()[0] +' option:selected').text(),
+									$('#city_list-update-'+row.data()[0] +' option:selected').text(),
+									jk,
+									$('#lat-update-'+row.data()[0] +'').val(), 
+									$('#lng-update-'+row.data()[0] +'').val()
+								], tr[0] );
+        		//$('#dataTablesAtlet').dataTable().fnDraw();
+        		 var propinsiValue = $('#city_list').val();
+   				var caborValue = $('#cabor').val()
+   				
+   	
+        		/*$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
+  			type: 'POST',
+      	data: {id_propinsi:propinsiValue,id_cabor:caborValue},
+       	success: function(output) {
+      	var op=JSON.parse(output);
+                //alert(output);
+         	$('#dataTablesAtlet').DataTable().fnClearTable();
+         	$('#dataTablesAtlet').DataTable().fnAddData(op);
+			},
+    		error: function (xhr, ajaxOptions, thrownError) {
+     			alert(xhr.status + " "+ thrownError);
+   		}});*/
+
+    			});
+				});        
         }
+        
+        
     }); 
     
        
@@ -323,8 +392,9 @@
             		<div class="panel-body">
             			<div id="gmap_city" style="height:380px; width:100%; border-radius:10px 10px 0px 0px;"></div>
       	      		<div class="informasibox" style="margin-bottom:10px;height:24px;border-radius:0px 0px 10px 10px;width:100%; background-color:#E7F7A7; text-align:center;">
-                     	<p>Informasi : Klik pada peta untuk menentukan lokasi atlet secara otomatis</p>                               
+                     	<p>Informasi : Klik 2x pada peta untuk menentukan lokasi atlet secara otomatis</p>                               
                   	</div>
+                  	<div id="alert-input"></div>
                   	<div id="inputatlet" style="height:100%px; width:100%; border-radius:10px 10px 0px 0px; background-color:#F5F5F5; padding:20px 20px 20px 80px;">
                   	<form id="input-atlet" action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
 <div class="row">
@@ -367,7 +437,7 @@
 							</select>
                   		</div>
                   		<div class="col-md-6 text-center" >
-                  		<select required="required" id="cabor-input" name="cabor" class="cabor form-control" style="width:230px; height:34px;margin : 0 auto" ></select>
+                  		<select required="required" id="cabor" name="cabor" class="cabor form-control" style="width:230px; height:34px;margin : 0 auto" ></select>
                   		</div>
                   	</div>
 							<hr>
@@ -377,7 +447,7 @@
 						<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control"></td>
 						<td style="padding:10px 20px 10px 40px;">Latitude</td>
 						<td style="padding:10px 20px 10px 20px;">:</td>
-						<td><input required="required" style="width:230px; height:34px;" type="text" autocomplete="on" required="required" name="lat" id="lat" class="form-control"></td><td><div id="nan1" hidden="true"><label style="color:red">Salah</label></div></td>
+						<td><input tabindex="5" required="required" style="width:230px; height:34px;" type="text" autocomplete="on" required="required" name="lat" id="lat" class="form-control"></td><td><div id="nan1" hidden="true"><label style="color:red">Salah</label></div></td>
 					</tr>
 					<tr>
 						<td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>
@@ -386,13 +456,13 @@
  										<input tabindex="2"  type="radio" name="jenkel" id="jenkel" value="1"> Laki-laki</input>
 									</label>
 									<label class="radio-inline">
-  										<input tabindex="2" type="radio" name="jenkel" id="jenkel" value="2"> Perempuan</input>
+  										<input tabindex="3" type="radio" name="jenkel" id="jenkel" value="2"> Perempuan</input>
 									</label>
 							</select>									
 						</td>
 						<td style="padding:10px 20px 10px 40px;">Longitude</td>
 						<td style="padding:10px 20px 10px 20px;">:</td>
-						<td><input required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" required="required" class="form-control"></td><td><div id="nan2" hidden="true"><label style="color:red">Salah</label></div><td>
+						<td><input tabindex="7" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" required="required" class="form-control"></td><td><div id="nan2" hidden="true"><label style="color:red">Salah</label></div><td>
 												
 					</tr>
 					<tr>
@@ -401,7 +471,7 @@
 					</tr>
 					<tr>
 						<td>Nama Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>
-						<td><select tabindex="3" required="required" name="pelatih" id="pelatih" style="width:230px; height:34px;" class="form-control"></select></td>						
+						<td><select tabindex="4" required="required" name="pelatih" id="pelatih" style="width:230px; height:34px;" class="form-control"></select></td>						
 						
 						<td style="padding:10px 20px 10px 40px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin-left: 10px;margin-right:40px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
 					</tr>
@@ -413,7 +483,7 @@
                   	</div>
                   	               	
 
-                  	<div class="row" id="datatable">
+                  	<div class="row" id="datatable" style="margin-top:15px">
    
                   	
 
@@ -452,11 +522,12 @@ $('#lat').keyup(function () {
       	$('#alert-input').empty();
 
       /* get some values from elements on the page: */
-      	var $form = $( this ),
-          url = $form.attr( 'action' );
+      	var $form = $( this );
+          var url = $form.attr( 'action' );
           if ($('#nama-atlet').val()=="" || $('#cabor').val()==0 || $('#pelatih').val()=="" || $('#city_list').val()==0 || $('#lat').val()=="" || !$.isNumeric($('#lat').val()) || $('#lng').val()=="" || !$.isNumeric($('#lng').val()) || $('#jenkel:checked').val()==undefined ) {
           	if($('#nama-atlet').val()==""){
           		$('#alert-input').append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert">&times;</a>Silakan isi nama atlet.</div>');
+					
 				} 
 				if($('#cabor').val()==0){
           		$('#alert-input').append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert">&times;</a>Silakan pilih cabang olahraga.</div>');
@@ -485,8 +556,7 @@ $('#lat').keyup(function () {
       /* Alerts the results */
       		posting.done(function( data ) {
         		//alert('success');
-        		$('#alert-input').append('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil ditambah.</div>');
-				
+        		
         		//$('#dataTablesAtlet').dataTable().fnDraw();
         		 var propinsiValue = $('#city_list').val();
    				var caborValue = $('#cabor').val()
@@ -497,8 +567,11 @@ $('#lat').keyup(function () {
        	success: function(output) {
       	var op=JSON.parse(output);
                 //alert(output);
-         	$('#dataTablesAtlet').DataTable().fnClearTable();
-         	$('#dataTablesAtlet').DataTable().fnAddData(op);
+         	$('#dataTablesAtlet').dataTable().fnClearTable();
+         	$('#dataTablesAtlet').dataTable().fnAddData(op);
+         	$('#alert-input').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil ditambah.</div>');
+				
+         	
 			},
     		error: function (xhr, ajaxOptions, thrownError) {
      			alert(xhr.status + " "+ thrownError);
@@ -515,24 +588,24 @@ $('#lat').keyup(function () {
 
     function format ( d ) {
     // `d` is the original data object for the row
-    var tableString = '<form id="update-atlet-'+d[0] +'" action="<?php echo $url_rewrite.'core/input_atlet/update_atlet_controller.php'; ?>" method="POST">'+
+    var tableString = '<form id="update-atlet-'+d[0] +'" action="<?php echo $url_rewrite.'core/input_atlet/update_atlet.php'; ?>" method="POST">'+
     '<table cellpadding="5" cellspacing="0" border="0"  class="table" style="padding-left:50px;border: 0;">'+
         '<tr>'+
         		'<td style="padding : 10px">ID Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="id-atlet" id="id-atlet" class="form-control" value="'+d[0]+'"></td>'+
+            '<td><input tabindex="1"  style="width:230px; height:34px;" type="text" name="id-atlet-update-'+d[0] +'" id="id-atlet-update-'+d[0] +'" class="form-control" value="'+d[0]+'"></td>'+
       		
             '<td style="padding : 10px">Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><select required="required" id="cabor-update-'+d[0] +'" name="cabor" class="cabor form-control" >'+
+            '<td><select  id="cabor-update-'+d[0] +'" name="cabor-update-'+d[0] +'" class="cabor form-control" >'+
             caborOutput +
             '</select></td>'+
   
         '</tr>'+
         '<tr>'+
         		'<td style="padding : 10px">Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control" value="'+d[1]+'"></td>'+
+            '<td><input tabindex="1"  style="width:230px; height:34px;" type="text" name="nama-atlet-update-'+d[0] +'" id="nama-atlet-update-'+d[0] +'" class="form-control" value="'+d[1]+'"></td>'+
       		
             '<td style="padding : 10px">Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><select required="required" id="city_list-update-'+d[0] +'"  name="propinsi" class="form-control">'+
+            '<td><select id="city_list-update-'+d[0] +'"  name="propinsi-update-'+d[0] +'" class="form-control">'+
 							'<option selected="selected" data-latlng="[-1.5, 117]" id="valid2" value="0">Pilih Propinsi</option>'+
 							'<option data-latlng="[4.359558, 96.934570]" value="1">Nanggroe Aceh Darussalam</option>'+
        						'<option data-latlng="[2.264792,99.219727]" value="3" >Sumatera Utara</option>'+
@@ -573,29 +646,29 @@ $('#lat').keyup(function () {
         '</tr>'+
         '<tr>'+
         		'<td style="padding : 10px">Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><select tabindex="3" required="required" name="pelatih" id="pelatih-update-'+d[0] +'" style="width:230px; height:34px;" class="form-control"></select></td>'+
+            '<td><select tabindex="3" name="pelatih-update-'+d[0] +'" id="pelatih-update-'+d[0] +'" style="width:230px; height:34px;" class="form-control"></select></td>'+
       		
             '<td style="padding : 10px">Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>'+
             '<td><label class="radio-inline">'+
- 										'<input tabindex="2"  type="radio" name="jenkel" id="jenkel-update-'+d[0] +'-laki" value="1"> Laki-laki</input>'+
+ 										'<input tabindex="2"  type="radio" name="jenkel-update-'+d[0] +'" class="jenkel-update-'+d[0] +'" id="jenkel-update-'+d[0] +'-laki" value="1"><label for="jenkel-update-'+d[0] +'-laki">Laki-laki</label></input>'+
 									'</label>'+
 									'<label class="radio-inline">'+
-  										'<input tabindex="2" type="radio" name="jenkel" id="jenkel-update-'+d[0] +'-perempuan" value="2"> Perempuan</input>'+
+  										'<input tabindex="2" type="radio" name="jenkel-update-'+d[0] +'" class="jenkel-update-'+d[0] +'" id="jenkel-update-'+d[0] +'-perempuan" value="2"><label for="jenkel-update-'+d[0] +'-perempuan">Perempuan</label></input>'+
 									'</label></td>'+
   
         '</tr>'+
         '<tr>'+
             '<td style="padding : 10px">Lat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="lat" id="lat" class="form-control" value="'+d[6]+'"></td>'+
+            '<td><input tabindex="1" style="width:230px; height:34px;" type="text" name="lat-update-'+d[0] +'" id="lat-update-'+d[0] +'" class="form-control" value="'+d[6]+'"></td>'+
 				'<td style="padding : 10px">Lng</td><td style="padding:10px 20px 10px 20px;">:</td>'+
-            '<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" class="form-control" value="'+d[7]+'"></td>'+      		
+            '<td><input tabindex="1" style="width:230px; height:34px;" type="text" name="lng-update-'+d[0] +'" id="lng-update-'+d[0] +'" class="form-control" value="'+d[7]+'"></td>'+      		
       		
   
         '</tr>'+
             
     '</table>'+
     '<div class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"></div>'+
-    '<div class="alert-update" width="100%"></div>'+
+    '<div id="alert-update-'+d[0] +'" width="100%"></div>'+
     '</form>';
     
     return tableString
