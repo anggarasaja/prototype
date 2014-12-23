@@ -1,11 +1,26 @@
 td div.details-control {
-	width: 100%;
-	height: 100%;	
+	width: 20px;
+	height: 20px;	
     background: url('../images/datatables/details_open.png') no-repeat center center;
     cursor: pointer;
 }
 tr.shown td div.details-control {
-	width: 100%;
-	height: 100%;
+	width: 20px;
+	height: 20px;
     background: url('../images/datatables/details_close.png') no-repeat center center;
+}
+
+label {
+font-weight: normal
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+padding: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: white !important;
+  border: 1px ;
+  background-color: #585858;
+  background: none;
 }

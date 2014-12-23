@@ -10,7 +10,7 @@ include "config/application.php";
 <link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>font-awesome/css/font-awesome.css" rel="stylesheet">
-
+<link href="<?=$url_rewrite?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 <!-- SB Admin CSS - Include with every page -->
 <link href="<?=$url_rewrite?>css/sb-admin.css" rel="stylesheet">
 
@@ -31,6 +31,7 @@ include "config/application.php";
      
       <script type="text/javascript" src="<?=$url_rewrite?>js/jquery-ui.js"></script> 
      <link href="<?=$url_rewrite?>css/jquery-ui.css" rel="stylesheet">
+     <link href="<?=$url_rewrite?>css/custom.css" rel="stylesheet">
      <script language="javaScript">
 var form_id;
 function confirm_delete(go_url)

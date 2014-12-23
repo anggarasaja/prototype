@@ -60,5 +60,5 @@
     </script>
 
 </body>
-<?php include "view/foot.php";?>
+<?php include "view/head.php";?>
 </html>

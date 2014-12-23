@@ -3,8 +3,6 @@
 <head>
    <?php include "view/head.php";?>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../view/media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 	/*$(document).ready(function() {
@@ -675,4 +673,5 @@ $('#lat').keyup(function () {
 		}
 	</script>
 </body>
+<?php include "view/foot.php";?>
 </html>

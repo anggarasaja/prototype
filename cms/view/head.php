@@ -10,7 +10,7 @@ include "config/application.php";
 <link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>font-awesome/css/font-awesome.css" rel="stylesheet">
-
+<link href="<?=$url_rewrite?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 <!-- SB Admin CSS - Include with every page -->
 <link href="<?=$url_rewrite?>css/sb-admin.css" rel="stylesheet">
 
@@ -18,8 +18,7 @@ include "config/application.php";
 <!-- Core Scripts - Include with every page -->
     <script src="<?=$url_rewrite?>js/jquery-1.10.2.js"></script>
     <script src="<?=$url_rewrite?>js/bootstrap.min.js"></script>
-    <script src="<?=$url_rewrite?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
+    
     <!-- SB Admin Scripts - Include with every page -->
     <script src="<?=$url_rewrite?>js/sb-admin.js"></script>
 
