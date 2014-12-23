@@ -107,7 +107,7 @@ body {
     padding: 15px;
 }
 
-.navbar-static-side ul li a.active {
+.sidebar ul li a.active {
     background-color: #eee;
 }
 .arrow {

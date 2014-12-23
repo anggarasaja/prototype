@@ -11,17 +11,14 @@ include "config/application.php";
 <link href="<?=$url_rewrite?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="<?=$url_rewrite?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-<!-- SB Admin CSS - Include with every page -->
-<link href="<?=$url_rewrite?>css/sb-admin.css" rel="stylesheet">
+
 
 
 <!-- Core Scripts - Include with every page -->
     <script src="<?=$url_rewrite?>js/jquery-1.10.2.js"></script>
     <script src="<?=$url_rewrite?>js/bootstrap.min.js"></script>
-    <script src="<?=$url_rewrite?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    
 
-    <!-- SB Admin Scripts - Include with every page -->
-    <script src="<?=$url_rewrite?>js/sb-admin.js"></script>
 
     
    <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
@@ -31,6 +28,8 @@ include "config/application.php";
      
       <script type="text/javascript" src="<?=$url_rewrite?>js/jquery-ui.js"></script> 
      <link href="<?=$url_rewrite?>css/jquery-ui.css" rel="stylesheet">
+     <!-- SB Admin CSS - Include with every page -->
+<link href="<?=$url_rewrite?>css/sb-admin-2.css" rel="stylesheet">
      <link href="<?=$url_rewrite?>css/custom.css" rel="stylesheet">
      <script language="javaScript">
 var form_id;
