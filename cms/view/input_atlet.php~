@@ -365,7 +365,39 @@
 
     			});
 				});        
-				$('hapus-'+ row.data()[0] +'')
+				$('#hapus-'+ row.data()[0] +'').click(function() {
+        			//Do stuff when clicked
+        			$('#modal-hapus').modal('show');
+        			$('#hapus-data').click(function() {
+        			var propinsiValue = $('#city_list').val();
+   				var caborValue = $(this).val();
+  				   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/delete_atlet.php'; ?>',
+      				type: 'POST',
+      				data: {id_atlet:row.data()[0]},
+      				success: function(output) {
+      			          //alert(output);
+      			   	$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
+  								type: 'POST',
+      						data: {id_propinsi:propinsiValue,id_cabor:caborValue},
+       						success: function(output) {
+      							var op=JSON.parse(output);
+                				//alert(output);
+         						$('#dataTablesAtlet').dataTable().fnClearTable();
+         						$('#dataTablesAtlet').dataTable().fnAddData(op);
+								},
+    							error: function (xhr, ajaxOptions, thrownError) {
+     								alert(xhr.status + " "+ thrownError);
+   							}
+   						});
+							$('#alert-hapus').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil dihapus.</div>');
+							$('#modal-hapus').modal('hide');
+     			      },
+     				  	error: function (xhr, ajaxOptions, thrownError) {
+    			   		alert(xhr.status + " "+ thrownError);
+    					}
+    				});      
+    				});			
+    			});
         }
         
         
@@ -481,7 +513,7 @@
                      	<p>Informasi : Daftar atlet yang sudah di data</p>                               
                   	</div>
                   	               	
-
+							<div id="alert-hapus"></div>
                   	<div class="row" id="datatable" style="margin-top:15px">
    
                   	
@@ -493,10 +525,20 @@
       	</div>
    	</div>
 	</div>
-	<div class="modal fade bs-example-modal-sm " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div id="modal-hapus" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   		<div class="modal-dialog modal-sm modal-vertical-centered" >
    		<div class="modal-content">
-      		...
+      		<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title">Peringatan</h4>
+      		</div>
+      		<div class="modal-body">
+        			<p>Anda yakin akan menghapus data atlet ini ?</p>
+      		</div>
+      		<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        			<button type="button" class="btn btn-danger" id="hapus-data">Hapus !</button>
+      		</div>
     		</div>
   		</div>
 	</div>

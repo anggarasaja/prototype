@@ -123,6 +123,13 @@ class modelAtlet extends mysql_db {
 			
      	}
      	
+     	public function deleteAtlet($data){
+     		$id_atlet = $data['id_atlet'];
+			$query ="DELETE FROM tbl_atlet WHERE id_atlet = $id_atlet";
+			
+			$result = $this->query($query);
+     	}
+     	
 		
 }
 
