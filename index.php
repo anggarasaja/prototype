@@ -132,8 +132,11 @@
         		if (coordinate == '-1.5,117') {
         			map.setZoom(5);
         		}
+        		else if (coordinate == '-6.211278,106.842316') {
+        			map.setZoom(11);
+        		}
         		else {
-        			map.setZoom(8)
+        			map.setZoom(8);
         		}
         		
    		}).trigger('change');
@@ -152,7 +155,7 @@
 		
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
 			var image = {
-    			url: 'icon/icon.png',
+    			url: 'icon/diamond.png',
   			};
 			var newmarker = new google.maps.Marker({
       		position: new google.maps.LatLng(lat, lon),

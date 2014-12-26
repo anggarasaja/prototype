@@ -3,370 +3,291 @@
 <head>
    <?php include "view/head.php";?>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&language=in"></script>
-	<script type="text/javascript" language="javascript" class="init">
-
-	/*$(document).ready(function() {
-		$('#dataTablesAtlet').dataTable( {
-			"processing": true,
-			"serverSide": true,
-			"ajax": "<?php echo $url_rewrite.'core/input_atlet/server_processing.php'; ?>"
-		});
-	});*/
-
-	</script>
+	<script type="text/javascript" src="../../js/markerclusterer.js"></script>
    <script type="text/javascript">
    var map;
    var caborOutput;
+   var marker;
+   var markers = [];
    function pageLoad(){
-   	
 		var table;
     	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet"></table>' );
  		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-      			type: 'POST',
-      			data: {id_propinsi:0},
-             success: function(output) {
-             	var op=JSON.parse(output);
-                //alert(output);
-                
-               // $('#dataTablesAtlet').html(output);
-                
-                
-          		//$('#dataTablesAtlet').DataTable();
-          	table = $('#dataTablesAtlet').DataTable( {
-          		"order": [[ 0, "desc" ]],
-          		 "language": {
-            "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            "zeroRecords": "Tidak ada data yang ditampilkan",
-            "info": "Halaman _PAGE_ dari _PAGES_",
-            "infoEmpty": "Data tidak tersedia",
-            "search":         "Cari :",
-            "paginate": {
-        			"first":      "Awal",
-        			"last":       "Akhir",
-        			"next":       "selanjutnya",
-        			"previous":   "sebelumnya"
-    			},
-            "infoFiltered": "(filtered from _MAX_ total records)"
-        },
-        		
-        		"columns": [
-				{ "title": "ID" },
-            { "title": "Nama Atlet" },
-            { "title": "Cabang<br>Olahraga" },
-            { "title": "Nama Pelatih" },
-            { "title": "propinsi", "class": "center" },
-            { "title": "Jenis<br>Kelamin", "class": "center" },
-            { "title": "Posisi Lat", "class": "center" },
-            { "title": "Posisi Lng", "class": "center" },
-                    		{
-                
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": '<div class="details-control"></div.'
-            }
-        ],	
-        		"data" : op,
-		    });
-		    
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});   	
+      	type: 'POST',
+      	data: {id_propinsi:0},
+	      success: function(output) {
+         	var op=JSON.parse(output);
+         	table = $('#dataTablesAtlet').DataTable( {
+         		"order": [[ 0, "desc" ]],
+          		"language": {
+            		"lengthMenu": "Tampilkan _MENU_ data per halaman",
+            		"zeroRecords": "Tidak ada data yang ditampilkan",
+            		"info": "Halaman _PAGE_ dari _PAGES_",
+            		"infoEmpty": "Data tidak tersedia",
+            		"search":         "Cari :",
+            		"paginate": {
+        					"first":      "Awal",
+        					"last":       "Akhir",
+        					"next":       "selanjutnya",
+        					"previous":   "sebelumnya"
+    					},
+            		"infoFiltered": "(filtered from _MAX_ total records)"
+        			},
+        			"columns": [
+						{ "title": "ID" },
+            		{ "title": "Nama Atlet" },
+            		{ "title": "Cabang<br>Olahraga" },
+            		{ "title": "Nama Pelatih" },
+            		{ "title": "propinsi", "class": "center" },
+            		{ "title": "Jenis<br>Kelamin", "class": "center" },
+            		{ "title": "Posisi Lat", "class": "center" },
+            		{ "title": "Posisi Lng", "class": "center" },
+               	{
+               		"orderable":      false,
+                		"data":           null,
+                		"defaultContent": '<div class="details-control"></div.'
+            		}
+        			],	
+        			"data" : op,
+				});
+		   },
+         error: function (xhr, ajaxOptions, thrownError) {
+         	alert(xhr.status + " "+ thrownError);
+         }
+      });   	
    	
   		map = new google.maps.Map(document.getElementById('gmap_city'),
   			{
       		zoom: 5,
       		mapTypeId: google.maps.MapTypeId.ROADMAP,
       		center: new google.maps.LatLng(-1.5,117)
- 			});
+ 			}
+ 		);
+ 		
  		map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
-	   	google.maps.event.addListener(map, 'dblclick', function(event) {
-			//alert(event.latLng);
-			$('#lat').val(event.latLng.lat());
+	   google.maps.event.addListener(map, 'dblclick', function(event) {
+			placeMarker(event.latLng);
+        	$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
 		});
 		map.data.loadGeoJson('../../json/indonesia.json');
-			map.data.setStyle(function(feature) {
-    			return({
-      			fillColor: feature.getProperty('color'),
-      			strokeWeight: 1
-    			});
-  			});
-  			map.data.addListener('mouseover', function(event) {
-   	 	map.data.revertStyle();
+		map.data.setStyle(function(feature) {
+    		return({
+      		fillColor: feature.getProperty('color'),
+      		strokeWeight: 1
+    		});
+  		});
+  		map.data.addListener('mouseover', function(event) {
+   		map.data.revertStyle();
     		map.data.overrideStyle(event.feature, {strokeWeight: 2});
-  			});
-  			map.data.addListener('dblclick', function(event) {
+  		});
+  		map.data.addListener('dblclick', function(event) {
+  			placeMarker(event.latLng);
 			$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
-  			});
+  		});
+  		$.ajax({
+			type:"POST",
+			url : "../../ajax/load_atlet.php",
+			dataType: 'json',
+			success: function (atlet) {			
+				setMarkers(atlet);	
+			}
+		});
+		
 		$('.cabor').html('<option value="">--Loading--</option>');
  
 		$.ajax({url: "<?php echo $url_rewrite.'core/input_atlet/read_cabor.php'; ?>",
-             success: function(output) {
-                //alert(output);
-                caborOutput = output;
-                $('.cabor').html(caborOutput);
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
+	   	success: function(output) {
+         	caborOutput = output;
+            $('.cabor').html(caborOutput);
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+         	alert(xhr.status + " "+ thrownError);
+         }
+     	});
           
-    $('#pelatih').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');
-    $('#input-cabor').change(function(e) {
-    //Grab the chosen value on first select list change
-    var selectvalue = $(this).val();
- 
-    //Display 'loading' status in the target select list
-    $('#pelatih').html('<option value="">Loading...</option>');
- 
-    if (selectvalue == "") {
-        //Display initial prompt in target select if blank value selected
-       $('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-    } else {
-      //Make AJAX request, using the selected value as the GET
-      $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
+    	$('#pelatih').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');
+    	$('#input-cabor').change(function(e) {
+    		var selectvalue = $(this).val();
+ 			$('#pelatih').html('<option value="">Loading...</option>');
+ 			if (selectvalue == "") {
+        		$('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
+    		}
+    		else {
+      		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
       			type: 'POST',
       			data: {id:selectvalue},
-             success: function(output) {
-                //alert(output);
-                $('#pelatih').html(output);
-            },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-        }
-     });
-     	
+            	success: function(output) {
+            		$('#pelatih').html(output);
+            	},
+         		error: function (xhr, ajaxOptions, thrownError) {
+         			alert(xhr.status + " "+ thrownError);
+         		}
+         	});
+      	}
+    	});
       
      	$('#city_list').change(function(){
-   	var coordinate = $('option:selected',this).data('latlng');
-   	var propinsiValue = $(this).val();
-   	var caborValue = $('#cabor').val();
-   	map.panTo(new google.maps.LatLng(coordinate[0],coordinate[1]));
-   	if (coordinate == '-1.5,117') {
-   		map.setZoom(5);
-    	}
-   	else {
-      	map.setZoom(8)
-    	}
+   		var coordinate = $('option:selected',this).data('latlng');
+   		var propinsiValue = $(this).val();
+   		var caborValue = $('#cabor').val();
+   		map.panTo(new google.maps.LatLng(coordinate[0],coordinate[1]));
+   		if (coordinate == '-1.5,117') {
+   			map.setZoom(5);
+    		}
+    		else if (coordinate == '-6.211278,106.842316') {
+        			map.setZoom(11);
+        	}
+   		else {
+      		map.setZoom(8)
+    		}
 	      $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-      			type: 'POST',
-      			data: {id_propinsi:propinsiValue,id_cabor:caborValue},
-             success: function(output) {
-             	var op=JSON.parse(output);
-                //alert(output);
-                $('#dataTablesAtlet').dataTable().fnClearTable();
-                $('#dataTablesAtlet').dataTable().fnAddData(op);
-               // $('#dataTablesAtlet').html(output);
-                
-                
-          		//$('#dataTablesAtlet').DataTable();
-          		   /* $('#dataTablesAtlet').dataTable( {
-        		"data": op,
-        		"columns": [
-            { "title": "Atlet" },
-            { "title": "Cabang Olahraga" },
-            { "title": "Pelatih" },
-            { "title": "propinsi", "class": "center" },
-            { "title": "Jenis Kelamin", "class": "center" },
-            { "title": "Posisi Lat", "class": "center" },
-            { "title": "Posisi Lng", "class": "center" }
-        ]
-    });*/
+      		type: 'POST',
+      		data: {id_propinsi:propinsiValue,id_cabor:caborValue},
+            success: function(output) {
+            	var op=JSON.parse(output);
+               $('#dataTablesAtlet').dataTable().fnClearTable();
+               $('#dataTablesAtlet').dataTable().fnAddData(op);
             },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + " "+ thrownError);
-          }});
-		
-	});
+          	error: function (xhr, ajaxOptions, thrownError) {
+            	alert(xhr.status + " "+ thrownError);
+          	}
+       	});
+		});
 	
      	$('#cabor').change(function(){
-   	
-   	var propinsiValue = $('#city_list').val();
-   	var caborValue = $(this).val()
-   	
-	   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-  			type: 'POST',
-      	data: {id_propinsi:propinsiValue,id_cabor:caborValue},
-       	success: function(output) {
-      	var op=JSON.parse(output);
-                //alert(output);
-         	$('#dataTablesAtlet').dataTable().fnClearTable();
-         	$('#dataTablesAtlet').dataTable().fnAddData(op);
-			},
-    		error: function (xhr, ajaxOptions, thrownError) {
-     			alert(xhr.status + " "+ thrownError);
-   		}});
-       	//var selectvalue = $(this).val();
- 
-    		//Display 'loading' status in the target select list
-    		$('#pelatih').html('<option value="">Loading...</option>');
- 
+			var propinsiValue = $('#city_list').val();
+   		var caborValue = $(this).val()
+		   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
+  				type: 'POST',
+      		data: {id_propinsi:propinsiValue,id_cabor:caborValue},
+       		success: function(output) {
+      			var op=JSON.parse(output);
+           		$('#dataTablesAtlet').dataTable().fnClearTable();
+         		$('#dataTablesAtlet').dataTable().fnAddData(op);
+				},
+    			error: function (xhr, ajaxOptions, thrownError) {
+     				alert(xhr.status + " "+ thrownError);
+   			}
+   		});
+       	$('#pelatih').html('<option value="">Loading...</option>');
     		if (caborValue == "") {
-        		//Display initial prompt in target select if blank value selected
        		$('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-    		} else {
-      		//Make AJAX request, using the selected value as the GET
+    		}
+    		else {
       		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
       			type: 'POST',
       			data: {id:caborValue},
              	success: function(output) {
-                //alert(output);
                	$('#pelatih').html(output);
- 
             	},
           		error: function (xhr, ajaxOptions, thrownError) {
             		alert(xhr.status + " "+ thrownError);
           		}
           	});
         	}
-        	
-		});	     
+ 		});	     
 		
 		$(document).on('click', '.details-control', function () {
-			
-        var tr = $(this).closest('tr');
-        //alert(tr);
-        var row = table.row(tr);
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
+			var tr = $(this).closest('tr');
+      	var row = table.row(tr);
+      	if ( row.child.isShown() ) {
             row.child.hide();
             tr.removeClass('shown warning');
-            
-        }
-        else {
-            // Open this row
+         }
+        	else {
             row.child( format(row.data()) ).show();
             tr.addClass('shown warning');
-            //alert(row.data()[2])
-            //$('#cabor-update').filter(function () { return $(this).html() == 'Atletik'; }).val();
-           // $('#cabor-update').find('option[text="Atletik"]').val();
-            //$("#cabor-update").val("23");
-            //$("#city_list-update").val("7");
             var value = $("#cabor-update-"+row.data()[0] +" option").filter(function() {
-  									return $(this).text() == row.data()[2];
-								}).first().attr("value");
+ 					return $(this).text() == row.data()[2];
+				}).first().attr("value");
 				$("#cabor-update-"+row.data()[0] +"").val(value);
-				
-            var value2 = $("#city_list-update-"+row.data()[0] +" option").filter(function() {
-  									return $(this).text() == row.data()[4];
-								}).first().attr("value");
+			  	var value2 = $("#city_list-update-"+row.data()[0] +" option").filter(function() {
+  					return $(this).text() == row.data()[4];
+				}).first().attr("value");
 				$("#city_list-update-"+row.data()[0] +"").val(value2);
-								
 				$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');	
-				
 				$("#cabor-update-"+row.data()[0] +"").change(function(e) {
-   			 //Grab the chosen value on first select list change
-   			var selectvalue = $(this).val();
- 
-    				//Display 'loading' status in the target select list
-    					$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Loading...</option>');
- 
-    						if (selectvalue == "") {
-       			 //Display initial prompt in target select if blank value selected
-      					 $('#pelatih-update-'+row.data()[0] +'').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-   					} else {
-   				   //Make AJAX request, using the selected value as the GET
-   							   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
-      							type: 'POST',
-      						data: {id:selectvalue},
-      			       success: function(output) {
-      			          //alert(output);
-        				        $('#pelatih-update-'+row.data()[0] +'').html(output);
-     			       },
+   				var selectvalue = $(this).val();
+ 					$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Loading...</option>');
+ 					if (selectvalue == "") {
+       				$('#pelatih-update-'+row.data()[0] +'').html('<option value="">! Pilih Cabang Olahraga ! </option>');
+   				}
+   				else {
+   					$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
+      					type: 'POST',
+      					data: {id:selectvalue},
+      			      success: function(output) {
+      			      	$('#pelatih-update-'+row.data()[0] +'').html(output);
+     			       	},
      				     error: function (xhr, ajaxOptions, thrownError) {
-    			        alert(xhr.status + " "+ thrownError);
-    					      }});
-   				     }
-  				   });
-  				   
-  				   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
-      							type: 'POST',
-      						data: {id:value},
-      			       success: function(output) {
-      			          //alert(output);
-        				        $('#pelatih-update-'+row.data()[0] +'').html(output);
-        				        				 var value3 = $("#pelatih-update-"+row.data()[0] +" option").filter(function() {
-  									return $(this).text() == row.data()[3];
-								}).first().attr("value");
-				$("#pelatih-update-"+row.data()[0] +"").val(value3);
-				//alert(value3);
-     			       },
-     				     error: function (xhr, ajaxOptions, thrownError) {
-    			        alert(xhr.status + " "+ thrownError);
-    					      }});
+    			        		alert(xhr.status + " "+ thrownError);
+    					  }
+    					});
+   				}
+  				});
+  				$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
+      			type: 'POST',
+      			data: {id:value},
+      		   success: function(output) {
+      			   $('#pelatih-update-'+row.data()[0] +'').html(output);
+        				var value3 = $("#pelatih-update-"+row.data()[0] +" option").filter(function() {
+  							return $(this).text() == row.data()[3];
+						}).first().attr("value");
+						$("#pelatih-update-"+row.data()[0] +"").val(value3);
+					},
+     				error: function (xhr, ajaxOptions, thrownError) {
+    			   	alert(xhr.status + " "+ thrownError);
+    				}
+    			});
 				if(row.data()[5] == "Perempuan"){
 					$('#jenkel-update-'+row.data()[0] +'-perempuan').prop("checked", true);
-					
-				}else{
+				}
+				else{
 					$('#jenkel-update-'+row.data()[0] +'-laki').prop("checked", true);
 				}
-        
 				$('#update-atlet-'+row.data()[0] +'').submit(function(event) {
-					      	event.preventDefault();
-      	$('#alert-update').empty();
-					      	var $form = $( this );
-          var url = $form.attr( 'action' );
-          
-
-          //alert($('#lng-update-'+row.data()[0] +'').val() );
-					var posting = $.post(url, {
-										id_atlet: row.data()[0], 
-										namaatlet: $('#nama-atlet-update-'+row.data()[0] +'').val(), 
-										jenkel: $('.jenkel-update-'+row.data()[0] +':checked').val(), 
-										cabor: $('#cabor-update-'+row.data()[0] +'').val(), 
-										propinsi: $('#city_list-update-'+row.data()[0] +'').val(), 
-										pelatih: $('#pelatih-update-'+row.data()[0] +'').val(), 
-										lat: $('#lat-update-'+row.data()[0] +'').val(), 
-										lng: $('#lng-update-'+row.data()[0] +'').val() 
-										} );
-
-      /* Alerts the results */
-      		posting.done(function( data ) {
-        		//alert('success');
-
-        		$('#alert-update-'+row.data()[0] +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil diubah.</div>');
-				          var jk;
-          if ($('.jenkel-update-'+row.data()[0] +':checked').val()==1) {
-          	jk = "Laki-laki";
-          } else {
-          	jk = "Perempuan";
-          }
-				$('#dataTablesAtlet').dataTable().fnUpdate( 
-								[
-									row.data()[0],
-									$('#nama-atlet-update-'+row.data()[0] +'').val(),
-									$('#cabor-update-'+row.data()[0] +' option:selected').text(), 
-									$('#pelatih-update-'+row.data()[0] +' option:selected').text(),
-									$('#city_list-update-'+row.data()[0] +' option:selected').text(),
-									jk,
-									$('#lat-update-'+row.data()[0] +'').val(), 
-									$('#lng-update-'+row.data()[0] +'').val()
-								], tr[0] );
-        		//$('#dataTablesAtlet').dataTable().fnDraw();
-        		 var propinsiValue = $('#city_list').val();
-   				var caborValue = $('#cabor').val()
-   				
-   	
-        		/*$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-  			type: 'POST',
-      	data: {id_propinsi:propinsiValue,id_cabor:caborValue},
-       	success: function(output) {
-      	var op=JSON.parse(output);
-                //alert(output);
-         	$('#dataTablesAtlet').DataTable().fnClearTable();
-         	$('#dataTablesAtlet').DataTable().fnAddData(op);
-			},
-    		error: function (xhr, ajaxOptions, thrownError) {
-     			alert(xhr.status + " "+ thrownError);
-   		}});*/
-
-    			});
+					event.preventDefault();
+      			$('#alert-update').empty();
+					var $form = $( this );
+          		var url = $form.attr( 'action' );
+          		var posting = $.post(url, {
+						id_atlet: row.data()[0], 
+						namaatlet: $('#nama-atlet-update-'+row.data()[0] +'').val(), 
+						jenkel: $('.jenkel-update-'+row.data()[0] +':checked').val(), 
+						cabor: $('#cabor-update-'+row.data()[0] +'').val(), 
+						propinsi: $('#city_list-update-'+row.data()[0] +'').val(), 
+						pelatih: $('#pelatih-update-'+row.data()[0] +'').val(), 
+						lat: $('#lat-update-'+row.data()[0] +'').val(), 
+						lng: $('#lng-update-'+row.data()[0] +'').val() 
+					});
+					posting.done(function( data ) {
+        				$('#alert-update-'+row.data()[0] +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil diubah.</div>');
+				      var jk;
+          			if ($('.jenkel-update-'+row.data()[0] +':checked').val()==1) {
+          				jk = "Laki-laki";
+          			}
+          			else {
+          				jk = "Perempuan";
+          			}
+						$('#dataTablesAtlet').dataTable().fnUpdate( 
+							[
+								row.data()[0],
+								$('#nama-atlet-update-'+row.data()[0] +'').val(),
+								$('#cabor-update-'+row.data()[0] +' option:selected').text(), 
+								$('#pelatih-update-'+row.data()[0] +' option:selected').text(),
+								$('#city_list-update-'+row.data()[0] +' option:selected').text(),
+								jk,
+								$('#lat-update-'+row.data()[0] +'').val(), 
+								$('#lng-update-'+row.data()[0] +'').val()
+							], tr[0]
+						);
+        				var propinsiValue = $('#city_list').val();
+   					var caborValue = $('#cabor').val()
+   				});
 				});        
 				$('#hapus-'+ row.data()[0] +'').click(function() {
-        			//Do stuff when clicked
         			$('#modal-hapus').modal('show');
         			$('#hapus-data').click(function() {
         			var propinsiValue = $('#city_list').val();
@@ -375,14 +296,12 @@
       				type: 'POST',
       				data: {id_atlet:row.data()[0]},
       				success: function(output) {
-      			          //alert(output);
-      			   	$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
+      			  		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
   								type: 'POST',
       						data: {id_propinsi:propinsiValue,id_cabor:caborValue},
        						success: function(output) {
       							var op=JSON.parse(output);
-                				//alert(output);
-         						$('#dataTablesAtlet').dataTable().fnClearTable();
+                				$('#dataTablesAtlet').dataTable().fnClearTable();
          						$('#dataTablesAtlet').dataTable().fnAddData(op);
 								},
     							error: function (xhr, ajaxOptions, thrownError) {
@@ -398,13 +317,55 @@
     				});      
     				});			
     			});
-        }
-        
-        
-    }); 
-    
-       
-	} 		   
+       	}
+    	}); 
+	}
+	
+	function placeMarker(location) {
+ 		if ( marker ) {
+    		marker.setPosition(location);
+  		}
+  		else {
+  			var image = {
+    			url: '../../icon/diamond.png',
+  			};
+    		marker = new google.maps.Marker({
+      		position: location,
+      		map: map,
+      		icon: image
+    		});
+  		}
+	}
+	
+	function createMarkers(namatlet, lat, lon) {
+		var image = {
+   		url: '../../icon/diamond.png',
+  		};
+		var newmarker = new google.maps.Marker({
+     		position: new google.maps.LatLng(lat, lon),
+     		map: map,
+     		icon: image
+   	});
+   	markers.push(newmarker); 
+   	newmarker['infowindow'] = new google.maps.InfoWindow({
+    		content: namatlet
+    	});
+    	google.maps.event.addListener(newmarker, 'mouseover', function() {
+      	this['infowindow'].open(map, this);
+    	});
+    	google.maps.event.addListener(newmarker, 'mouseout', function() {
+      	this['infowindow'].close();
+    	});
+	}
+
+	function setMarkers(locations) {
+		for (var i = 0; i < locations.length; i++) {
+   		var beach = locations[i];
+   		createMarkers(beach[0], beach[1], beach[2]);
+   	}
+		var mcOptions = {gridSize: 50, maxZoom: 7};
+   	var mc = new MarkerClusterer(map, markers, mcOptions);
+	}
 	
    </script>
 </head>
@@ -428,7 +389,7 @@
                   	<div id="alert-input"></div>
                   	<div id="inputatlet" style="height:100%px; width:100%; border-radius:10px 10px 0px 0px; background-color:#F5F5F5; padding:20px 20px 20px 80px;">
                   	<form id="input-atlet" action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
-<div class="row">
+							<div class="row">
                   		<div class="col-md-6">
                   			<select required="required" id="city_list" style="width:230px; height:34px;margin : 0 auto" name="propinsi" class="form-control">
 							<option selected="selected" data-latlng="[-1.5, 117]" id="valid2" value="0">Pilih Propinsi</option>
