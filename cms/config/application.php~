@@ -35,7 +35,6 @@ $ALBUM=new modelAlbum();
 $FOTO=new modelFoto();
 $DESTINATION=new modelDestination();
 $ATLET= new modelAtlet();
-$PELATIH = new modelPelatih();
 //$data= $_SESSION['cookies']; 
 //setcookie($cookie_name, $data, time() + $cookie_time);
 

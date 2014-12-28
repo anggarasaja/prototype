@@ -11,5 +11,5 @@ while($row = $result->fetch_object())
   {
     echo '<option value="'. $row->id_pelatih .'">' . $row->pelatih . "</option>";
   }
-echo '<option value="0">Belum Ada</option>';
+echo '<option value="0">Belum Ada </option>';
   }
