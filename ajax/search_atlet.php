@@ -12,6 +12,6 @@ $query->execute();
 $list = $query->fetchAll();
 foreach ($list as $rs) {
 	$atlet_name = str_replace($_POST['keyword'], '<b>'.$_POST['keyword'].'</b>', $rs['atlet']);
-   echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['atlet']).'\')"><a><div style="margin-left:60px; line-height:40px;">'.$atlet_name.'</div></a></li>';
+   echo '<li onclick="set_item(\''.str_replace("'", "\'", $rs['atlet']).'\')"><a><div style="margin-left:60px; line-height:40px;" onclick="search_click(\''.str_replace("'", "\'", $rs['lat']).'\',\''.str_replace("'", "\'", $rs['lng']).'\')">'.$atlet_name.'</div></a></li>';
 }
 ?>

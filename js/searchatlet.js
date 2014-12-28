@@ -20,3 +20,8 @@ function set_item(item) {
 	$('#search_atlet').val(item);
 	$('#search_list_atlet').hide();
 }
+
+function search_click(lat,lng) {
+	map.panTo(new google.maps.LatLng(lat,lng));
+	map.setZoom(15);
+}

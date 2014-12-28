@@ -274,7 +274,7 @@
 						<div class="gn-scroller">
 							<ul class="gn-menu">
 								<li class="gn-search-item">
-									<input placeholder="Search" type="text" class="gn-search" id="search_atlet" onkeyup="searchtext()"/>
+									<input placeholder="Search Atlet" type="text" class="gn-search" id="search_atlet" onkeyup="searchtext()"/>
 									<a class="gn-icon gn-icon-search"><span>Search</span></a>
 								</li>
 								<ul id="search_list_atlet"></ul>
