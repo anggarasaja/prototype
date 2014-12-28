@@ -263,6 +263,7 @@
   			}
 		}  
 	</script>
+	<script type="text/javascript" src="js/searchatlet.js"></script>
 	</head>
 	<body onload="pageLoad()">
 		<div class="container">
@@ -273,12 +274,13 @@
 						<div class="gn-scroller">
 							<ul class="gn-menu">
 								<li class="gn-search-item">
-									<input placeholder="Search" type="search" class="gn-search">
+									<input placeholder="Search" type="text" class="gn-search" id="search_atlet" onkeyup="searchtext()"/>
 									<a class="gn-icon gn-icon-search"><span>Search</span></a>
 								</li>
+								<ul id="search_list_atlet"></ul>
 								<li><span class="gn-icon gn-icon-download"><input id="toggleall" name="Profil Prov" type="checkbox" value="Profil Prov" onclick="toggle(this)" checked="active"> Select All</span>
 									<ul class="gn-submenu">
-										<li><span class="label" style="margin-left:60px;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/icon.png">Atlet</span></li>
+										<li><span class="label" style="margin-left:60px;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/diamond.png">Atlet</span></li>
 										<li><span class="label" style="margin-left:60px;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png">KNPI</span></li>
 									</ul>
 								</li>
@@ -344,7 +346,51 @@
 		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
 			<div style="margin: 20px; border-width:1px; border-radius:20px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
-				<div id="details" style="padding:5px;"></div>			
+				<div id="details" style="padding:5px 15px;">
+					<div id="informasiawal" style="text-align:justify;">
+						<h2 style="text-align:center;">GIS Kemenpora V2</h2>
+						<p>Penjelasan Singkat Menu GIS<br>
+							<table>
+							<tr>
+								<td><li></li></td>
+								<td>Quick View</td>
+								<td>:</td>
+								<td>Menentukan Wilayah Propinsi</td>							
+							</tr>							
+							<tr>
+								<td><li></li></td>
+								<td>Enable Layer</td>
+								<td>:</td>
+								<td>Menampilkan Layer Propinsi</td>							
+							</tr>
+							<tr>
+								<td><li></li></td>
+								<td>Enable Atlet</td>
+								<td>:</td>
+								<td>Menampilkan Marker Atlet</td>							
+							</tr>
+							<tr>
+								<td><li></li></td>
+								<td>Enable KNPI</td>
+								<td>:</td>
+								<td>Menampilkan Marker KNPI</td>							
+							</tr>
+							<tr>
+								<td><li></li></td>
+								<td>Icon KNPI</td>
+								<td>:</td>
+								<td>Mengetahui Informasi KNPI</td>							
+							</tr>
+							<tr>
+								<td><li></li></td>
+								<td>Icon Angka</td>
+								<td>:</td>
+								<td>Mengetahui Informasi Atlet</td>							
+							</tr>
+							</table>
+						</p>					
+					</div>
+				</div>			
 			</div>		
 		</div>		
 		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 372px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>		
