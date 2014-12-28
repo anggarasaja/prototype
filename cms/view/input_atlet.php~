@@ -7,17 +7,13 @@
    <script type="text/javascript">
    var map;
    var caborOutput;
-<<<<<<< HEAD
+
    var marker;
    var markers = [];
-   function pageLoad(){
-		var table;
-=======
+
    var table;
    function pageLoad(){
-   	
-		
->>>>>>> input pelatih
+
     	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet"></table>' );
  		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
       	type: 'POST',
@@ -150,14 +146,7 @@
       		map.setZoom(8)
     		}
 	      $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-<<<<<<< HEAD
-      		type: 'POST',
-      		data: {id_propinsi:propinsiValue,id_cabor:caborValue},
-            success: function(output) {
-            	var op=JSON.parse(output);
-               $('#dataTablesAtlet').dataTable().fnClearTable();
-               $('#dataTablesAtlet').dataTable().fnAddData(op);
-=======
+
       			type: 'POST',
       			data: {id_propinsi:propinsiValue,id_cabor:caborValue},
              success: function(output) {
@@ -184,7 +173,6 @@
             { "title": "Posisi Lng", "class": "center" }
         ]
     });*/
->>>>>>> input pelatih
             },
           	error: function (xhr, ajaxOptions, thrownError) {
             	alert(xhr.status + " "+ thrownError);
@@ -193,23 +181,7 @@
 		});
 	
      	$('#cabor').change(function(){
-<<<<<<< HEAD
-			var propinsiValue = $('#city_list').val();
-   		var caborValue = $(this).val()
-		   $.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
-  				type: 'POST',
-      		data: {id_propinsi:propinsiValue,id_cabor:caborValue},
-       		success: function(output) {
-      			var op=JSON.parse(output);
-           		$('#dataTablesAtlet').dataTable().fnClearTable();
-         		$('#dataTablesAtlet').dataTable().fnAddData(op);
-				},
-    			error: function (xhr, ajaxOptions, thrownError) {
-     				alert(xhr.status + " "+ thrownError);
-   			}
-   		});
-       	$('#pelatih').html('<option value="">Loading...</option>');
-=======
+
    	
    	var propinsiValue = $('#city_list').val();
    	var caborValue = $(this).val()
@@ -233,8 +205,7 @@
  
     		//Display 'loading' status in the target select list
     		$('#pelatih').html('<option value="">Loading...</option>');
- 
->>>>>>> input pelatih
+
     		if (caborValue == "") {
        		$('#pelatih').html('<option value="">! Pilih Cabang Olahraga ! </option>');
     		}
@@ -253,11 +224,7 @@
  		});	     
 		
 		$(document).on('click', '.details-control', function () {
-<<<<<<< HEAD
-			var tr = $(this).closest('tr');
-      	var row = table.row(tr);
-      	if ( row.child.isShown() ) {
-=======
+
 			                        var row;
         var id_row;
         var pelatih_row ;
@@ -283,104 +250,14 @@
         	
         if ( row.child.isShown() ) {
             // This row is already open - close it
->>>>>>> input pelatih
+
             row.child.hide();
             tr.removeClass('shown warning');
          }
         	else {
             row.child( format(row.data()) ).show();
             tr.addClass('shown warning');
-<<<<<<< HEAD
-            var value = $("#cabor-update-"+row.data()[0] +" option").filter(function() {
- 					return $(this).text() == row.data()[2];
-				}).first().attr("value");
-				$("#cabor-update-"+row.data()[0] +"").val(value);
-			  	var value2 = $("#city_list-update-"+row.data()[0] +" option").filter(function() {
-  					return $(this).text() == row.data()[4];
-				}).first().attr("value");
-				$("#city_list-update-"+row.data()[0] +"").val(value2);
-				$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');	
-				$("#cabor-update-"+row.data()[0] +"").change(function(e) {
-   				var selectvalue = $(this).val();
- 					$('#pelatih-update-'+row.data()[0] +'').html('<option value="">Loading...</option>');
- 					if (selectvalue == "") {
-       				$('#pelatih-update-'+row.data()[0] +'').html('<option value="">! Pilih Cabang Olahraga ! </option>');
-   				}
-   				else {
-   					$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
-      					type: 'POST',
-      					data: {id:selectvalue},
-      			      success: function(output) {
-      			      	$('#pelatih-update-'+row.data()[0] +'').html(output);
-     			       	},
-     				     error: function (xhr, ajaxOptions, thrownError) {
-    			        		alert(xhr.status + " "+ thrownError);
-    					  }
-    					});
-   				}
-  				});
-  				$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_pelatih_controller.php'; ?>',
-      			type: 'POST',
-      			data: {id:value},
-      		   success: function(output) {
-      			   $('#pelatih-update-'+row.data()[0] +'').html(output);
-        				var value3 = $("#pelatih-update-"+row.data()[0] +" option").filter(function() {
-  							return $(this).text() == row.data()[3];
-						}).first().attr("value");
-						$("#pelatih-update-"+row.data()[0] +"").val(value3);
-					},
-     				error: function (xhr, ajaxOptions, thrownError) {
-    			   	alert(xhr.status + " "+ thrownError);
-    				}
-    			});
-				if(row.data()[5] == "Perempuan"){
-					$('#jenkel-update-'+row.data()[0] +'-perempuan').prop("checked", true);
-				}
-				else{
-					$('#jenkel-update-'+row.data()[0] +'-laki').prop("checked", true);
-				}
-				$('#update-atlet-'+row.data()[0] +'').submit(function(event) {
-					event.preventDefault();
-      			$('#alert-update').empty();
-					var $form = $( this );
-          		var url = $form.attr( 'action' );
-          		var posting = $.post(url, {
-						id_atlet: row.data()[0], 
-						namaatlet: $('#nama-atlet-update-'+row.data()[0] +'').val(), 
-						jenkel: $('.jenkel-update-'+row.data()[0] +':checked').val(), 
-						cabor: $('#cabor-update-'+row.data()[0] +'').val(), 
-						propinsi: $('#city_list-update-'+row.data()[0] +'').val(), 
-						pelatih: $('#pelatih-update-'+row.data()[0] +'').val(), 
-						lat: $('#lat-update-'+row.data()[0] +'').val(), 
-						lng: $('#lng-update-'+row.data()[0] +'').val() 
-					});
-					posting.done(function( data ) {
-        				$('#alert-update-'+row.data()[0] +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Data berhasil diubah.</div>');
-				      var jk;
-          			if ($('.jenkel-update-'+row.data()[0] +':checked').val()==1) {
-          				jk = "Laki-laki";
-          			}
-          			else {
-          				jk = "Perempuan";
-          			}
-						$('#dataTablesAtlet').dataTable().fnUpdate( 
-							[
-								row.data()[0],
-								$('#nama-atlet-update-'+row.data()[0] +'').val(),
-								$('#cabor-update-'+row.data()[0] +' option:selected').text(), 
-								$('#pelatih-update-'+row.data()[0] +' option:selected').text(),
-								$('#city_list-update-'+row.data()[0] +' option:selected').text(),
-								jk,
-								$('#lat-update-'+row.data()[0] +'').val(), 
-								$('#lng-update-'+row.data()[0] +'').val()
-							], tr[0]
-						);
-        				var propinsiValue = $('#city_list').val();
-   					var caborValue = $('#cabor').val()
-   				});
-				});        
-				$('#hapus-'+ row.data()[0] +'').click(function() {
-=======
+
             //alert(row.data()[2])
             //$('#cabor-update').filter(function () { return $(this).html() == 'Atletik'; }).val();
            // $('#cabor-update').find('option[text="Atletik"]').val();
@@ -508,7 +385,6 @@
 				});        
 				$('#hapus-'+ id_row +'').click(function() {
         			//Do stuff when clicked
->>>>>>> input pelatih
         			$('#modal-hapus').modal('show');
         			$('#hapus-data').click(function() {
         			var propinsiValue = $('#city_list').val();
@@ -522,17 +398,13 @@
       						data: {id_propinsi:propinsiValue,id_cabor:caborValue},
        						success: function(output) {
       							var op=JSON.parse(output);
-<<<<<<< HEAD
-                				$('#dataTablesAtlet').dataTable().fnClearTable();
-         						$('#dataTablesAtlet').dataTable().fnAddData(op);
-=======
+
                 				//alert(output);
          						table.clear().draw();
                                 if (op!=null) {
                         //alert("op not null");
                         table.rows.add(op).draw();
                 }
->>>>>>> input pelatih
 								},
     							error: function (xhr, ajaxOptions, thrownError) {
      								alert(xhr.status + " "+ thrownError);

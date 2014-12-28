@@ -45,7 +45,8 @@
             		{ "title": "Jenis<br>Kelamin", "class": "center" },
             		{ "title": "Posisi Lat", "class": "center" },
             		{ "title": "Posisi Lng", "class": "center" },
-               	{
+               	{	
+               		"title":"Edit",
                		"orderable":      false,
                 		"data":           null,
                 		"defaultContent": '<div class="details-control"></div.'
