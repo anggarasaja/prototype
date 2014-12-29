@@ -2,6 +2,11 @@
 <html>
 <head>
    <?php include "view/head.php";?>
+   <style type="text/css">
+   	#dataTablesAtlet_paginate{
+			width:600px;   	
+   	}
+   </style>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&language=in"></script>
 	<script type="text/javascript" src="../../js/markerclusterer.js"></script>
    <script type="text/javascript">
@@ -430,7 +435,7 @@
   		}
   		else {
   			var image = {
-    			url: '../../icon/diamond.png',
+    			url: '../../icon/diamondadd.png',
   			};
     		marker = new google.maps.Marker({
       		position: location,
@@ -491,7 +496,7 @@
                   	</div>
                   	<div id="alert-input"></div>
                   	<div id="inputatlet" class="input-box">
-                  	<form id="input-atlet" action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
+                  	<form id="input-atlet" style="margin-bottom:-5px;" action="<?php echo $url_rewrite.'core/input_atlet/input_atlet_controller.php'; ?>" method="POST">
 							<div class="row">
                   		<div class="col-md-6">
                   			<select required="required" id="city_list" style="width:230px; height:34px;margin : 0 auto" name="propinsi" class="form-control">
@@ -536,16 +541,15 @@
                   		</div>
                   	</div>
 							<hr>
-                  		<table width="100%">
+						<div class="row">
+						<div class="col-md-6">                  
+                  <table width="100%">
 						<tr>
-						<td>Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>
+						<td style="padding:10px 20px 10px 35px;">Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td>
 						<td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-atlet" id="nama-atlet" class="form-control"></td>
-						<td style="padding:10px 20px 10px 40px;">Latitude</td>
-						<td style="padding:10px 20px 10px 20px;">:</td>
-						<td><input tabindex="5" required="required" style="width:230px; height:34px;" type="text" autocomplete="on" required="required" name="lat" id="lat" class="form-control"></td><td><div id="nan1" hidden="true"><label style="color:red">Salah</label></div></td>
-					</tr>
-					<tr>
-						<td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>
+						</tr>
+						<tr>
+						<td style="padding:10px 20px 10px 35px;">Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td>
 						<td>
 								<label class="radio-inline">
  										<input tabindex="2"  type="radio" name="jenkel" id="jenkel" value="1"> Laki-laki</input>
@@ -555,22 +559,31 @@
 									</label>
 							</select>									
 						</td>
-						<td style="padding:10px 20px 10px 40px;">Longitude</td>
-						<td style="padding:10px 20px 10px 20px;">:</td>
-						<td><input tabindex="7" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" required="required" class="form-control"></td><td><div id="nan2" hidden="true"><label style="color:red">Salah</label></div><td>
-												
-					</tr>
+						</tr>
 					<tr>
-						
-						
-					</tr>
-					<tr>
-						<td>Nama Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>
+						<td style="padding:10px 20px 10px 35px;">Nama Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>
 						<td><select tabindex="4" required="required" name="pelatih" id="pelatih" style="width:230px; height:34px;" class="form-control"></select></td>						
-						
-						<td style="padding:10px 20px 10px 40px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin-left: 10px;margin-right:40px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
 					</tr>
  				</table>
+				</div>
+				<div class="col-md-6">
+				<table width="100%">
+						<tr>
+						<td style="padding:10px 20px 10px 35px;">Latitude</td>
+						<td style="padding:10px 20px 10px 20px;">:</td>
+						<td><input tabindex="5" required="required" style="width:230px; height:34px;" type="text" autocomplete="on" required="required" name="lat" id="lat" class="form-control"></td><td><div id="nan1" hidden="true"><label style="color:red">Salah</label></div></td>
+					</tr>
+					<tr>
+						<td style="padding:10px 48px 10px 35px;">Longitude</td>
+						<td style="padding:10px 20px 10px 20px;">:</td>
+						<td><input tabindex="7" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" required="required" class="form-control"></td><td><div id="nan2" hidden="true"><label style="color:red">Salah</label></div><td>
+					</tr>
+					<tr>
+						<td style="padding:10px 20px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin-left: 190px;margin-right:10px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
+					</tr>
+ 				</table>				
+				</div>
+ 				</div>
  			</form>
                   	</div>
                   	<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FADAAA; text-align:center;">
