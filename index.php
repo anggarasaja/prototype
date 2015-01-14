@@ -285,7 +285,7 @@
 									</ul>
 								</li>
 								<li><a class="gn-icon gn-icon-cog">Settings</a></li>
-								<li><a class="gn-icon gn-icon-help">Help</a></li>
+								<li><a class="gn-icon gn-icon-help" href="dokumentasi/gis_v2.pdf" target="_blank">Help</a></li>
 								<li>
 									<a class="gn-icon gn-icon-archive">Archives</a>
 									<ul class="gn-submenu">

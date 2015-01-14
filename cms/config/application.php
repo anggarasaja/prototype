@@ -15,6 +15,7 @@ require_once __DIR__ . '/../model/modelFoto.php';
 require_once __DIR__ . '/../model/modelDestination.php';
 require_once __DIR__ . '/../model/modelAtlet.php';
 require_once __DIR__ . '/../model/modelPelatih.php';
+require_once __DIR__ . '/../model/modelAdmin.php';
 
 //Akhir Model
 
@@ -36,6 +37,7 @@ $FOTO=new modelFoto();
 $DESTINATION=new modelDestination();
 $ATLET= new modelAtlet();
 $PELATIH = new modelPelatih();
+$ADMIN = new modelAdmin();
 //$data= $_SESSION['cookies']; 
 //setcookie($cookie_name, $data, time() + $cookie_time);
 

@@ -31,6 +31,9 @@ else
           case 'data_pelatih':
                include "view/input_pelatih.php";
                break;
+          case 'manage_admin':
+               include "view/manage_admin.php";
+               break;
 
           
 
