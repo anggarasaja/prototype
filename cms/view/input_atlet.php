@@ -483,7 +483,7 @@
    	<div id="page-wrapper" style="min-height:850px;">
 	  		<div class="row">
    	   	<div class="col-lg-12"  style="margin-bottom:-20px;">
-             	<label class="page-header title-page" style="background-color:#FADAAA">Input Data Atlet</label>
+             	<label class="page-header title-page" style="background-color:#FDDAAA">Input Data Atlet</label>
          	</div>
       	</div>
       	<div class="row">
@@ -586,12 +586,12 @@
  				</div>
  			</form>
                   	</div>
-                  	<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FADAAA; text-align:center;">
+                  	<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FDDAAA; text-align:center;">
                      	<label>Daftar atlet yang sudah ada</label>                               
                   	</div>
                   	               	
 							<div id="alert-hapus"></div>
-                  	<div class="row" id="datatable" style="margin: 0; padding:0 5px; background-color:#FADAAA; border-radius: 0 0 10px 10px" >
+                  	<div class="row" id="datatable" style="margin: 0; padding:0 5px; background-color:#FDDAAA; border-radius: 0 0 10px 10px" >
    
                   	
 

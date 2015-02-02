@@ -54,10 +54,11 @@
                              <ul class="nav nav-second-level">
                                   <li><a href="<?=$url_rewrite?>content/data_atlet"><i class="fa fa-map-marker  fa-fw"></i> Input Data Atlet</a></li>
                                   <li><a href="<?=$url_rewrite?>content/data_pelatih"><i class="fa fa-info-circle fa-fw"></i> Input Data Pelatih</a></li>
+                             		 <li><a href="<?=$url_rewrite?>content/data_pemuda"><i class="fa fa-info-circle fa-fw"></i> Input Data Kepemudaan</a></li>
+                                  <li><a href="<?=$url_rewrite?>content/data_knpi"><i class="fa fa-info-circle fa-fw"></i> Input Data KNPI</a></li>
                              </ul>
                         </li>
                         
-
                     </ul>
                     
                     <!-- /#side-menu -->

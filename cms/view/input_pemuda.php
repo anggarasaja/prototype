@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="generator" content="Bluefish 2.2.6" >
-<meta name="generator" content="Bluefish 2.2.6" >
+<meta name="generator" content="Bluefish 2.2.5" >
+<meta name="generator" content="Bluefish 2.2.5" >
 <?php include "view/head.php";?>
 <script type="text/javascript" src=
 "http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
@@ -359,7 +359,7 @@
 <div id="page-wrapper" style="min-height:850px;">
 <div class="row">
 <div class="col-lg-12" style="margin-bottom:-20px;"><label class=
-"page-header title-page" style="background-color:#FF827D;">Input Data Pemuda</label></div>
+"page-header title-page" style="background-color:#D0FAD0;">Input Data Pemuda</label></div>
 </div>
 <div class="row">
 <div class="col-lg-12">
@@ -441,10 +441,10 @@ class="btn btn-warning"><input type="submit" value="Submit" style=
 </div>
 <div id="alert-hapus"></div>
 <div class="informasibox" style=
-"margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FF827D; text-align:center;">
+"margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#D0FAD0; text-align:center;">
 <label>Daftar pemuda yang sudah ada</label></div>
 <div class="row" id="datatable" style=
-"margin:0;padding: 0 5px;background-color:#FF827D; border-radius: 0 0 10px 10px">
+"margin:0;padding: 0 5px;background-color:#D0FAD0; border-radius: 0 0 10px 10px">
 </div>
 </div>
 </div>

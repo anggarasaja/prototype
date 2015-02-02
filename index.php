@@ -14,12 +14,14 @@
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
 		<script src="js/modernizr.custom.js"></script>
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization"></script>
 		<script type="text/javascript" src="js/markerclusterer.js"></script>
 		<script>
 
 		var map;
 		var markers = [];
+		var heatmaps = [];
+		var pointarray, heatmap;
 
 		function HybridControl(controlDiv, map) {
 	  		controlDiv.style.paddingTop = '5px';
@@ -38,7 +40,7 @@
   			controlText.style.fontSize = '12px';
   			controlText.style.paddingLeft = '4px';
   			controlText.style.paddingRight = '4px';
-  			controlText.style.paddingTop = '2px';
+  			controlText.style.paddingTop = '1px';
   			controlText.style.paddingBottom = '1px';
   			controlText.innerHTML = 'Hybrid';
   			controlUI.appendChild(controlText);
@@ -64,7 +66,7 @@
   			controlText.style.fontSize = '12px';
   			controlText.style.paddingLeft = '4px';
   			controlText.style.paddingRight = '4px';
-  			controlText.style.paddingTop = '2px';
+  			controlText.style.paddingTop = '1px';
   			controlText.style.paddingBottom = '1px';
   			controlText.innerHTML = 'Transportation';
   			controlUI.appendChild(controlText);
@@ -78,7 +80,7 @@
   			map = new google.maps.Map(document.getElementById('gmap_city'),
   		   {
       		zoom: 5,
-      	 	mapTypeId: google.maps.MapTypeId.ROADMAP
+      	 	mapTypeId: google.maps.MapTypeId.HYBRID
  		   });
  		   		   
  		   var hybridControlDiv = document.createElement('div');
@@ -101,6 +103,25 @@
 					setMarkers(atlet);	
 				}
 			});
+			
+			$('#cabor_list').change(function(e) {		
+				var selectvalue = $(this).val();
+				if (selectvalue == 0) {
+        			alert(selectvalue);
+    			}
+    			else {	
+					$.ajax({
+						type:"POST",
+						url : "ajax/load_heatmaps.php",
+						dataType: 'json',
+						data: {id:selectvalue},
+						success: function (heat) {			
+							setHeatmaps(heat);	
+						}
+					});
+				}
+			});
+			
 			$.ajax({
 				type:"POST",
 				url : "ajax/load_knpi.php",
@@ -109,6 +130,16 @@
 					setMarkersknpi(knpi);	
 				}
 			});
+			
+			$.ajax({url: "ajax/load_cabor.php",
+	   	success: function(output) {
+         	loadCabor = output;
+            $('#cabor_list').html(loadCabor);
+         },
+         error: function (xhr, ajaxOptions, thrownError) {
+         	alert(xhr.status + " "+ thrownError);
+         }
+     		});
 			
 			map.data.loadGeoJson('json/indonesia.json');
 			map.data.setStyle(function(feature) {
@@ -140,6 +171,7 @@
         		}
         		
    		}).trigger('change');
+   		
    		$('#enablelayer').click(function(){
     			if (this.checked) {
         			map.data.setMap(map);
@@ -151,6 +183,24 @@
 			$("#aboutus").click(function(){
    			alert("Nama Tim\n\n- Andreas Hadiyono\n- Haris Anggara\n- Yohanes Christomas Daimler");
   			});
+  			$("#cabor_list").change(function(){
+				var valueCab = $('option:selected',this).val();
+				$.ajax({url: "ajax/load_potensi.php",
+      			type: 'POST',
+      			data: {id_cabor:valueCab},
+      			success: function(output) {
+      			   $("#details").html(output);
+      			   //alert(output);
+     			   },
+     				error: function (xhr, ajaxOptions, thrownError) {
+    			      alert(xhr.status + " "+ thrownError);
+    			}});
+			});
+			//var pointArray = new google.maps.MVCArray(taxiData);
+  			//heatmap = new google.maps.visualization.HeatmapLayer({
+    		//	data: pointArray
+  			//});
+  			//heatmap.setMap(map);
 		}
 		
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
@@ -162,7 +212,7 @@
         		map: map,
         		icon: image
     		});
-    		markers.push(newmarker); 
+    		markers.push(newmarker);
     		newmarker['infowindow'] = new google.maps.InfoWindow({
       		content: namatlet
       	});
@@ -189,7 +239,7 @@
     			}
 			});
 		}
-
+		
 		function setMarkers(locations) {
 			for (var i = 0; i < locations.length; i++) {
     			var beach = locations[i];
@@ -223,7 +273,7 @@
       		position: new google.maps.LatLng(lat, lon),
         		map: map,
         		icon: image,
-        		zIndex: 1000
+        		zIndex: 10
     		});
     		google.maps.event.addListener(newmarker, 'click', function() {
 					details.innerHTML = '<h2>KNPI</h2><table>'+
@@ -255,6 +305,24 @@
     			createMarkersknpi(beach[0], beach[1], beach[2]);
     		}
 		}
+		
+		function setHeatmaps(locations) {
+			for (var i = 0; i < locations.length; i++) {
+    			var beach = locations[i];
+    			createHeatmaps(beach[0], beach[1]);
+    		}
+		}
+		function createHeatmaps(lat, lon) {
+			var pointArray = new google.maps.MVCArray({
+				position: new google.maps.LatLng(lat, lon),
+        		map: map
+        	});
+        	heatmaps.push(pointArray);
+        	heatmap = new google.maps.visualization.HeatmapLayer({
+    			data: heatmaps
+  			});
+  			heatmap.setMap(map);
+		}
 					
 		function toggle(source) {
   			checkboxes = document.getElementsByClassName('togglebox');
@@ -284,25 +352,20 @@
 										<li><span class="label" style="margin-left:60px;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png">KNPI</span></li>
 									</ul>
 								</li>
-								<li><a class="gn-icon gn-icon-cog">Settings</a></li>
-								<li><a class="gn-icon gn-icon-help" href="dokumentasi/gis_v2.pdf" target="_blank">Help</a></li>
-								<li>
-									<a class="gn-icon gn-icon-archive">Archives</a>
-									<ul class="gn-submenu">
-										<li><a class="gn-icon gn-icon-article">Articles</a></li>
-									</ul>
-								</li>
+								<li><a class="gn-icon gn-icon-help" href="dokumentasi/gis_v2.pdf" target="_blank">Documentation</a></li>								
+								<li><a id="aboutus" class="gn-icon gn-icon-article">About Us</a></li>
+								<li><a class="gn-icon gn-icon-archive">Archives</a></li>
+								<li><a class="gn-icon gn-icon-cog">Settings</a></li>									
 							</ul>
 						</div>
 					</nav>
 				</li>
-				<li><a href="index.php">HOME</a></li>
-				<li><a id="aboutus">ABOUT US</a></li>
+				<li><a href="">HOME</a></li>
 				<li><a>Quick View
-				<select id="city_list">
+				<select id="city_list" style="border-radius:20px; background-color:white; padding-left:3px;">
 					<option selected="selected" data-latlng="[-1.5, 117]" id="valid2">--Peta Indonesia--</option>
-					<option data-latlng="[4.359558, 96.934570]" >Nanggroe Aceh Darussalam</option>x
-               <option data-latlng="[2.264792,99.219727]" >Sumatera Utara</option>x
+					<option data-latlng="[4.359558, 96.934570]" >Nanggroe Aceh Darussalam</option>
+               <option data-latlng="[2.264792,99.219727]" >Sumatera Utara</option>
                <option data-latlng="[-0.973342,100.066002]" >Sumatera Barat</option>
                <option data-latlng="[0.312010,101.582001]" >Riau</option>
                <option data-latlng="[-1.654310,102.790001]" >Jambi</option>
@@ -310,33 +373,38 @@
                <option data-latlng="[-3.837950,102.251999]" >Bengkulu</option>
                <option data-latlng="[-5.009961,105.152344]" >Lampung</option>
                <option data-latlng="[-2.715901,106.557495]" >Kepulauan Bangka Belitung</option>
-               <option data-latlng="[3.829178,108.131836]" >Kepulauan Riau</option>x
-               <option data-latlng="[-6.211278,106.842316]" >DKI Jakarta</option>x
-               <option data-latlng="[-6.932970,107.602295]" >Jawa Barat</option>x
-               <option data-latlng="[-7.161940,110.184082]" >Jawa Tengah</option>x
-               <option data-latlng="[-7.894941,110.432373]" >Daerah Istimewa Yogyakarta</option>x
-               <option data-latlng="[-7.761069,112.645020]" >Jawa Timur</option>x
-               <option data-latlng="[-6.451230,106.112000]" >Banten</option>x
-               <option data-latlng="[-8.408255,115.170776]" >Bali</option>x
-               <option data-latlng="[-8.696155,117.499878]" >Nusa Tenggara Barat</option>x
-               <option data-latlng="[-8.647282,121.097900]" >Nusa Tenggara Timur</option>x
-               <option data-latlng="[0.129638,111.106934]" >Kalimantan Barat</option>x
-               <option data-latlng="[-1.518133,113.425049]" >Kalimantan Tengah</option>x
-               <option data-latlng="[-3.043977,115.479492]" >Kalimantan Selatan</option>x
-               <option data-latlng="[1.656507,116.545166]" >Kalimantan Timur</option>x
-               <option data-latlng="[0.678940,124.235596]" >Sulawesi Utara</option>x
-               <option data-latlng="[-1.430271,121.445068]" >Sulawesi Tengah</option>x
-               <option data-latlng="[-3.598949,120.247559]" >Sulawesi Selatan</option>x
-               <option data-latlng="[-4.129477,122.148193]" >Sulawesi Tenggara</option>x
-               <option data-latlng="[0.678940,122.455811]" >Gorontalo</option>x
-               <option data-latlng="[-2.183553,119.324707]" >Sulawesi Barat</option>x
-               <option data-latlng="[-3.320404,130.126465]" >Maluku</option>x
-               <option data-latlng="[1.423683,127.687500]" >Maluku Utara</option>x
-               <option data-latlng="[-2.067178,132.585205]" >Irian Jaya Barat</option>x
+               <option data-latlng="[3.829178,108.131836]" >Kepulauan Riau</option>
+               <option data-latlng="[-6.211278,106.842316]" >DKI Jakarta</option>
+               <option data-latlng="[-6.932970,107.602295]" >Jawa Barat</option>
+               <option data-latlng="[-7.161940,110.184082]" >Jawa Tengah</option>
+               <option data-latlng="[-7.894941,110.432373]" >Daerah Istimewa Yogyakarta</option>
+               <option data-latlng="[-7.761069,112.645020]" >Jawa Timur</option>
+               <option data-latlng="[-6.451230,106.112000]" >Banten</option>
+               <option data-latlng="[-8.408255,115.170776]" >Bali</option>
+               <option data-latlng="[-8.696155,117.499878]" >Nusa Tenggara Barat</option>
+               <option data-latlng="[-8.647282,121.097900]" >Nusa Tenggara Timur</option>
+               <option data-latlng="[0.129638,111.106934]" >Kalimantan Barat</option>
+               <option data-latlng="[-1.518133,113.425049]" >Kalimantan Tengah</option>
+               <option data-latlng="[-3.043977,115.479492]" >Kalimantan Selatan</option>
+               <option data-latlng="[1.656507,116.545166]" >Kalimantan Timur</option>
+               <option data-latlng="[0.678940,124.235596]" >Sulawesi Utara</option>
+               <option data-latlng="[-1.430271,121.445068]" >Sulawesi Tengah</option>
+               <option data-latlng="[-3.598949,120.247559]" >Sulawesi Selatan</option>
+               <option data-latlng="[-4.129477,122.148193]" >Sulawesi Tenggara</option>
+               <option data-latlng="[0.678940,122.455811]" >Gorontalo</option>
+               <option data-latlng="[-2.183553,119.324707]" >Sulawesi Barat</option>
+               <option data-latlng="[-3.320404,130.126465]" >Maluku</option>
+               <option data-latlng="[1.423683,127.687500]" >Maluku Utara</option>
+               <option data-latlng="[-2.067178,132.585205]" >Irian Jaya Barat</option>
                <option data-latlng="[-4.385847,138.177246]" >Papua</option>
 				</select>
 				</a></li>
-				<li><a>Enable Layer <input id="enablelayer" type="checkbox" name="enable" checked="active"></a></li>
+				<li><a>Potential
+				<select id="cabor_list" style="border-radius:20px; background-color:white; padding-left:3px;">
+					<option>-- Loading... --</option>
+				</select>
+				</a></li>
+				<li><a>Enable Layer <input id="enablelayer" type="checkbox" name="enable" checked="active" style="vertical-align:middle;"></a></li>
 				<li><a class="codrops-icon codrops-icon-drop" href="#"><span>GIS Kemenpora V2</span></a></li>
 			</ul>
 			<div style="height:66px"></div>
@@ -350,7 +418,7 @@
 					<div id="informasiawal" style="text-align:justify;">
 						<h2 style="text-align:center;">GIS Kemenpora V2</h2>
 						<p>Penjelasan Singkat Menu GIS<br>
-							<table>
+							<table style="height:200px;">
 							<tr>
 								<td><li></li></td>
 								<td>Quick View</td>
@@ -392,8 +460,21 @@
 					</div>
 				</div>			
 			</div>		
+		</div>
+		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-540px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h3 style="text-align:center; padding:0px;">Tahun</h3>
+			<select id="city_list" style="border-radius:20px; background-color:white; padding-left:3px;">
+				<option selected="selected">--Pilih Tahun--</option>
+				<option>2009</option>
+				<option>2010</option>
+				<option>2011</option>
+				<option>2012</option>
+				<option>2013</option>
+				<option>2014</option>
+			</select><br><br>
+			<input type="radio" name="sex" value="male" style="vertical-align:middle;" checked="active"> Daerah<br>
+			<input type="radio" name="sex" value="female" style="vertical-align:middle;"> Nasional
 		</div>		
-		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 372px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>		
+		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 460px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
 		</div>
 		<script src="js/classie.js"></script>
 		<script src="js/gnmenu.js"></script>

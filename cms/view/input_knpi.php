@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="generator" content="Bluefish 2.2.6" >
-<meta name="generator" content="Bluefish 2.2.6" >
+<meta name="generator" content="Bluefish 2.2.5" >
+<meta name="generator" content="Bluefish 2.2.5" >
 <?php include "view/head.php";?>
 <script type="text/javascript" src=
 "http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
@@ -457,7 +457,7 @@
 <div id="page-wrapper" style="min-height:850px;">
 <div class="row">
 <div class="col-lg-12" style="margin-bottom:-20px;"><label class=
-"page-header title-page" style="background-color:#FFFF00;">Input Data KNPI</label></div>
+"page-header title-page" style="background-color:#FDFDAA;">Input Data KNPI</label></div>
 </div>
 <div class="row">
 <div class="col-lg-12">
@@ -552,10 +552,10 @@ class="btn btn-warning"><input type="submit" value="Submit" style=
 <div id="alert-hapus" style="margin-top:10px"></div>
 <div id="alert-update" style="margin-top:10px"></div>
 <div class="informasibox" style=
-"margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FFFF00; text-align:center;">
+"margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FDFDAA; text-align:center;">
 <label>Daftar KNPI yang sudah ada</label></div>
 <div class="row" id="datatable" style=
-"margin:0;padding: 0 5px;background-color:#FFFF00; border-radius: 0 0 10px 10px">
+"margin:0;padding: 0 5px;background-color:#FDFDAA; border-radius: 0 0 10px 10px">
 </div>
 </div>
 </div>
