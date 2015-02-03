@@ -21,7 +21,7 @@
 		var map;
 		var markers = [];
 		var heatmaps = [];
-		var pointarray, heatmap;
+		var heatmap;
 
 		function HybridControl(controlDiv, map) {
 	  		controlDiv.style.paddingTop = '5px';
@@ -104,10 +104,13 @@
 				}
 			});
 			
+			$('#cabor_list').click(function() {
+				heatmap.setMap(null);
+			});
 			$('#cabor_list').change(function(e) {		
 				var selectvalue = $(this).val();
 				if (selectvalue == 0) {
-        			alert(selectvalue);
+        			//alert(selectvalue);
     			}
     			else {	
 					$.ajax({
@@ -184,10 +187,11 @@
    			alert("Nama Tim\n\n- Andreas Hadiyono\n- Haris Anggara\n- Yohanes Christomas Daimler");
   			});
   			$("#cabor_list").change(function(){
+  				var yearCab = $('#year_list').val();
 				var valueCab = $('option:selected',this).val();
 				$.ajax({url: "ajax/load_potensi.php",
       			type: 'POST',
-      			data: {id_cabor:valueCab},
+      			data: {id_cabor:valueCab,year:yearCab},
       			success: function(output) {
       			   $("#details").html(output);
       			   //alert(output);
@@ -307,21 +311,19 @@
 		}
 		
 		function setHeatmaps(locations) {
+			heatmaps = [];
 			for (var i = 0; i < locations.length; i++) {
     			var beach = locations[i];
     			createHeatmaps(beach[0], beach[1]);
-    		}
+    		}    		
+  			heatmap.setMap(map);
 		}
-		function createHeatmaps(lat, lon) {
-			var pointArray = new google.maps.MVCArray({
-				position: new google.maps.LatLng(lat, lon),
-        		map: map
-        	});
-        	heatmaps.push(pointArray);
+		function createHeatmaps(lat, lon) {			
         	heatmap = new google.maps.visualization.HeatmapLayer({
+        		location: new google.maps.LatLng(lat, lon),
     			data: heatmaps
   			});
-  			heatmap.setMap(map);
+  			heatmaps.push(heatmap);
 		}
 					
 		function toggle(source) {
@@ -462,14 +464,14 @@
 			</div>		
 		</div>
 		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-540px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h3 style="text-align:center; padding:0px;">Tahun</h3>
-			<select id="city_list" style="border-radius:20px; background-color:white; padding-left:3px;">
-				<option selected="selected">--Pilih Tahun--</option>
-				<option>2009</option>
-				<option>2010</option>
-				<option>2011</option>
-				<option>2012</option>
-				<option>2013</option>
-				<option>2014</option>
+			<select id="year_list" style="border-radius:20px; background-color:white; padding-left:3px;">
+				<option value="0">--Pilih Tahun--</option>				
+				<option selected="selected" value="2009">2009</option>
+				<option value="2010">2010</option>
+				<option value="2011">2011</option>
+				<option value="2012">2012</option>
+				<option value="2013">2013</option>
+				<option value="2014">2014</option>
 			</select><br><br>
 			<input type="radio" name="sex" value="male" style="vertical-align:middle;" checked="active"> Daerah<br>
 			<input type="radio" name="sex" value="female" style="vertical-align:middle;"> Nasional
