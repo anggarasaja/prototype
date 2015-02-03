@@ -116,7 +116,7 @@
       			data: {id_cabor:valueCab,year:yearCab},
       			success: function(output) {
       				var decodedData = $.parseJSON(output);
-      				//alert(decodedData.html_string);
+      				alert(decodedData.html_string);
       			   $("#details").html(decodedData.html_string);
 		      		$.ajax({
 							type:"POST",

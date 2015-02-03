@@ -38,7 +38,7 @@
    				echo "Tidak Ada Wilayah Potensial Atlet";
    			}
 	   		
-   	 		$rows = ['html_string'=> $html_string, 'id_propinsi' => $row['id_propinsi']];
+   	 		$rows = ['html-string'=> $html_string, 'id_propinsi' => $row['id_propinsi']];
    	 		echo json_encode($rows);
    		}
 
