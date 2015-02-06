@@ -579,7 +579,7 @@
 			var $form = $( this );
 	 		var url = $form.attr( 'action' );
 	          
-	 		if ($('#emas').val()=="" || $('#city_list').val()==0 || $('#perak').val()=="" || $('#perunggu').val()=="" ||$('#kejuaraan').val()=="" ||) {
+	 		if ($('#emas').val()=="" || $('#city_list').val()==0 || $('#perak').val()=="" || $('#perunggu').val()=="" ||$('#kejuaraan').val()=="") {
 	     		if($('#emas').val()==""){
 	        		$('#alert-input-failed').append('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert">&times;<\/a>Silakan isi jumlah medali emas.<\/div>');
 			  	} 

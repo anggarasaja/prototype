@@ -37,9 +37,6 @@ else
          case 'data_knpi':
                include "view/input_knpi.php";
                break;
-          case 'data_medali':
-               include "view/input_medali.php";
-               break;
           case 'manage_admin':
                include "view/manage_admin.php";
                break;

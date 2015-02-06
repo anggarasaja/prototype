@@ -3,16 +3,15 @@
 	if(mysqli_connect_errno()) {
 		echo "gagal terkoneksi dengan mysql: ". mysqli_connect_error();
 	}
-	//if(isset($_POST["id_cabor"]))
-	//{
-    	$id_cabor= 27;
-		$sql = "select tbl_medali.*, tbl_propinsi.propinsi, tbl_cabor.cabor
+	if(isset($_POST["id_cabor"]) && isset($_POST["id_propinsi"]) && isset($_POST["kejuaraan"]))
+	{
+		$id_propinsi = $_POST["id_propinsi"];
+    	$kejuaraan = $_POST["kejuaraan"];
+    	$id_cabor= $_POST["id_cabor"];//isset($_POST["id_cabor"]);
+		$sql = "select tbl_medali.*
 				 from tbl_medali
-				 join tbl_propinsi
-				 on tbl_propinsi.id_propinsi = tbl_medali.id_propinsi
-				 join tbl_cabor
-				 on tbl_cabor.id_cabor = tbl_medali.id_cabor
-				 where tbl_medali.id_cabor= $id_cabor and tbl_medali.id_propinsi = 1 and tbl_medali.kejuaraan = 0";
+				 where id_cabor = $id_cabor and id_propinsi = $id_propinsi and kejuaraan = $kejuaraan";
+		
 		$result = mysqli_query($conn, $sql);
 		
 
@@ -43,4 +42,4 @@
 		  }
 		  //echo "\n]";
 		  echo json_encode($rows);
-  //}
+  }

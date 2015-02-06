@@ -16,12 +16,28 @@
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization"></script>
 		<script type="text/javascript" src="js/markerclusterer.js"></script>
+		
+				<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+		<!-- morris -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
 		<script>
 
 		var map;
 		var markers = [];
 		var heatmaps = [];
 		var heatmap;
+		var chartMedali;
+		var decodedDataChart;
 
 		function HybridControl(controlDiv, map) {
 	  		controlDiv.style.paddingTop = '5px';
@@ -111,9 +127,11 @@
 				var selectvalue = $(this).val();
 				var yearCab = $('#year_list').val();
 				var valueCab = $('option:selected',this).val();
+				var kejuaraanCab = $('input[name="kejuaraan"]:checked').val();
+				alert(kejuaraanCab);
 				$.ajax({url: "ajax/load_potensi.php",
       			type: 'POST',
-      			data: {id_cabor:valueCab,year:yearCab},
+      			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
       			success: function(output) {
       				var decodedData = $.parseJSON(output);
       				//alert(decodedData.html_string);
@@ -129,6 +147,18 @@
 						});
 						
       			   //alert(output);
+      			   $.ajax({url: "ajax/load_chart.php",
+		      			type: 'POST',
+		      			data: {id_cabor:valueCab, id_propinsi:decodedData.id_propinsi, kejuaraan : kejuaraanCab},
+		      			success: function(output) {
+		      				decodedDataChart = $.parseJSON(output);
+		      				
+		      				
+
+		     			   },
+		     				error: function (xhr, ajaxOptions, thrownError) {
+		    			      alert(xhr.status + " "+ thrownError);
+		    			}});
      			   },
      				error: function (xhr, ajaxOptions, thrownError) {
     			      alert(xhr.status + " "+ thrownError);
@@ -206,6 +236,14 @@
     		//	data: pointArray
   			//});
   			//heatmap.setMap(map);
+  			
+      	chartMedali = Morris.Line({
+			  element: 'chart-medali',
+			  xkey: 'y',
+			  ykeys: ['emas', 'perak', 'perunggu'],
+			  labels: ['Emas', 'Perak', 'Perunggu'],
+			  lineColors: ['red', 'green', 'blue']
+			});
 		}
 		
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
@@ -416,7 +454,7 @@
 		<div style="width: 70%; height: 100%;" id="gmap_city"></div>		
 		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
-			<div style="margin: 20px; border-width:1px; border-radius:20px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
+			<div style="margin: 20px; border-width:1px; border-radius:5px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
 				<div id="details" style="padding:5px 15px;">
 					<div id="informasiawal" style="text-align:justify;">
 						<h2 style="text-align:center;">GIS Kemenpora V2</h2>
@@ -461,7 +499,16 @@
 							</table>
 						</p>					
 					</div>
-				</div>			
+				</div>
+				<div class="row">
+					<div class="container">
+					
+					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chart-modal" style="margin-left: 100px">
+  						Graphic Chart
+					</button>
+					
+					</div>
+				</div>		
 			</div>		
 		</div>
 		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-540px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h3 style="text-align:center; padding:0px;">Tahun</h3>
@@ -474,15 +521,42 @@
 				<option value="2013">2013</option>
 				<option value="2014">2014</option>
 			</select><br><br>
-			<input type="radio" name="sex" value="male" style="vertical-align:middle;" checked="active"> Daerah<br>
-			<input type="radio" name="sex" value="female" style="vertical-align:middle;"> Nasional
+			<input type="radio" name="kejuaraan"  value="0" style="vertical-align:middle;" checked="active"> Daerah<br>
+			<input type="radio" name="kejuaraan" value="1" style="vertical-align:middle;"> Nasional
 		</div>		
 		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 460px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="chart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Chart</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="row text-center">
+		      		<div id="chart-medali" style="width:450px"></div>	
+		      	</div>
+		      	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<script src="js/classie.js"></script>
 		<script src="js/gnmenu.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 		<script>
 			new gnMenu( document.getElementById( 'gn-menu' ) );
+			
+			$('#chart-modal').on('shown.bs.modal', function () {
+    			chartMedali.setData(decodedDataChart);
+  			})
+			
 		</script>
 	</body>
 </html>
