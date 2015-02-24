@@ -14,7 +14,7 @@
 				 on tbl_propinsi.id_propinsi = tbl_medali.id_propinsi
 				 join tbl_cabor
 				 on tbl_cabor.id_cabor = tbl_medali.id_cabor
-				 where jml_medali=(select max(jml_medali) from tbl_medali where tbl_medali.id_cabor=$id_cabor and kejuaraan=$kejuaraan and tahun=$year_list) and tbl_medali.id_cabor=$id_cabor and kejuaraan=$kejuaraan and tahun=$year_list";
+				 where jml_medali=(select max(jml_medali) from tbl_medali where tbl_medali.id_cabor=$id_cabor and kejuaraan='$kejuaraan' and tahun=$year_list) and tbl_medali.id_cabor=$id_cabor and kejuaraan='$kejuaraan' and tahun=$year_list";
 		$result = mysqli_query($conn, $sql);
 		
 		$rows= array();
@@ -23,7 +23,7 @@
 		$html_string= '<h2>Wilayah Potensi Atlet</h2><table><tr>';
 		
 		if(mysqli_num_rows($result) != 1) {
-			$html_string = "Tidak Ada Wilayah Potensial Atlet";
+			$html_string = $html_string."Tidak Ada Wilayah Potensial Atlet";
 		}		
 		else {
 			while($row = mysqli_fetch_array($result)){
@@ -32,6 +32,7 @@
 	   	
 		   		$html_string = $html_string .'<td>Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'.$row["propinsi"].'</td></tr>
 					<td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td>'. $row["cabor"].'</td></tr>
+					<td>Kejuaraan</td><td style="padding:10px 20px 10px 20px;">:</td><td>'. $kejuaraan.'</td></tr>
 					<td>Emas</td><td style="padding:10px 20px 10px 20px;">:</td><td>'.$row["emas"].'</td></tr>
 					<td>Perak</td><td style="padding:10px 20px 10px 20px;">:</td><td> '.$row["perak"].'</td></tr>
 					<td>Perunggu</td><td style="padding:10px 20px 10px 20px;">:</td><td> '. $row["perunggu"].'</td></tr>
@@ -41,7 +42,7 @@
 					$id_propinsi = $row["id_propinsi"];
 	   		}
 	   		else {
-   				$html_string = "<h2>Tidak Ada Wilayah Potensial Atlet</h2>";
+   				$html_string = $html_string."Tidak Ada Wilayah Potensial Atlet";
    			}
 	   		
    	 		

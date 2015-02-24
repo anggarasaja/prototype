@@ -22,6 +22,12 @@
 		
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<style type="text/css">
+			ul li a:hover select{
+				text-decoration: none;
+				color:#5f6f81;
+			}
+		</style>
 		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -119,16 +125,107 @@
 					setMarkers(atlet);	
 				}
 			});
-			
+			$('#year_list').change(function() {
+				heatmap.setMap(null);
+			});
 			$('#cabor_list').click(function() {
 				heatmap.setMap(null);
 			});
+			$('input[name="kejuaraan"]:checked').change(function() {
+				heatmap.setMap(null);
+			});
+
 			$('#cabor_list').change(function(e) {		
 				var selectvalue = $(this).val();
 				var yearCab = $('#year_list').val();
 				var valueCab = $('option:selected',this).val();
 				var kejuaraanCab = $('input[name="kejuaraan"]:checked').val();
-				alert(kejuaraanCab);
+				$.ajax({url: "ajax/load_potensi.php",
+      			type: 'POST',
+      			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
+      			success: function(output) {
+      				var decodedData = $.parseJSON(output);
+      				//alert(decodedData.html_string);
+      			   $("#details").html(decodedData.html_string);
+		      		$.ajax({
+							type:"POST",
+							url : "ajax/load_heatmaps.php",
+							dataType: 'json',
+							data: {id:decodedData.id_propinsi},
+							success: function (heat) {			
+								setHeatmaps(heat);	
+							}
+						});
+						
+      			   //alert(output);
+      			   $.ajax({url: "ajax/load_chart.php",
+		      			type: 'POST',
+		      			data: {id_cabor:valueCab, id_propinsi:decodedData.id_propinsi, kejuaraan : kejuaraanCab},
+		      			success: function(output) {
+		      				decodedDataChart = $.parseJSON(output);
+		      				
+		      				
+
+		     			   },
+		     				error: function (xhr, ajaxOptions, thrownError) {
+		    			      alert(xhr.status + " "+ thrownError);
+		    			}});
+     			   },
+     				error: function (xhr, ajaxOptions, thrownError) {
+    			      alert(xhr.status + " "+ thrownError);
+    			}});
+    			
+				
+			});
+
+			$('#year_list').change(function(e) {		
+				var selectvalue = $(this).val();
+				var yearCab = $('option:selected',this).val();
+				var valueCab = $('#cabor_list').val();
+				var kejuaraanCab = $('input[name="kejuaraan"]:checked').val();
+				$.ajax({url: "ajax/load_potensi.php",
+      			type: 'POST',
+      			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
+      			success: function(output) {
+      				var decodedData = $.parseJSON(output);
+      				//alert(decodedData.html_string);
+      			   $("#details").html(decodedData.html_string);
+		      		$.ajax({
+							type:"POST",
+							url : "ajax/load_heatmaps.php",
+							dataType: 'json',
+							data: {id:decodedData.id_propinsi},
+							success: function (heat) {			
+								setHeatmaps(heat);	
+							}
+						});
+						
+      			   //alert(output);
+      			   $.ajax({url: "ajax/load_chart.php",
+		      			type: 'POST',
+		      			data: {id_cabor:valueCab, id_propinsi:decodedData.id_propinsi, kejuaraan : kejuaraanCab},
+		      			success: function(output) {
+		      				decodedDataChart = $.parseJSON(output);
+		      				
+		      				
+
+		     			   },
+		     				error: function (xhr, ajaxOptions, thrownError) {
+		    			      alert(xhr.status + " "+ thrownError);
+		    			}});
+     			   },
+     				error: function (xhr, ajaxOptions, thrownError) {
+    			      alert(xhr.status + " "+ thrownError);
+    			}});
+    			
+				
+			});
+			
+			$('input[name="kejuaraan"]:checked').change(function(e) {		
+				var selectvalue = $(this).val();
+				var yearCab = $('#year_list').val();
+				var valueCab = $('#cabor_list').val();
+				var kejuaraanCab = $(this).val();
 				$.ajax({url: "ajax/load_potensi.php",
       			type: 'POST',
       			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
@@ -375,7 +472,13 @@
 	<script type="text/javascript" src="js/searchatlet.js"></script>
 	</head>
 	<body onload="pageLoad()">
-		<div class="container">
+		<div class="container" style="
+    background-color: #5f6f81;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+left:0px;width:100%;">
 			<ul id="gn-menu" class="gn-menu-main">
 				<li class="gn-trigger">
 					<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
@@ -450,11 +553,11 @@
 			</ul>
 			<div style="height:66px"></div>
 		</div>
-		<div style="height:590px; width:100%;">
+		<div style="height:594px; width:100%; padding-bottom:5px; background-color:#5f6f81;">
 
-		<div style="width: 75%; height: 100%;" id="gmap_city"></div>		
+		<div style="width: 955px; height: 100%;" id="gmap_city"></div>		
 		
-		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0; width: 25%">
+		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
 			<div style="margin: 20px; border-width:1px; border-radius:5px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
 				<div id="details" style="padding:5px 15px;">
@@ -503,17 +606,13 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="container">
-					
 					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chart-modal" style="margin-left: 100px">
   						Graphic Chart
 					</button>
-					
-					</div>
 				</div>		
 			</div>		
 		</div>
-		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-540px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h3 style="text-align:center; padding:0px;">Tahun</h3>
+		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-550px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h4 style="text-align:center; padding:0px;">Tahun</h4>
 			<select id="year_list" style="border-radius:20px; background-color:white; padding-left:3px;">
 				<option value="0">--Pilih Tahun--</option>				
 				<option selected="selected" value="2009">2009</option>
@@ -523,8 +622,8 @@
 				<option value="2013">2013</option>
 				<option value="2014">2014</option>
 			</select><br><br>
-			<input type="radio" name="kejuaraan"  value="0" style="vertical-align:middle;" checked="active"> Daerah<br>
-			<input type="radio" name="kejuaraan" value="1" style="vertical-align:middle;"> Nasional
+			<input type="radio" name="kejuaraan"  value="Daerah" style="vertical-align:middle;" checked="active"> Daerah<br>
+			<input type="radio" name="kejuaraan" value="Nasional" style="vertical-align:middle;"> Nasional
 		</div>		
 		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 460px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
 		</div>

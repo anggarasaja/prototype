@@ -10,7 +10,7 @@
     	$id_cabor= $_POST["id_cabor"];//isset($_POST["id_cabor"]);
 		$sql = "select tbl_medali.*
 				 from tbl_medali
-				 where id_cabor = $id_cabor and id_propinsi = $id_propinsi and kejuaraan = $kejuaraan";
+				 where id_cabor = $id_cabor and id_propinsi = $id_propinsi and kejuaraan = '$kejuaraan'";
 		
 		$result = mysqli_query($conn, $sql);
 		
