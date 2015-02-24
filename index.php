@@ -7,7 +7,7 @@
 		<title>GIS Kemenpora V2</title>
 		<meta name="description" content="A sidebar menu as seen on the Google Nexus 7 website" />
 		<meta name="keywords" content="google nexus 7 menu, css transitions, sidebar, side menu, slide out menu" />
-		<meta name="author" content="blackhole" />
+		<meta name="author" content="Christomas Daimler" />
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
@@ -121,7 +121,7 @@
 			});
 			
 			$('#cabor_list').click(function() {
-				//heatmap.setMap(null);
+				heatmap.setMap(null);
 			});
 			$('#cabor_list').change(function(e) {		
 				var selectvalue = $(this).val();

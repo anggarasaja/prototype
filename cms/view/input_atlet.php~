@@ -410,7 +410,7 @@
                                 if (op!=null) {
                         //alert("op not null");
                         table.rows.add(op).draw();
-                			}
+                }
 								},
     							error: function (xhr, ajaxOptions, thrownError) {
      								alert(xhr.status + " "+ thrownError);
