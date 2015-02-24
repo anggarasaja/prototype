@@ -23,6 +23,10 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 		<style type="text/css">
+			html, body{
+				height:100%;
+				width: 100%;
+			}
 			ul li a:hover select{
 				text-decoration: none;
 				color:#5f6f81;
@@ -131,7 +135,7 @@
 			$('#cabor_list').click(function() {
 				heatmap.setMap(null);
 			});
-			$('input[name="kejuaraan"]:checked').change(function() {
+			$('input[name="kejuaraan"]').click(function() {
 				heatmap.setMap(null);
 			});
 
@@ -221,7 +225,7 @@
 				
 			});
 			
-			$('input[name="kejuaraan"]:checked').change(function(e) {		
+			$('input[name="kejuaraan"]').click(function(e) {		
 				var selectvalue = $(this).val();
 				var yearCab = $('#year_list').val();
 				var valueCab = $('#cabor_list').val();
@@ -296,7 +300,7 @@
   			});
   			map.data.addListener('click', function(event) {
     			lettermap =	event.feature.getProperty('letter');
-				details.innerHTML = '<h2>Propinsi</h2><table>'+
+				details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Propinsi</h2><table>'+
 				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lettermap+'</td></tr></table>'
         	});
 	    	$('#city_list').change(function(){
@@ -357,7 +361,7 @@
       		content: namatlet
       	});
       	google.maps.event.addListener(newmarker, 'click', function() {
-					details.innerHTML = '<h2>Profil Atlet</h2><table>'+
+					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Profil Atlet</h2><table>'+
 					'<tr><td>Nama Atlet</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+namatlet+'</td></tr>'+
 					'<tr><td>Jenis Kelamin</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+jkel+'</td></tr>'+
 					'<tr><td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+cabor+'</td></tr>'+
@@ -416,7 +420,7 @@
         		zIndex: 10
     		});
     		google.maps.event.addListener(newmarker, 'click', function() {
-					details.innerHTML = '<h2>KNPI</h2><table>'+
+					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">KNPI</h2><table>'+
 					'<tr><td>Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lat+'</td></tr>'+
 					'<tr><td>Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lon+'</td></tr>'+
  					'<tr><td>Location</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+loc+'</td></tr></table>';
@@ -472,13 +476,7 @@
 	<script type="text/javascript" src="js/searchatlet.js"></script>
 	</head>
 	<body onload="pageLoad()">
-		<div class="container" style="
-    background-color: #5f6f81;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: 0px;
-    margin-left: 0px;
-left:0px;width:100%;">
+		<div class="container" style="background-color: #5f6f81;">
 			<ul id="gn-menu" class="gn-menu-main">
 				<li class="gn-trigger">
 					<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
@@ -492,8 +490,8 @@ left:0px;width:100%;">
 								<ul id="search_list_atlet"></ul>
 								<li><span class="gn-icon gn-icon-download"><input id="toggleall" name="Profil Prov" type="checkbox" value="Profil Prov" onclick="toggle(this)" checked="active"> Select All</span>
 									<ul class="gn-submenu">
-										<li><span class="label" style="margin-left:60px;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/diamond.png">Atlet</span></li>
-										<li><span class="label" style="margin-left:60px;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png">KNPI</span></li>
+										<li><span style="margin-left:60px; color:#5f6f81;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/diamond.png" style="margin-top:-5px;margin-left:4px;"> Atlet</span></li>
+										<li><span style="margin-left:60px; color:#5f6f81;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png" style="margin-top:-5px;margin-left:4px;"> Knpi</span></li>
 									</ul>
 								</li>
 								<li><a class="gn-icon gn-icon-help" href="dokumentasi/gis_v2.pdf" target="_blank">Documentation</a></li>								
@@ -548,21 +546,21 @@ left:0px;width:100%;">
 					<option>-- Loading... --</option>
 				</select>
 				</a></li>
-				<li><a>Enable Layer <input id="enablelayer" type="checkbox" name="enable" checked="active" style="vertical-align:middle;"></a></li>
+				<li><a>Enable Layer <input id="enablelayer" type="checkbox" name="enable" checked="active" style="margin-left:4px;"></a></li>
 				<li><a class="codrops-icon codrops-icon-drop" href="#"><span>GIS Kemenpora V2</span></a></li>
 			</ul>
-			<div style="height:66px"></div>
 		</div>
-		<div style="height:594px; width:100%; padding-bottom:5px; background-color:#5f6f81;">
+		<div style="height:100%; width:100%; padding-top:61px; background-color:#5f6f81;">
 
-		<div style="width: 955px; height: 100%;" id="gmap_city"></div>		
+		<div style="width: 69.9%; height: 100%;" id="gmap_city"></div>		
 		
-		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
+		<div style=" padding:0 20px;position:absolute; right:0px; width: 30%; padding-top:61px; top:0px;height:100%; background-color:white; z-index:0;">
+		<div style="padding:0 20px;position:absolute; right:0px; width: 100%; top:0px;height:61px; background-color:#5f6f81; z-index:0;"></div>
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
-			<div style="margin: 20px; border-width:1px; border-radius:5px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
+			<div style="padding: 20px; border-width:1px; border-radius:5px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:100%px; width:100%;">
 				<div id="details" style="padding:5px 15px;">
 					<div id="informasiawal" style="text-align:justify;">
-						<h2 style="text-align:center;">GIS Kemenpora V2</h2>
+						<h2 style="text-align:center; margin-bottom:30px; margin-top:0px;">GIS Kemenpora V2</h2>
 						<p>Penjelasan Singkat Menu GIS<br>
 							<table style="height:200px;">
 							<tr>
@@ -605,14 +603,12 @@ left:0px;width:100%;">
 						</p>					
 					</div>
 				</div>
-				<div class="row">
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chart-modal" style="margin-left: 100px">
+				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chart-modal" style="margin-left: 100px">
   						Graphic Chart
 					</button>
-				</div>		
 			</div>		
 		</div>
-		<div style="font-size:12px; position:absolute; right:416px;  width: 130px; margin-top:-550px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h4 style="text-align:center; padding:0px;">Tahun</h4>
+		<div style="font-size:12px; position:absolute; right:30.6%;  width: 130px; top:96px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h4 style="text-align:center; padding:0px;">Tahun</h4>
 			<select id="year_list" style="border-radius:20px; background-color:white; padding-left:3px;">
 				<option value="0">--Pilih Tahun--</option>				
 				<option selected="selected" value="2009">2009</option>
@@ -622,10 +618,10 @@ left:0px;width:100%;">
 				<option value="2013">2013</option>
 				<option value="2014">2014</option>
 			</select><br><br>
-			<input type="radio" name="kejuaraan"  value="Daerah" style="vertical-align:middle;" checked="active"> Daerah<br>
+			<input type="radio" name="kejuaraan"  value="Daerah" style="vertical-align:middle;" checked> Daerah<br>
 			<input type="radio" name="kejuaraan" value="Nasional" style="vertical-align:middle;"> Nasional
 		</div>		
-		<div style="text-align:center; font-size:11px; position:absolute; right:410px;  width: 460px; margin-top:-15px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
+		<div style="text-align:center; font-size:11px; position:absolute; right:30.1%;  width: 50%; bottom:0px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="chart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

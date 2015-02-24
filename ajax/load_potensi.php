@@ -20,7 +20,7 @@
 		$rows= array();
 		$row;
 		$id_propinsi = null;
-		$html_string= '<h2>Wilayah Potensi Atlet</h2><table><tr>';
+		$html_string= '<h2 style="margin-bottom:30px; margin-top:0px;">Wilayah Potensi Atlet</h2><table><tr>';
 		
 		if(mysqli_num_rows($result) != 1) {
 			$html_string = $html_string."Tidak Ada Wilayah Potensial Atlet";
