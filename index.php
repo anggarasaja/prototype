@@ -570,7 +570,7 @@
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png" style="margin-top:-5px;margin-left:4px;"> Knpi</span></li>
 									</ul>
 								</li>
-								<li><a class="gn-icon gn-icon-help" href="dokumentasi/gis_v2.pdf" target="_blank">Documentation</a></li>								
+								<li><a class="gn-icon gn-icon-help" href="dokumentasi/" target="_blank">Documentation</a></li>								
 								<li><a id="aboutus" class="gn-icon gn-icon-article">About Us</a></li>
 								<li><a class="gn-icon gn-icon-archive">Archives</a></li>
 								<li><a class="gn-icon gn-icon-cog">Settings</a></li>									
