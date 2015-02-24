@@ -7,7 +7,7 @@
 		<title>GIS Kemenpora V2</title>
 		<meta name="description" content="A sidebar menu as seen on the Google Nexus 7 website" />
 		<meta name="keywords" content="google nexus 7 menu, css transitions, sidebar, side menu, slide out menu" />
-		<meta name="author" content="Christomas Daimler" />
+		<meta name="author" content="harris" />
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
@@ -451,8 +451,10 @@
 			<div style="height:66px"></div>
 		</div>
 		<div style="height:590px; width:100%;">
-		<div style="width: 70%; height: 100%;" id="gmap_city"></div>		
-		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0;">
+
+		<div style="width: 75%; height: 100%;" id="gmap_city"></div>		
+		
+		<div style="padding-top:20px; position:absolute; right:0px; width: 404px; margin-top:-590px; height:590px; background-color:white; z-index:0; width: 25%">
 			<h1 style="text-align:center; color:#34495E;">Informasi Peta</h1>
 			<div style="margin: 20px; border-width:1px; border-radius:5px; border-color:#34495E; box-shadow: 0px 0px 2px 0px #34495E; height:450px; width:366px;">
 				<div id="details" style="padding:5px 15px;">
