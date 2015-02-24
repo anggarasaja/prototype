@@ -395,6 +395,7 @@
 			//datatables
 			$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="inherit" id="dataTablesPotential"></table>' );
          	table = $('#dataTablesPotential').DataTable( {
+         		"order": [[ 0, "desc" ]],
           		"language": {
             		"lengthMenu": "Tampilkan _MENU_ data per halaman",
             		"zeroRecords": "Tidak ada data yang ditampilkan",
