@@ -156,6 +156,7 @@
       			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
       			success: function(output) {
       				var decodedData = $.parseJSON(output);
+      				
       				//alert(decodedData.html_string);
       			   $("#details").html(decodedData.html_string);
 		      		$.ajax({
@@ -268,8 +269,9 @@
       			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
       			success: function(output) {
       				var decodedData = $.parseJSON(output);
-      				//alert(decodedData.html_string);
+      				alert(decodedData.button_string);
       			   $("#details").html(decodedData.html_string);
+      			   
 		      		$.ajax({
 							type:"POST",
 							url : "ajax/load_heatmaps.php",
@@ -395,6 +397,7 @@
 			//datatables
 			$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="inherit" id="dataTablesPotential"></table>' );
          	table = $('#dataTablesPotential').DataTable( {
+         		"lengthMenu": [[5, 10, -1], [5, 10, "All"]],
           		"language": {
             		"lengthMenu": "Tampilkan _MENU_ data per halaman",
             		"zeroRecords": "Tidak ada data yang ditampilkan",
@@ -675,10 +678,9 @@
 							</table>
 						</p>					
 					</div>
+					
 				</div>
-				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#chart-modal" style="margin-left: 100px">
-  						Graphic Chart
-					</button>
+				
 			</div>		
 		</div>
 		<div style="font-size:12px; position:absolute; right:30.6%;  width: 130px; top:96px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h4 style="text-align:center; padding:0px;">Tahun</h4>
@@ -702,16 +704,31 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Chart</h4>
+		        <h4 class="modal-title" id="myModalLabel">Grafik Peraihan Medali</h4>
 		      </div>
 		      <div class="modal-body">
 		      	<div class="row text-center">
-		      		<div id="chart-medali" style="width:450px"></div>	
+		      		<div id="chart-medali" style="width:450px; margin:auto"></div>	
 		      	</div>
-		      	<div class="row" id="datatable" style="margin:auto">
-		      	
+		      		
 		      	</div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="modal fade" id="table-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Tabel peraihan medali untuk seluruh cabang olahraga</h4>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      	<div class="row" id="datatable" style="margin: 15px auto"></div>
+		      	</div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
@@ -727,6 +744,10 @@
 			
 			$('#chart-modal').on('shown.bs.modal', function () {
     			chartMedali.setData(decodedDataChart);
+    			
+    			
+  			});
+  			$('#table-modal').on('shown.bs.modal', function () {
     			
     			table.clear().draw();
           	if (decodedDataTable!=null) {

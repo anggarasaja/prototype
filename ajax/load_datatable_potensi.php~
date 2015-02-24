@@ -36,7 +36,7 @@
 				'perunggu' => $array["perunggu"],
 				
 				);*/
-				$rows[] = [$array["tahun"],$array["emas"],$array["perak"],$array["perunggu"]];
+				$rows[] = [$array['cabor'],$array["tahun"],$array["emas"],$array["perak"],$array["perunggu"]];
   
 		  }
 		  //echo "\n]";

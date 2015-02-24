@@ -20,7 +20,7 @@
 		$rows= array();
 		$row;
 		$id_propinsi = null;
-		$html_string= '<h3 style="margin-bottom:20px; margin-top:0px;">Wilayah Potensi Atlet</h3>';
+		$html_string= '<h3 style="margin-bottom:30px; margin-top:0px;">Wilayah Potensi Atlet</h3>';
 		
 		
 		if(mysqli_num_rows($result) != 1) {

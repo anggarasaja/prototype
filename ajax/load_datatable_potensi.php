@@ -20,6 +20,7 @@
 		
 		
 		//echo "[\n";
+		
 		while($array = mysqli_fetch_assoc($result))
 		  {
 		  		/*echo $prefix . " {\n";
