@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="generator" content="http://www.nongnu.org/elyxer/"/>
+<meta name="create-date" content="2015-02-25"/>
+<link rel="stylesheet" href="http://elyxer.nongnu.org/lyx.css" type="text/css" media="all"/>
+<title>DOKUMENTASI PENGGUNAAN GEOGRAPHICAL INFORMATION SYSTEM(GIS)KEMENTERIAN PEMUDA DAN OLAHRAGA REPUBLIK INDONESIA</title>
+</head>
+<body>
+<div id="globalWrapper">
+<div class="Unindented">
+</div>
+<h1 class="title">
+DOKUMENTASI PENGGUNAAN<br/>
+ GEOGRAPHICAL INFORMATION SYSTEM(GIS)<br/>
+KEMENTERIAN PEMUDA DAN OLAHRAGA REPUBLIK INDONESIA
+</h1>
+<div class="fulltoc">
+<div class="tocheader">
+Table of Contents
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Chapter-1">Chapter 1: Overview Sistem</a>
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Section-1.1">Section 1.1: Arsitektur Website</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Section-1.2">Section 1.2: Sistem GIS</a>
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.2.1">Subsection 1.2.1: Side Bar</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.2.2">Subsection 1.2.2: Quickview </a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.2.3">Subsection 1.2.3: Enable Layer</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.2.4">Subsection 1.2.4: Informasi Potensi Atlet</a>
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Subsubsection-1.2.4.1">Subsubsection 1.2.4.1: Wilayah Potensi Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsubsection-1.2.4.2">Subsubsection 1.2.4.2: Chart Potensi Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsubsection-1.2.4.3">Subsubsection 1.2.4.3: Table Potensi Atlet</a>
+</div>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.2.5">Subsection 1.2.5: Informasi Marker</a>
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Subsubsection-1.2.5.1">Subsubsection 1.2.5.1: Marker</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsubsection-1.2.5.2">Subsubsection 1.2.5.2: Informasi Marker</a>
+</div>
+</div>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Section-1.3">Section 1.3: CMS</a>
+</div>
+<div class="tocindent">
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.1">Subsection 1.3.1: Penambahan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.2">Subsection 1.3.2: Pengaturan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.3">Subsection 1.3.3: Penghapusan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.4">Subsection 1.3.4: Penambahan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.5">Subsection 1.3.5: Pengaturan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.6">Subsection 1.3.6: Penghapusan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.7">Subsection 1.3.7: Penambahan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.8">Subsection 1.3.8: Pengaturan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.9">Subsection 1.3.9: Penghapusan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.10">Subsection 1.3.10: Penambahan Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.11">Subsection 1.3.11: Pengaturan Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#toc-Subsection-1.3.12">Subsection 1.3.12: Penghapusan Data KNPI</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="fulltoc">
+<div class="tocheader">
+List of Figures
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Arsitektur-Sistem">Figure 1.1: Arsitektur Sistem</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Peta-Spasial-Indonesia">Figure 1.2: Peta Spasial Indonesia </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Menu-Detail">Figure 1.3: Menu Detail </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Contoh-hasil-tampilan">Figure 1.4: Contoh hasil tampilan quickview</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Enable-Layer-Diaktifkan">Figure 1.5: Enable Layer Diaktifkan</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Enable-Layer-Dinonaktifkan">Figure 1.6: Enable Layer Dinonaktifkan</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Wilayah-dan-Informasi-Potensi-Atlet">Figure 1.7: Wilayah dan Informasi Potensi Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Chart-Potensi-Atlet">Figure 1.8: Chart Potensi Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Table-Potensi-Atlet">Figure 1.9: Tabel Potensi Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Marker">Figure 1.10: Marker</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Men-nonaktifkan marker KNPI">Figure 1.11: Men-nonaktifkan marker KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Mengaktifkan-Marker-Atlet">Figure 1.12: Mengaktifkan Marker Atlet dan Menonaktfikan Marker KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Men-nonaktifkan-marker-atlet">Figure 1.13: Men-nonaktifkan marker atlet  </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet">Figure 1.14: Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Informasi-Marker">Figure 1.15: Informasi Marker</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:CMS-Gis">Figure 1.16: CMS GIS </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Penambahan-Data-pada">Figure 1.17: Penambahan Data pada CMS </a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Pengaturan-data">Figure 1.18: Pengaturan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-Perubaha">Figure 1.19: Notifikasi Keberhasilan Perubahan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Penghapusan-data-atlet">Figure 1.20: Penghapusan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#pop-up-penghapusan-data-atlet">Figure 1.21: Pop Up Penghapusan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-penghpusan-atlet">Figure 1.22: Notifikasi Keberhasilan Penghapusan Data Atlet</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:form-data-pelatih">Figure 1.23: Form Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Pengaturan-data-pelatih">Figure 1.24: Pengaturan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-Perubaha-1">Figure 1.25: Notifikasi Keberhasilan Perubahan Data</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Penghapusan-data-pelatih">Figure 1.26: Penghapusan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#pop-up-penghapusan-data-atlet-pelatih">Figure 1.27: Pop Up Penghapusan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-penghpusan-pelatih">Figure 1.28: Notifikasi Keberhasilan Penghapusan Data Pelatih</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:form-data-pelatih-1">Figure 1.29: Form Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Pengaturan-data-pelatih-1">Figure 1.30: Pengaturan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-Perubaha-1-1">Figure 1.31: Notifikasi Keberhasilan Perubahan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Penghapusan-data-pelatih-1">Figure 1.32: Penghapusan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#pop-up-penghapusan-data-atlet-pelatih-1">Figure 1.33: Pop Up Penghapusan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-penghpusan-pelatih-1">Figure 1.34: Notifikasi Keberhasilan Penghapusan Data Pemuda</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:form-data-pelatih-2">Figure 1.35: Form Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Pengaturan-data-pelatih-2">Figure 1.36: Pengaturan Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-Perubaha-1-2">Figure 1.37: Notifikasi Keberhasilan Perubahan Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Penghapusan-data-pelatih-2">Figure 1.38: Penghapusan Data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#pop-up-penghapusan-data-atlet-pelatih-2">Figure 1.39: Pop up penghapusan data KNPI</a>
+</div>
+<div class="toc">
+<a class="Link" href="#fig:Notifikasi-Keberhasilan-penghpusan-pelatih-2">Figure 1.40: Notifikasi Keberhasilan Penghapusan Data KNPI</a>
+</div>
+
+</div>
+<h1 class="Chapter">
+<a class="toc" name="toc-Chapter-1">1</a> Overview Sistem
+</h1>
+<div class="Unindented">
+Keseluruhan tahapan yang telah dijabarkan pada Bab 1 akan menghasilkan sebuah perbaikan sistem informasi terutama dalam membantu pengelolaan data spasial di lingkungan Kemenpora.
+</div>
+<div class="Indented">
+Sistem yang baru dikembangkan ini telah mengadopsi teknologi yang telah berkembangan saat ini. Hal ini sangat penting mengingat kegiatan pengelolaan data spasial memerlukan dukungan teknologu yang baik. Dengan terintegerasinya sistem serta teknologi , memudahkan pengguna akhir untuk melakukan analisa data sehinga tujuan akhir pembuatan sistem yaitu peningkatan efisiensi dan efektifitas pengelolaan data spasial menjadi lebih myudah.
+</div>
+<h2 class="Section">
+<a class="toc" name="toc-Section-1.1">1.1</a> Arsitektur Website
+</h2>
+<div class="Unindented">
+Arsitektur sistem yang dikembangkan ini menggunakan perangkat lunak open source dengan menggunakan teknologi cloud computing serta menggunaka <i>Open Source Software (OSS</i>) antara lain :
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Arsitektur-Sistem"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar/new-menpora-gis.png" alt="figure gambar/new-menpora-gis.png" style="max-width: 1365px; max-height: 663px;"/>
+
+</div>
+<div class="caption">
+Figure 1.1 Arsitektur Sistem
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Berdasarkan gambar <a class="Reference" href="#fig:Arsitektur-Sistem">1.1↑</a> terlihat bahwa sistem dikembangkan telah diterapkan dalam sistem cloud computing Kemenpora sehingga proses untuk backup data menjadi lebih mudah sehingga dapat menjamin integritas data. Adapun arsitektur website untuk aplikasi ini adalah sebagai berikut:
+</div>
+<ul>
+<li>
+Penggunaan Apache Web Server sebagai backend dari aplikasi ini 
+</li>
+<li>
+Penggunaan Maria DB sebagai backend database server
+</li>
+<li>
+Penggunaan PHP programming language sebagai bahasa pemograman utama. 
+</li>
+<li>
+Penggunaan HTML Purifier sebagai salah satu library keamanan untuk website ini. 
+</li>
+
+</ul>
+<div class="Unindented">
+Pengembangan revitalisasi sistem pelaporan ini dibuat secara detail berdasarkan definisi kebutuhan yang berkembang serta aturan-aturan yang berlaku di lingkungan Kemenpora. Sistem pelaporan ini pun tidak hanya fokus terhadap workflow aplikasi namun juga memperhatikan segi keamanan serta portabilitas bagi setiap pengguna yang ada..
+</div>
+<h2 class="Section">
+<a class="toc" name="toc-Section-1.2">1.2</a> Sistem GIS
+</h2>
+<div class="Unindented">
+Pada tampilan utama akan tersedia sebuah tampilan peta indonesia beserta dengan jumlah data yang dimiliki dalam sistem. Seperti yang terlihat dalam gambar<a class="Reference" href="#fig:Peta-Spasial-Indonesia">1.2↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Peta-Spasial-Indonesia"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/overview.png" alt="figure gambar2/overview.png" style="max-width: 1365px; max-height: 663px;"/>
+
+</div>
+<div class="caption">
+Figure 1.2 Peta Spasial Indonesia 
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Berdasarkan gambar tersebut terdapat beberapa fitur yang tersedia dalam aplikasi ini (ditandai dengan nomor pada setiap gambar). Fasilitas tersebut adalah:
+</div>
+<ol>
+<li>
+Side Bar
+</li>
+<li>
+Main menu
+</li>
+<li>
+Quickview untuk memusatkan pencarian informasi dalam suatau daerah
+</li>
+<li>
+Potential untuk melihat potensi wilayah atlet berdasarkan cabang olahraga
+</li>
+<li>
+Enable layer untuk mengaktifkan serta men-nonaktifkan marker pada setiap peta yang ada
+</li>
+<li>
+Mode tampilan peta
+</li>
+<li>
+Tahun dan Kejuaraan terkait dengan seleksi menu Potential
+</li>
+<li>
+Informasi peta (menampilkan informasi setiap marker yang ada)
+</li>
+
+</ol>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.2.1">1.2.1</a> Side Bar
+</h3>
+<div class="Unindented">
+Dalam menu detail berisi informasi mengenai setiap konfigurasi yang ada pada sistem gis ini. Seperti yang ditunjukkan pada gambar <a class="Reference" href="#fig:Menu-Detail">1.3↓</a> seperti mengaktifkan marker untuk data atlet dan knpi atau kepemudaan.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Menu-Detail"> </a><div class="figure">
+<div class="center">
+<img class="embedded" src="gambar2/menu.png" alt="figure gambar2/menu.png" style="width: 153px; max-width: 340px; height: 218px; max-height: 485px;"/>
+
+</div>
+<div class="caption">
+Figure 1.3 Menu Detail 
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.2.2">1.2.2</a> Quickview 
+</h3>
+<div class="Unindented">
+Pada fasilitas ini setiap pengguna dapat melihat detail per daerah dengan memilih provinsi yang diinginkan seperti pada gambar <a class="Reference" href="#fig:Contoh-hasil-tampilan">1.4↓</a>
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Contoh-hasil-tampilan"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/show-spesific-kalbar.png" alt="figure gambar2/show-spesific-kalbar.png" style="max-width: 1365px; max-height: 663px;"/>
+
+</div>
+<div class="caption">
+Figure 1.4 Contoh hasil tampilan quickview
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.2.3">1.2.3</a> Enable Layer
+</h3>
+<div class="Unindented">
+Fasilitas ini berfungsi untuk menghilangkan layer bewarna yang berguna sebagai pembagian batas wilayah untuk indonesia pada gambar <a class="Reference" href="#fig:Enable-Layer-Diaktifkan">1.5↓</a> dang gambar <a class="Reference" href="#fig:Enable-Layer-Dinonaktifkan">1.6↓</a> menunjukkan hasil pada peta jika layer dinonaktifkan.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Enable-Layer-Diaktifkan"> </a><div class="figure" style="max-width: 55%;">
+<div class="center">
+<img class="figure" src="gambar2/show-layer.png" alt="figure gambar2/show-layer.png" style="max-width: 956px; max-height: 600px;"/>
+
+</div>
+<div class="caption">
+Figure 1.5 Enable Layer Diaktifkan
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Enable-Layer-Dinonaktifkan"> </a><div class="figure" style="max-width: 55%;">
+<div class="center">
+<img class="figure" src="gambar2/disable-layer.png" alt="figure gambar2/disable-layer.png" style="max-width: 956px; max-height: 601px;"/>
+
+</div>
+<div class="caption">
+Figure 1.6 Enable Layer Dinonaktifkan
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.2.4">1.2.4</a> Informasi Potensi Atlet
+</h3>
+<h4 class="Subsubsection">
+<a class="toc" name="toc-Subsubsection-1.2.4.1">1.2.4.1</a> Wilayah Potensi Atlet
+</h4>
+<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Wilayah-dan-Informasi-Potensi-Atlet"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/Documentasi-Heatmaps.png" alt="figure gambar2/Documentasi-Heatmaps.png" style="max-width: 1365px; max-height: 662px;"/>
+
+</div>
+<div class="caption">
+Figure 1.7 Wilayah dan Informasi Potensi Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Fasilitas ini untuk melihat informasi suatu wilayah yang memiliki potensi atlet dari masing-masing cabang olahraga berdasarkan tahun dan juga jenis kejuaraan, untuk menampilkan fitur potensi atlet ini dapat mengikuti urutan pada gambar dengan penjelasan yang terdapat pada langkah - langkah berikut :
+</div>
+<ol>
+<li>
+Pilih potensi Cabang Olahraga
+</li>
+<li>
+Pilih tahun dan Pilih jenis kejuaraan
+</li>
+<li>
+Apabila terdapat potensi pada Cabang Olahraga serta tahun dan jenis kejuaraan maka wilayah potensi akan ditampilkan pada Peta
+</li>
+<li>
+Informasi lengkap mengenai wilayah potensi atlet
+</li>
+<li>
+Tombol yang berfungsi menampilkan chart
+</li>
+<li>
+Tombol yang berfungsi menampilkan table data
+</li>
+
+</ol>
+<h4 class="Subsubsection">
+<a class="toc" name="toc-Subsubsection-1.2.4.2">1.2.4.2</a> Chart Potensi Atlet
+</h4>
+<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Chart-Potensi-Atlet"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/chart-potential-atlet.png" alt="figure gambar2/chart-potential-atlet.png" style="max-width: 1365px; max-height: 663px;"/>
+
+</div>
+<div class="caption">
+Figure 1.8 Chart Potensi Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Fasilitas Chart Potensi Atlet ini bertujuan untuk mengetahui track record potensi atlet cabang olahraga tertentu dari wilayah tersebut berdasarkan tahun dan banyak medali yang di dapat serta jenis kejuaraan yang di ikuti.
+</div>
+<h4 class="Subsubsection">
+<a class="toc" name="toc-Subsubsection-1.2.4.3">1.2.4.3</a> Table Potensi Atlet
+</h4>
+<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Table-Potensi-Atlet"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/table-potential.png" alt="figure gambar2/table-potential.png" style="max-width: 1352px; max-height: 662px;"/>
+
+</div>
+<div class="caption">
+Figure 1.9 Tabel Potensi Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Fasilitas ini memudahkan dalam menyaring informasi data untuk setiap cabang olahraga berdasarkan tahun ataupun sebaliknya.
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.2.5">1.2.5</a> Informasi Marker
+</h3>
+<h4 class="Subsubsection">
+<a class="toc" name="toc-Subsubsection-1.2.5.1">1.2.5.1</a> Marker
+</h4>
+<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Marker"> </a><div class="figure" style="max-width: 70%;">
+<div class="center">
+<img class="figure" src="gambar2/example-marker.png" alt="figure gambar2/example-marker.png" style="max-width: 956px; max-height: 600px;"/>
+
+</div>
+<div class="caption">
+Figure 1.10 Marker
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Marker berbentuk lingkaran dengan angka di dalamnya menunjuk bahwa ada atlet pada daerah tersebut sejumlah angka yang tertera (seperti no 1 pada gambar <a class="Reference" href="#fig:Marker">1.10↑</a>). Pada menu sidebar terdapat fitur untuk menghilangkan marker pada peta seperti:
+</div>
+<ul>
+<li>
+Marker dengan logo KNPI akan menunjukan informasi knpi pada daerah tersebut jika di-klik (seperti pada gambar <a class="Reference" href="#fig:Men-nonaktifkan marker KNPI">1.11↓</a>) maka akan menghilangkan marker knpi pada peta(gambar <a class="Reference" href="#fig:Mengaktifkan-Marker-Atlet">1.12↓</a> )<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Men-nonaktifkan marker KNPI"> </a><div class="figure">
+<div class="center">
+<img class="embedded" src="gambar2/choice-knpi-disabled.png" alt="figure gambar2/choice-knpi-disabled.png" style="width: 136px; max-width: 340px; height: 49px; max-height: 123px;"/>
+
+</div>
+<div class="caption">
+Figure 1.11 Men-nonaktifkan marker KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Mengaktifkan-Marker-Atlet"> </a><div class="figure" style="max-width: 65%;">
+<div class="center">
+<img class="figure" src="gambar2/enable-atlet-disabled-knpi.png" alt="figure gambar2/enable-atlet-disabled-knpi.png" style="max-width: 957px; max-height: 603px;"/>
+
+</div>
+<div class="caption">
+Figure 1.12 Mengaktifkan Marker Atlet dan Menonaktfikan Marker KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</li>
+<li>
+Untuk menonaktifkan data (marker) atlet dapat dilakukan dengan menglik logo atlet (seperti pada gambar <a class="Reference" href="#fig:Mengaktifkan-Marker-Atlet">1.12↑</a> )maka akan menghilangkan data atlet yang ada pada peta (seperti pada gambar <a class="Reference" href="#fig:Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet">1.14↓</a>).<div class="Unindented">
+<div class="float">
+<a class="Label" name="fig:Men-nonaktifkan-marker-atlet"> </a><div class="figure">
+<div class="center">
+<img class="embedded" src="gambar2/choice-atlet-disabled.png" alt="figure gambar2/choice-atlet-disabled.png" style="width: 170px; max-width: 340px; height: 61px; max-height: 122px;"/>
+
+</div>
+<div class="caption">
+Figure 1.13 Men-nonaktifkan marker atlet  
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet"> </a><div class="figure" style="max-width: 65%;">
+<div class="center">
+<img class="figure" src="gambar2/knpi-enabled-disabled-atlet.png" alt="figure gambar2/knpi-enabled-disabled-atlet.png" style="max-width: 956px; max-height: 601px;"/>
+
+</div>
+<div class="caption">
+Figure 1.14 Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet 
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</li>
+
+</ul>
+<h4 class="Subsubsection">
+<a class="toc" name="toc-Subsubsection-1.2.5.2">1.2.5.2</a> Informasi Marker
+</h4>
+<div class="Unindented">
+Untuk melihat informasi marker dari setiap daerah, bisa dilihat dengan cara meng-klik marker. Klik marker yang berbentuk lingkaran untuk memperbesar peta ke propinsi yang dituju atau bisa dengan memilih propinsi dengan menggunakan quikview pada pada menu bar. Contoh hasil informasi marker adalah seperti pada gambar <a class="Reference" href="#fig:Informasi-Marker">1.15↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Informasi-Marker"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/detail-provinis-spesifik.png" alt="figure gambar2/detail-provinis-spesifik.png" style="max-width: 1365px; max-height: 663px;"/>
+
+</div>
+<div class="caption">
+Figure 1.15 Informasi Marker
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h2 class="Section">
+<a class="toc" name="toc-Section-1.3">1.3</a> CMS
+</h2>
+<div class="Unindented">
+Untuk melalukan pengelolaan data maka dalam sistem ini telah mendukung penambahan data spasial dengan memanfaatkan teknologi Content Management Sistem sehingga data-data spasial dapat ditambah serta diperbaiki sesuai dengan perkembangan data dan informasi yang ada(seperti pada gambar ). Adapun fitur CMS tersebut adalah sebagai berikut:
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:CMS-Gis"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar2/table-cms.png" alt="figure gambar2/table-cms.png" style="max-width: 1298px; max-height: 1479px;"/>
+
+</div>
+<div class="caption">
+Figure 1.16 CMS GIS 
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.1">1.3.1</a> Penambahan Data Atlet
+</h3>
+<div class="Unindented">
+Untuk mengaktifkan penambahan data dapat dilakukan dengan beberapa tahapan. 
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Penambahan-Data-pada"> </a><div class="figure">
+<div class="center">
+<img class="embedded" src="gambar3/cms-view.png" alt="figure gambar3/cms-view.png" style="width: 482px; max-width: 1072px; height: 641px; max-height: 1426px;"/>
+
+</div>
+<div class="caption">
+Figure 1.17 Penambahan Data pada CMS 
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar <a class="Reference" href="#fig:Penambahan-Data-pada">1.17↑</a>), tahapan ditunjukkan dengan nomor:
+</div>
+<ol>
+<li>
+Pemilihan provinsi
+</li>
+<li>
+Pemilihan Cabang Olahraga
+</li>
+<li>
+Penentuan peta dengan mengklik dua kali pada peta yang tampil
+</li>
+<li>
+Data akan tampil pada kolom longitude dan latitude
+</li>
+<li>
+Mengisi form pada peta yang adaa.
+</li>
+<li>
+Validasi data dengan menekan tombol submit.
+</li>
+
+</ol>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.2">1.3.2</a> Pengaturan Data Atlet
+</h3>
+<div class="Unindented">
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling kanan. Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan seperti pada gambar <a class="Reference" href="#fig:Pengaturan-data">1.18↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Pengaturan-data"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/before-update.png" alt="figure gambar3/before-update.png" style="max-width: 968px; max-height: 299px;"/>
+
+</div>
+<div class="caption">
+Figure 1.18 Pengaturan Data Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Jika data sudah selesai diubah, klik update untuk merubah data secara permanen. Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-Perubaha"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/after-update.png" alt="figure gambar3/after-update.png" style="max-width: 972px; max-height: 366px;"/>
+
+</div>
+<div class="caption">
+Figure 1.19 Notifikasi Keberhasilan Perubahan Data Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.3">1.3.3</a> Penghapusan Data Atlet
+</h3>
+<div class="Unindented">
+Untuk penghapusan data atlet dapat dilakukan dengan cara menekan tombol bergambar pensil pada kolom paling kanan. Kemudian tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Penghapusan-data-atlet"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/before-delete.png" alt="figure gambar3/before-delete.png" style="max-width: 970px; max-height: 296px;"/>
+
+</div>
+<div class="caption">
+Figure 1.20 Penghapusan Data Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Akan Muncul <i>Pop Up Dialog</i> yang memastikan untuk menghapus data atlet yang sudah ada. Jika sudah yakin untuk menghapus, maka tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="pop-up-penghapusan-data-atlet"> </a><div class="figure" style="max-width: 30%;">
+<div class="center">
+<img class="figure" src="gambar3/dialog-delete.png" alt="figure gambar3/dialog-delete.png" style="max-width: 275px; max-height: 182px;"/>
+
+</div>
+<div class="caption">
+Figure 1.21 Pop Up Penghapusan Data Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Notifikasi keberhasilan penghapusan data akan muncul.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-penghpusan-atlet"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/after-delete.png" alt="figure gambar3/after-delete.png" style="max-width: 983px; max-height: 263px;"/>
+
+</div>
+<div class="caption">
+Figure 1.22 Notifikasi Keberhasilan Penghapusan Data Atlet
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.4">1.3.4</a> Penambahan Data Pelatih
+</h3>
+<div class="Unindented">
+Untuk menambah data pelatih, klik menu ”Input Data” pada menu di sebelah kiri dan pilih ”Input Data Pelatih” kemudian akan tampil form seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih">1.23↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:form-data-pelatih"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pelatih-input.png" alt="figure gambar3/pelatih-input.png" style="max-width: 1073px; max-height: 1180px;"/>
+
+</div>
+<div class="caption">
+Figure 1.23 Form Data Pelatih
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih">1.23↑</a>), tahapan ditunjukkan dengan nomor:
+</div>
+<ol>
+<li>
+Pemilihan provinsi
+</li>
+<li>
+Pemilihan Cabang Olahraga
+</li>
+<li>
+Memasukkan nama pelatih dan jenis kelamin pelatih
+</li>
+<li>
+Tekan ”submit” untuk menambahkan data.
+</li>
+<li>
+Data akan tampil pada tabel yang berada dibawah form.
+</li>
+
+</ol>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.5">1.3.5</a> Pengaturan Data Pelatih
+</h3>
+<div class="Unindented">
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling kanan. Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan seperti pada gambar <a class="Reference" href="#fig:Pengaturan-data-pelatih">1.24↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Pengaturan-data-pelatih"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pelatih-before-update.png" alt="figure gambar3/pelatih-before-update.png" style="max-width: 966px; max-height: 223px;"/>
+
+</div>
+<div class="caption">
+Figure 1.24 Pengaturan Data Pelatih
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Jika data sudah selesai diubah, klik ”update” untuk merubah data secara permanen. Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-Perubaha-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/after-update.png" alt="figure gambar3/after-update.png" style="max-width: 972px; max-height: 366px;"/>
+
+</div>
+<div class="caption">
+Figure 1.25 Notifikasi Keberhasilan Perubahan Data
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.6">1.3.6</a> Penghapusan Data Pelatih
+</h3>
+<div class="Unindented">
+Untuk penghapusan data pelatih dapat dilakukan dengan cara menekan tombol bergambar pensil pada kolom paling kanan. Kemudian tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Penghapusan-data-pelatih"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pelatih-before-delete.png" alt="figure gambar3/pelatih-before-delete.png" style="max-width: 965px; max-height: 231px;"/>
+
+</div>
+<div class="caption">
+Figure 1.26 Penghapusan Data Pelatih
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Akan Muncul <i>Pop Up Dialog</i> yang memastikan untuk menghapus data pelatih yang sudah ada. Jika sudah yakin untuk menghapus, maka tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="pop-up-penghapusan-data-atlet-pelatih"> </a><div class="figure" style="max-width: 30%;">
+<div class="center">
+<img class="figure" src="gambar3/pelatih-delete-dialog.png" alt="figure gambar3/pelatih-delete-dialog.png" style="max-width: 271px; max-height: 183px;"/>
+
+</div>
+<div class="caption">
+Figure 1.27 Pop Up Penghapusan Data Pelatih
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Notifikasi keberhasilan penghapusan data akan muncul.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-penghpusan-pelatih"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pelatih-after-delete.png" alt="figure gambar3/pelatih-after-delete.png" style="max-width: 980px; max-height: 266px;"/>
+
+</div>
+<div class="caption">
+Figure 1.28 Notifikasi Keberhasilan Penghapusan Data Pelatih
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.7">1.3.7</a> Penambahan Data Pemuda
+</h3>
+<div class="Unindented">
+Untuk menambah data pemuda, klik menu ”Input Data” pada menu di sebelah kiri dan pilih ”Input Data Pemuda” kemudian akan tampil form seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih-1">1.29↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:form-data-pelatih-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-input.png" alt="figure gambar3/pemuda-input.png" style="max-width: 1071px; max-height: 916px;"/>
+
+</div>
+<div class="caption">
+Figure 1.29 Form Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih-1">1.29↑</a>), tahapan ditunjukkan dengan nomor:
+</div>
+<ol>
+<li>
+Pemilihan provinsi dan pengisian data pemuda
+</li>
+<li>
+Tekan ”submit” untuk menambahkan data ke dalam tabel secara permanen
+</li>
+
+</ol>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.8">1.3.8</a> Pengaturan Data Pemuda
+</h3>
+<div class="Unindented">
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling kanan. Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan seperti pada gambar <a class="Reference" href="#fig:Pengaturan-data-pelatih-1">1.30↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Pengaturan-data-pelatih-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-before-update.png" alt="figure gambar3/pemuda-before-update.png" style="max-width: 972px; max-height: 267px;"/>
+
+</div>
+<div class="caption">
+Figure 1.30 Pengaturan Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Jika data sudah selesai diubah, klik ”update” untuk merubah data secara permanen. Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-Perubaha-1-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-after-update.png" alt="figure gambar3/pemuda-after-update.png" style="max-width: 968px; max-height: 321px;"/>
+
+</div>
+<div class="caption">
+Figure 1.31 Notifikasi Keberhasilan Perubahan Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.9">1.3.9</a> Penghapusan Data Pemuda
+</h3>
+<div class="Unindented">
+Untuk penghapusan data pemuda dapat dilakukan dengan cara menekan tombol bergambar pensil pada kolom paling kanan. Kemudian tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Penghapusan-data-pelatih-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-before-delete.png" alt="figure gambar3/pemuda-before-delete.png" style="max-width: 966px; max-height: 268px;"/>
+
+</div>
+<div class="caption">
+Figure 1.32 Penghapusan Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Akan Muncul <i>Pop Up Dialog</i> yang memastikan untuk menghapus data pemuda yang sudah ada. Jika sudah yakin untuk menghapus, maka tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="pop-up-penghapusan-data-atlet-pelatih-1"> </a><div class="figure" style="max-width: 30%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-dialog-delete.png" alt="figure gambar3/pemuda-dialog-delete.png" style="max-width: 272px; max-height: 179px;"/>
+
+</div>
+<div class="caption">
+Figure 1.33 Pop Up Penghapusan Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Notifikasi keberhasilan penghapusan data akan muncul.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-penghpusan-pelatih-1"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/pemuda-after-delete.png" alt="figure gambar3/pemuda-after-delete.png" style="max-width: 981px; max-height: 264px;"/>
+
+</div>
+<div class="caption">
+Figure 1.34 Notifikasi Keberhasilan Penghapusan Data Pemuda
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.10">1.3.10</a> Penambahan Data KNPI
+</h3>
+<div class="Unindented">
+Untuk menambah data pelatih, klik menu ”Input Data” pada menu di sebelah kiri dan pilih ”Input Data KNPI” kemudian akan tampil form seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih-2">1.35↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:form-data-pelatih-2"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi-input.png" alt="figure gambar3/knpi-input.png" style="max-width: 1075px; max-height: 1047px;"/>
+
+</div>
+<div class="caption">
+Figure 1.35 Form Data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar <a class="Reference" href="#fig:form-data-pelatih-2">1.35↑</a>), tahapan ditunjukkan dengan nomor:
+</div>
+<ol>
+<li>
+Pemilihan provinsi dan pengisian data KNPI
+</li>
+<li>
+Klik 2 kali pada peta untuk menambahkan lokasi latitude dan longitude KNPI
+</li>
+<li>
+Tekan ”submit” untuk menambahkan data ke dalam tabel secara permanen.
+</li>
+
+</ol>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.11">1.3.11</a> Pengaturan Data KNPI
+</h3>
+<div class="Unindented">
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling kanan. Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan seperti pada gambar <a class="Reference" href="#fig:Pengaturan-data-pelatih-2">1.36↓</a>.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Pengaturan-data-pelatih-2"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi_before-update.png" alt="figure gambar3/knpi_before-update.png" style="max-width: 965px; max-height: 479px;"/>
+
+</div>
+<div class="caption">
+Figure 1.36 Pengaturan Data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Jika data sudah selesai diubah, klik ”update” untuk merubah data secara permanen. Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-Perubaha-1-2"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi-after-update.png" alt="figure gambar3/knpi-after-update.png" style="max-width: 980px; max-height: 338px;"/>
+
+</div>
+<div class="caption">
+Figure 1.37 Notifikasi Keberhasilan Perubahan Data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<h3 class="Subsection">
+<a class="toc" name="toc-Subsection-1.3.12">1.3.12</a> Penghapusan Data KNPI
+</h3>
+<div class="Unindented">
+Untuk penghapusan data KNPI dapat dilakukan dengan cara menekan tombol bergambar pensil pada kolom paling kiri. Kemudian tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Penghapusan-data-pelatih-2"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi-before-delete.png" alt="figure gambar3/knpi-before-delete.png" style="max-width: 966px; max-height: 463px;"/>
+
+</div>
+<div class="caption">
+Figure 1.38 Penghapusan Data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Akan Muncul <i>Pop Up Dialog</i> yang memastikan untuk menghapus data KNPI yang sudah ada. Jika sudah yakin untuk menghapus, maka tekan ”Hapus”.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="pop-up-penghapusan-data-atlet-pelatih-2"> </a><div class="figure" style="max-width: 30%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi-dialog-delete.png" alt="figure gambar3/knpi-dialog-delete.png" style="max-width: 270px; max-height: 184px;"/>
+
+</div>
+<div class="caption">
+Figure 1.39 Pop up penghapusan data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Indented">
+Notifikasi keberhasilan penghapusan data akan muncul.
+</div>
+<div class="Indented">
+<div class="float">
+<a class="Label" name="fig:Notifikasi-Keberhasilan-penghpusan-pelatih-2"> </a><div class="figure" style="max-width: 75%;">
+<div class="center">
+<img class="figure" src="gambar3/knpi-after-delete.png" alt="figure gambar3/knpi-after-delete.png" style="max-width: 978px; max-height: 260px;"/>
+
+</div>
+<div class="caption">
+Figure 1.40 Notifikasi Keberhasilan Penghapusan Data KNPI
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="footer"/>
+<div class="footer" id="generated-by">
+Document generated by <a href="http://elyxer.nongnu.org/">eLyXer 1.2.5 (2013-03-10)</a> on <span class="create-date">2015-02-25T05:20:05.303052</span>
+</div>
+</div>
+</body>
+</html>
