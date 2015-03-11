@@ -269,7 +269,6 @@
       			data: {id_cabor:valueCab,year:yearCab, kejuaraan : kejuaraanCab},
       			success: function(output) {
       				var decodedData = $.parseJSON(output);
-      				alert(decodedData.button_string);
       			   $("#details").html(decodedData.html_string);
       			   
 		      		$.ajax({
@@ -348,8 +347,10 @@
   			});
   			map.data.addListener('click', function(event) {
     			lettermap =	event.feature.getProperty('letter');
+    			id_prop =	event.feature.getProperty('prop');
 				details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Propinsi</h2><table>'+
-				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lettermap+'</td></tr></table>'
+				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lettermap+'</td></tr>'+
+				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+id_prop+'</td></tr></table>'
         	});
 	    	$('#city_list').change(function(){
       		var coordinate = $('option:selected',this).data('latlng')
