@@ -7,7 +7,7 @@
 		<title>GIS Kemenpora V2</title>
 		<meta name="description" content="A sidebar menu as seen on the Google Nexus 7 website" />
 		<meta name="keywords" content="google nexus 7 menu, css transitions, sidebar, side menu, slide out menu" />
-		<meta name="author" content="blackhole" />
+		<meta name="author" content="root" />
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
@@ -694,8 +694,8 @@
 				<option value="2013">2013</option>
 				<option value="2014">2014</option>
 			</select><br><br>
-			<input type="radio" name="kejuaraan"  value="Daerah" style="vertical-align:middle;" checked> Daerah<br>
-			<input type="radio" name="kejuaraan" value="Nasional" style="vertical-align:middle;"> Nasional
+			<input type="radio" name="kejuaraan"  value="0" style="vertical-align:middle;" checked> Daerah<br>
+			<input type="radio" name="kejuaraan" value="1" style="vertical-align:middle;"> Nasional
 		</div>		
 		<div style="text-align:center; font-size:11px; position:absolute; right:30.1%;  width: 50%; bottom:0px; height:15px; background-color:white; z-index:0;">GIS Kemenpora V2 | Term of Use</div>					
 		</div>

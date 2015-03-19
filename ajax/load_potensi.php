@@ -8,13 +8,15 @@
     	$id_cabor= $_POST["id_cabor"];
     	$year_list= $_POST["year"];
     	$kejuaraan = $_POST["kejuaraan"];
-		$sql = "select tbl_medali.emas, tbl_medali.perak, tbl_medali.perunggu, tbl_medali.jml_medali, tbl_medali.tahun, tbl_medali.id_propinsi, tbl_propinsi.propinsi, tbl_cabor.cabor
+		$sql = "select tbl_medali.emas, tbl_medali.perak, tbl_medali.perunggu, tbl_medali.jml_medali, tbl_medali.tahun, tbl_medali.id_propinsi, tbl_propinsi.propinsi, tbl_cabor.cabor, tbl_kejuaraan.kejuaraan
 				 from tbl_medali
 				 join tbl_propinsi
 				 on tbl_propinsi.id_propinsi = tbl_medali.id_propinsi
 				 join tbl_cabor
 				 on tbl_cabor.id_cabor = tbl_medali.id_cabor
-				 where jml_medali=(select max(jml_medali) from tbl_medali where tbl_medali.id_cabor=$id_cabor and kejuaraan='$kejuaraan' and tahun=$year_list) and tbl_medali.id_cabor=$id_cabor and kejuaraan='$kejuaraan' and tahun=$year_list";
+				 join tbl_kejuaraan
+				 on tbl_kejuaraan.id_kejuaraan = tbl_medali.kejuaraan
+				 where jml_medali=(select max(jml_medali) from tbl_medali where tbl_medali.id_cabor=$id_cabor and tbl_medali.kejuaraan='$kejuaraan' and tahun=$year_list) and tbl_medali.id_cabor=$id_cabor and tbl_medali.kejuaraan='$kejuaraan' and tahun=$year_list";
 		$result = mysqli_query($conn, $sql);
 		
 		$rows= array();
@@ -40,7 +42,7 @@
 					<td>Cabang Olahraga</td><td style="padding:10px 20px 10px 20px;">:</td><td>'. $row["cabor"].'</td>
 					</tr>
 					<tr>
-					<td>Kejuaraan</td><td style="padding:10px 20px 10px 20px;">:</td><td>'. $kejuaraan.'</td>
+					<td>Kejuaraan</td><td style="padding:10px 20px 10px 20px;">:</td><td>'. $row["kejuaraan"].'</td>
 					</tr>
 					<tr>
 					<td>Emas</td><td style="padding:10px 20px 10px 20px;">:</td><td>'.$row["emas"].'</td>

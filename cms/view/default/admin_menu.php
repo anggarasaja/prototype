@@ -56,6 +56,8 @@
                                   <li><a href="<?=$url_rewrite?>content/data_pelatih"><i class="fa fa-info-circle fa-fw"></i> Input Data Pelatih</a></li>
                              		 <li><a href="<?=$url_rewrite?>content/data_pemuda"><i class="fa fa-info-circle fa-fw"></i> Input Data Kepemudaan</a></li>
                                   <li><a href="<?=$url_rewrite?>content/data_knpi"><i class="fa fa-info-circle fa-fw"></i> Input Data KNPI</a></li>
+                                  <li><a href="<?=$url_rewrite?>content/data_medali"><i class="fa fa-info-circle fa-fw"></i> Input Data Medali</a></li>
+                                  <li><a href="<?=$url_rewrite?>content/data_sarpras"><i class="fa fa-info-circle fa-fw"></i> Input Data Sarana & Prasarana</a></li>
                              </ul>
                         </li>
                         <li>

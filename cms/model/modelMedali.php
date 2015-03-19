@@ -31,7 +31,7 @@ class modelMedali extends mysql_db {
           $query = "Insert into tbl_medali
                          set emas=$emas ,
                          perak=$perak ,
-                         perunggu= $medali ,
+                         perunggu= $perunggu ,
                          jml_medali=$jml_medali ,
                          id_cabor = $id_cabor ,
                          id_propinsi = $id_propinsi ,
@@ -161,8 +161,9 @@ class modelMedali extends mysql_db {
 			$id_propinsi = $data['id_propinsi'];
 			$tahun = $data['tahun'];
 			$kejuaraan = $data['kejuaraan'];
+			$id_medali = $data['id_medali'];
 			
-			$query ="UPDATE tbl_medali SET emas = $emas , perak = $perak , perunggu = $perunggu , jml_medali = $jml_medali , id_cabor = $id_cabor , id_propinsi = $id_propinsi , tahun = $tahun , kejuaraan = $id_kejuaraan WHERE id_medali = $id_medali";    	
+			$query ="UPDATE tbl_medali SET emas = $emas , perak = $perak , perunggu = $perunggu , jml_medali = $jml_medali , id_cabor = $id_cabor , id_propinsi = $id_propinsi , tahun = $tahun , kejuaraan = $kejuaraan WHERE id_medali = $id_medali";    	
 			
 			$result = $this->query($query);
 			

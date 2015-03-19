@@ -327,7 +327,24 @@
 				}else{
 					$('#jenkel-update-'+id_row +'-laki').prop("checked", true);
 				}
-        
+				// read prestasi untuk diedit.
+        		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/readPrestasi.php'; ?>',
+      			type: 'POST',
+      			data: {id_atlet:id_row},
+      			success: function(output) {
+      				//alert(output);
+      				op = JSON.parse(output);
+        				$('#emas-update-'+id_row +'').val(op[0]);
+        				$('#perak-update-'+id_row +'').val(op[1]);
+        				$('#perunggu-update-'+id_row +'').val(op[2]);
+        				$('#keterangan-update-'+id_row +'').val(op[4]);
+        				
+						$("#kejuaraan-update-"+id_row +"").val(op[3]);
+				//alert(value3);
+     			},
+     				     error: function (xhr, ajaxOptions, thrownError) {
+    			        alert(xhr.status + " "+ thrownError);
+    					      }});
 				$('#update-atlet-'+id_row +'').submit(function(event) {
 					      	event.preventDefault();
       	$('#alert-update').empty();
@@ -564,6 +581,7 @@
 						<td style="padding:10px 20px 10px 35px;">Nama Pelatih</td><td style="padding:10px 20px 10px 20px;">:</td>
 						<td><select tabindex="4" required="required" name="pelatih" id="pelatih" style="width:230px; height:34px;" class="form-control"></select></td>						
 					</tr>
+					
  				</table>
 				</div>
 				<div class="col-md-6">
@@ -578,11 +596,58 @@
 						<td style="padding:10px 20px 10px 20px;">:</td>
 						<td><input tabindex="7" required="required" style="width:230px; height:34px;" type="text" name="lng" id="lng" required="required" class="form-control"></td><td><div id="nan2" hidden="true"><label style="color:red">Salah</label></div><td>
 					</tr>
-					<tr>
-						<td style="padding:10px 20px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin-left: 190px;margin-right:10px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
+					<tr >
+						<td rowspan="2" style="padding:30px 20px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin:auto 10px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
 					</tr>
  				</table>				
 				</div>
+ 				</div>
+ 				<div class="row text-center">
+ 					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#row-prestasi" aria-expanded="false" aria-controls="collapseExample">
+  						Form Prestasi
+					</button>
+				</div>
+ 				<div class="collapse" id="row-prestasi">
+ 				<hr>
+ 				<div class="row" >
+ 					<div class="col-md-3">
+						<div class="form-group">
+					      <label for="emas">Emas :</label>
+					      <input type="number" class="form-control" id="emas" name="emas">
+					    </div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+					      <label for="perak">Perak :</label>
+					      <input type="number" class="form-control" id="perak" name="perak">
+					    </div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+					      <label for="perunggu">Perunggu :</label>
+					      <input type="number" class="form-control" id="perunggu" name="perunggu">
+					    </div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+					      <label for="kejuaraan">Kejuaraan :</label>
+					      <select class="form-control" id="kejuaraan" name="kejuaraan">
+								<option >==Pilih==</option>
+					      	<option value="0">daerah</option>
+					      	<option value="1">nasional</option>
+					      </select>
+					    </div>
+					</div>
+					
+ 				</div>
+ 				<div class="row">
+ 					<div class="col-md-12">
+						<div class="form-group">
+					      <label for="prestasi">Keterangan prestasi :</label>
+					      <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
+					    </div>
+					</div>
+ 				</div>
  				</div>
  			</form>
                   	</div>
@@ -676,7 +741,7 @@ $('#lat').keyup(function () {
 				         
           } else {
           	      /* Send the data using post */
-     			var posting = $.post( url, { namaatlet: $('#nama-atlet').val(), jenkel: $('#jenkel:checked').val(), cabor: $('#cabor').val(), propinsi: $('#city_list').val(), pelatih: $('#pelatih').val(), lat: $('#lat').val(), lng: $('#lng').val() } );
+     			var posting = $.post( url, { namaatlet: $('#nama-atlet').val(), jenkel: $('#jenkel:checked').val(), cabor: $('#cabor').val(), propinsi: $('#city_list').val(), pelatih: $('#pelatih').val(), lat: $('#lat').val(), lng: $('#lng').val(), emas: $('#emas').val(), perak: $('#perak').val(), perunggu: $('#perunggu').val(), kejuaraan: $('#kejuaraan').val(), keterangan: $('#keterangan').val()} );
 
       /* Alerts the results */
       		posting.done(function( data ) {
@@ -793,7 +858,30 @@ $('#lat').keyup(function () {
       		
   
         '</tr>'+
-        
+        '<tr>'+
+            '<td style="padding : 10px">Emas</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" style="width:230px; height:34px;" type="number" name="emas-update-'+d[0] +'" id="emas-update-'+d[0] +'" class="form-control" v></td>'+
+				'<td style="padding : 10px">Perak</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" style="width:230px; height:34px;" type="number" name="perak-update-'+d[0] +'" id="perak-update-'+d[0] +'" class="form-control" v></td>'+      		
+      		
+  
+        '</tr>'+
+        '<tr>'+
+            '<td style="padding : 10px">Perunggu</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><input tabindex="1" style="width:230px; height:34px;" type="number" name="perunggu-update-'+d[0] +'" id="perunggu-update-'+d[0] +'" class="form-control" ></td>'+
+				'<td style="padding : 10px">Kejuaraan</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td><select class="form-control" id="kejuaraan-update-'+d[0] +'" name="kejuaraan-update-'+d[0] +'">'+
+								'<option >==Pilih==</option>'+
+					      	'<option value="0">daerah</option>'+
+					      	'<option value="1">nasional</option>'+
+					      '</select></td>'+      		
+      		
+  
+        '</tr>'+
+        '<tr>'+
+            '<td  style="padding : 10px">keterangan</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td colspan="4"><textarea style="width:100%" class="form-control" id="keterangan-update-'+d[0] +'" name="keterangan-update-'+d[0] +'"></textarea></td>'+
+        '</tr>'+
         '<tr>'+
             '<td colspan="3"><div class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"></div></td>'+
 				'<td colspan="3"><div class="text-center"><input id="hapus-'+ d[0] +'" value="Hapus" style="width:110px; height:34px;" class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></div></td>'+

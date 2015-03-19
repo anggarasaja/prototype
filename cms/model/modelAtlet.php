@@ -28,17 +28,38 @@ class modelAtlet extends mysql_db {
 			$lng = $data['lng'];   
 			
           $query = "Insert into tbl_atlet
-                         set id_propinsi='$id_propinsi',
-                         id_cabor='$id_cabor',
-                         atlet='$atlet',
-                         id_jk='$id_jk',
-                         id_pelatih='$id_pelatih',
-                         lat= '$lat' ,   
-                         lng= '$lng' ";
+                         set id_propinsi=$id_propinsi ,
+                         id_cabor=$id_cabor ,
+                         atlet='$atlet' ,
+                         id_jk=$id_jk ,
+                         id_pelatih=$id_pelatih ,
+                         lat= $lat ,   
+                         lng= $lng";
+                    
+         $this->query($query);
+
+         return $this->connect->insert_id;
+     }
+     
+     public function insertPrestasiAtlet($data){
+			$emas = $data['emas'];
+			$perak = $data['perak'];
+			$perunggu = $data['perunggu'];
+			$kejuaraan = $data['kejuaraan'];
+			$keterangan = $data['keterangan'];
+			$id_atlet = $data['id_atlet'];
+			
+          $query = "Insert into tbl_prestasi
+                         set emas= $emas ,
+                         perak=$perak ,
+                         perunggu=$perunggu ,
+                         kejuaraan=$kejuaraan ,
+                         keterangan='$keterangan',
+                         id_atlet= $id_atlet ";
                     
          $result = $this->query($query);
 
-         return $result;
+         return result;
      }
      
      public function readCaborData(){
@@ -61,6 +82,17 @@ class modelAtlet extends mysql_db {
          //$data=$this->fetch_object($result);
          return $result;
 			
+     	}
+     	
+     	public function readPrestasi($id_atlet){
+     		$query = "select tbl_prestasi.emas, tbl_prestasi.perak, tbl_prestasi.perunggu, tbl_prestasi.keterangan, tbl_prestasi.kejuaraan from tbl_prestasi where tbl_prestasi.id_atlet=$id_atlet";
+     		
+     		$result = $this->query($query);
+        //  echo $result;
+          //Wrap Output Query
+         //$data=$this->fetch_object($result);
+         return $result;
+     		
      	}
      	
      	public function readAllAtlet(){

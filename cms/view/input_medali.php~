@@ -270,18 +270,24 @@
 		            }).first().attr("value");
 		            
 		            $("#cabor-update-"+id_row +"").val(value);
-		                                
+		                       
 		            var value2 = $("#city_list-update-"+id_row +" option").filter(function() {
 		            	return $(this).text() == propinsi_row;
 		            }).first().attr("value");
-		            
+      
 		            $("#city_list-update-"+id_row +"").val(value2);
+		            
+		            var value3 = $("#kejuaraan-update-"+id_row +" option").filter(function() {
+		            	return $(this).text() == kejuaraan_row;
+		            }).first().attr("value");
+		            
+		            $("#kejuaraan-update-"+id_row +"").val(value3);
 		            
 		            $("#emas-update-"+id_row +"").val(emas_row);
 		            $("#perak-update-"+id_row +"").val(perak_row);
 		            $("#perunggu-update-"+id_row +"").val(perunggu_row);
 		            $("#tahun-update-"+id_row +"").val(tahun_row);
-                                
+                     
 		            $('#update-medali-'+id_row +'').submit(function(event) {
 		           		event.preventDefault();
 				       	$('#alert-update').empty();
@@ -504,8 +510,9 @@
 												<div class="form-group">
 											      <label for="email">Kejuaraan :</label>
 											      <select class="form-control" id="kejuaraan" name="kejuaraan">
-											      	<option value="0">kejurda</option>
-											      	<option value="1">kejurnas</option>
+											      	<option >==Pilih==</option>
+											      	<option value="0">daerah</option>
+											      	<option value="1">nasional</option>
 											      </select>
 											    </div>
 											</div>

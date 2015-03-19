@@ -1,8 +1,8 @@
 <?php
 
 include '../../config/application.php';
-
-if(isset($_POST['lat'])){
+var_dump($_POST);
+if(isset($_POST['emas'])){
 $nama = $purifier->purify($_POST['namaatlet']);
 $jenkel = $purifier->purify($_POST['jenkel']);
 $cabor = $purifier->purify($_POST['cabor']);
@@ -10,6 +10,12 @@ $propinsi = $purifier->purify($_POST['propinsi']);
 $pelatih = $purifier->purify($_POST['pelatih']);
 $lat = $purifier->purify($_POST['lat']);
 $lng = $purifier->purify($_POST['lng']);
+
+$emas = $purifier->purify($_POST['emas']);
+$perak = $purifier->purify($_POST['perak']);
+$perunggu = $purifier->purify($_POST['perunggu']);
+$kejuaraan = $purifier->purify($_POST['kejuaraan']);
+$keterangan = $purifier->purify($_POST['keterangan']);
 
 $data_form= array(
 	"atlet"=> $nama,
@@ -20,10 +26,21 @@ $data_form= array(
 	"lat"=>$lat,
 	"lng"=>$lng
 );
+var_dump($data_form);
 
-$ATLET->insertAtletData($data_form);
-$UTILITY->location_goto("content/data_atlet/");
-exit;
+$id = $ATLET->insertAtletData($data_form);
+
+echo "id =".$id;
+$data_form2= array(
+	"emas"=> $emas,
+	"perak"=> $perak,
+	"perunggu" =>$perunggu,
+	"kejuaraan" =>$kejuaraan,
+	"keterangan" =>$keterangan,
+	"id_atlet"=>$id
+);
+
+$ATLET->insertPrestasiAtlet($data_form2);
 } else {
 echo "data null";
 }
