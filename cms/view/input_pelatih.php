@@ -4,9 +4,7 @@
 <meta name="generator" content="Bluefish 2.2.6" >
 <meta name="generator" content="Bluefish 2.2.6" >
 <?php include "view/head.php";?>
-<script type="text/javascript" src=
-"http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
-</script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 <script type="text/javascript">
     var map;
     var caborOutput;
@@ -54,26 +52,49 @@
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
-          }});  
+          }});
+          autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+        { 
+          types: ['geocode'],
+          componentRestrictions: {country: "ID"} 
+        });  
           map = new google.maps.Map(document.getElementById('gmap_city'),
                         {
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 center: new google.maps.LatLng(-1.5,117)
                         });
+          google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+          map.setCenter(place.geometry.location);
+          map.setZoom(13);
+        }
+        else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(15);  // Why 17? Because it looks good.
+        }
+        placeMarker(place.geometry.location);
+        $('#lat').val(place.geometry.location.lat());
+        $('#lng').val(place.geometry.location.lng());
+      });
                 map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
                 google.maps.event.addListener(map, 'dblclick', function(event) {
                         //alert(event.latLng);
                         $('#lat').val(event.latLng.lat());
                         $('#lng').val(event.latLng.lng());
                 });
-                map.data.loadGeoJson('../../json/indonesia.json');
-                        map.data.setStyle(function(feature) {
-                        return({
-                        fillColor: feature.getProperty('color'),
-                        strokeWeight: 1
-                        });
-                        });
+                // map.data.loadGeoJson('../../json/indonesia.json');
+                //         map.data.setStyle(function(feature) {
+                //         return({
+                //         fillColor: feature.getProperty('color'),
+                //         strokeWeight: 1
+                //         });
+                //         });
                         map.data.addListener('mouseover', function(event) {
                 map.data.revertStyle();
                 map.data.overrideStyle(event.feature, {strokeWeight: 2});
@@ -89,7 +110,7 @@
                         $('#lat').val(event.latLng.lat());
                         $('#lng').val(event.latLng.lng());
                 });
-                map.data.loadGeoJson('../../json/indonesia.json');
+                map.data.loadGeoJson('../../json/indonesia_kab.json');
                         map.data.setStyle(function(feature) {
                         return({
                         fillColor: feature.getProperty('color'),
@@ -413,17 +434,22 @@ value="0">Pilih Propinsi</option>
 <hr>
 <table width="100%">
 <tr>
-<td>Nama Pelatih</td>
+<td style="padding-left:30px;">Nama Pelatih</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required" style=
 "width:230px; height:34px;" type="text" name="nama-pelatih" id=
 "nama-pelatih" class="form-control"></td>
-<td>Jenis Kelamin</td>
+<td rowspan="2">Alamat</td>
+<td rowspan="2" style="padding:10px 20px 10px 20px;">:</td>
+<td rowspan="2"><textarea class="form-control" rows="2" tabindex="1" required="required" style="width:230px;" id="autocomplete" name="alamat" onFocus="geolocate()" style="resize: none;"></textarea></td>
+<tr>
+<td style="padding-left:30px;">Jenis Kelamin</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><label class="radio-inline"><input tabindex="2" type="radio"
 name="jenkel" id="jenkel" value="1"> Laki-laki</label>
 <label class="radio-inline"><input tabindex="3" type="radio" name=
 "jenkel" id="jenkel" value="2"> Perempuan</label></td>
+</tr>
 </tr>
 <tr>
 <td style="padding-top:20px;" colspan="6" class="text-center">

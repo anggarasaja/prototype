@@ -92,13 +92,13 @@
 					$('#lng').val(event.latLng.lng());
 				});
 		
-				map.data.loadGeoJson('../../json/indonesia.json');
-		 		map.data.setStyle(function(feature) {
-					return({
-						fillColor: feature.getProperty('color'),
-						strokeWeight: 1
-					});
-				});
+				// map.data.loadGeoJson('../../json/indonesia_kab.json');
+		 	// 	map.data.setStyle(function(feature) {
+				// 	return({
+				// 		fillColor: feature.getProperty('color'),
+				// 		strokeWeight: 1
+				// 	});
+				// });
 				map.data.addListener('mouseover', function(event) {
 					map.data.revertStyle();
 					map.data.overrideStyle(event.feature, {strokeWeight: 2});
@@ -115,7 +115,7 @@
 					$('#lat').val(event.latLng.lat());
 					$('#lng').val(event.latLng.lng());
 		  		});
-		  		map.data.loadGeoJson('../../json/indonesia.json');
+		  		map.data.loadGeoJson('../../json/indonesia_kab.json');
 		 		map.data.setStyle(function(feature) {
 		    		return({
 		       		fillColor: feature.getProperty('color'),

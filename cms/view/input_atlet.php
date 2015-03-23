@@ -7,7 +7,7 @@
 			width:600px;   	
    	}
    </style>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&language=in"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 	<script type="text/javascript" src="../../js/markerclusterer.js"></script>
    <script type="text/javascript">
    var map;
@@ -19,7 +19,7 @@
    var table;
    function pageLoad(){
 
-    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet"></table>' );
+    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet" style="font-size:13px;"></table>' );
  		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
       	type: 'POST',
       	data: {id_propinsi:0},
@@ -48,13 +48,14 @@
             		{ "title": "Nama Pelatih" },
             		{ "title": "propinsi", "class": "center" },
             		{ "title": "Jenis<br>Kelamin", "class": "center" },
-            		{ "title": "Posisi Lat", "class": "center" },
-            		{ "title": "Posisi Lng", "class": "center" },
+            		{ "title": "Latitude", "class": "center" },
+            		{ "title": "Longitude", "class": "center" },
+            		{ "title": "Alamat", "class": "center" },
                	{	
                		"title":"Edit",
                		"orderable":      false,
                 		"data":           null,
-                		"defaultContent": '<div class="details-control"></div.'
+                		"defaultContent": '<div class="details-control"></div>'
             		}
         			],	
         			"data" : op,
@@ -64,7 +65,11 @@
          	alert(xhr.status + " "+ thrownError);
          }
       });   	
-   	
+   		autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+        { 
+          types: ['geocode'],
+          componentRestrictions: {country: "ID"} 
+        });
   		map = new google.maps.Map(document.getElementById('gmap_city'),
   			{
       		zoom: 5,
@@ -72,14 +77,31 @@
       		center: new google.maps.LatLng(-1.5,117)
  			}
  		);
- 		
+ 		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+          map.setCenter(place.geometry.location);
+          map.setZoom(13);
+        }
+        else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(15);  // Why 17? Because it looks good.
+        }
+        placeMarker(place.geometry.location);
+        $('#lat').val(place.geometry.location.lat());
+        $('#lng').val(place.geometry.location.lng());
+      });
  		map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
 	   google.maps.event.addListener(map, 'dblclick', function(event) {
 			placeMarker(event.latLng);
         	$('#lat').val(event.latLng.lat());
 			$('#lng').val(event.latLng.lng());
 		});
-		map.data.loadGeoJson('../../json/indonesia.json');
+		map.data.loadGeoJson('../../json/indonesia_kab.json');
 		map.data.setStyle(function(feature) {
     		return({
       		fillColor: feature.getProperty('color'),
@@ -586,6 +608,11 @@
 				</div>
 				<div class="col-md-6">
 				<table width="100%">
+					<tr>
+			            <td style="padding:10px 20px 10px 35px;">Alamat</td>
+			            <td style="padding:10px 20px 10px 20px;">:</td>
+			            <td><textarea class="form-control" rows="2" tabindex="1" required="required" style="width:230px;" id="autocomplete" name="alamat" onFocus="geolocate()" style="resize: none;"></textarea></td>
+			          </tr>
 						<tr>
 						<td style="padding:10px 20px 10px 35px;">Latitude</td>
 						<td style="padding:10px 20px 10px 20px;">:</td>
@@ -741,7 +768,7 @@ $('#lat').keyup(function () {
 				         
           } else {
           	      /* Send the data using post */
-     			var posting = $.post( url, { namaatlet: $('#nama-atlet').val(), jenkel: $('#jenkel:checked').val(), cabor: $('#cabor').val(), propinsi: $('#city_list').val(), pelatih: $('#pelatih').val(), lat: $('#lat').val(), lng: $('#lng').val(), emas: $('#emas').val(), perak: $('#perak').val(), perunggu: $('#perunggu').val(), kejuaraan: $('#kejuaraan').val(), keterangan: $('#keterangan').val()} );
+     			var posting = $.post( url, { namaatlet: $('#nama-atlet').val(), jenkel: $('#jenkel:checked').val(), cabor: $('#cabor').val(), propinsi: $('#city_list').val(), pelatih: $('#pelatih').val(), lat: $('#lat').val(), lng: $('#lng').val(), alamat: $('#autocomplete').val(), emas: $('#emas').val(), perak: $('#perak').val(), perunggu: $('#perunggu').val(), kejuaraan: $('#kejuaraan').val(), keterangan: $('#keterangan').val()} );
 
       /* Alerts the results */
       		posting.done(function( data ) {
@@ -775,6 +802,7 @@ $('#lat').keyup(function () {
    		$('#pelatih').val('');
    		$('#lat').val('');
    		$('#lng').val('');
+   		$('#autocomplete').val('');
     			});
     		}
     });

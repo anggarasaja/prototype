@@ -62,3 +62,6 @@ label.title-page {
 .border-pelatih {
 	box-shadow: 0px 0px 10px #A6E9FB;
 }
+textarea {
+    resize: none;
+}

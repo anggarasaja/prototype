@@ -91,13 +91,13 @@
                         $('#lat').val(event.latLng.lat());
                         $('#lng').val(event.latLng.lng());
                 });
-                map.data.loadGeoJson('../../json/indonesia.json');
-                        map.data.setStyle(function(feature) {
-                        return({
-                        fillColor: feature.getProperty('color'),
-                        strokeWeight: 1
-                        });
-                        });
+                // map.data.loadGeoJson('../../json/indonesia_kab.json');
+                //         map.data.setStyle(function(feature) {
+                //         return({
+                //         fillColor: feature.getProperty('color'),
+                //         strokeWeight: 1
+                //         });
+                //         });
                         map.data.addListener('mouseover', function(event) {
                 map.data.revertStyle();
                 map.data.overrideStyle(event.feature, {strokeWeight: 2});
@@ -113,7 +113,7 @@
 						$('#lat').val(event.latLng.lat());
 						$('#lng').val(event.latLng.lng());
   					});
-                map.data.loadGeoJson('../../json/indonesia.json');
+                map.data.loadGeoJson('../../json/indonesia_kab.json');
                         map.data.setStyle(function(feature) {
                         return({
                         fillColor: feature.getProperty('color'),
@@ -513,14 +513,14 @@ value="0">Pilih Propinsi</option>
 <hr>
 <table width="100%">
 <tr>
-<td>Nama KNPI</td>
+<td style="padding-left:30px;">Nama KNPI</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-KNPI" id="nama-KNPI" class="form-control"></td>
 <td>Pemimpin</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="pemimpin" id="pemimpin" class="form-control"></td>
 </tr>
-<td rowspan="2">Alamat</td>
+<td rowspan="2" style="padding-left:30px;">Alamat</td>
 <td rowspan="2" style="padding:10px 20px 10px 20px;">:</td>
 <td rowspan="2"><textarea class="form-control" rows="3" tabindex="1" required="required" style="width:230px;" id="alamat" name="alamat"></textarea></td>
 <td>Logo</td>
@@ -532,7 +532,7 @@ value="0">Pilih Propinsi</option>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required"  type="text" style="width:230px; height:34px;" name="lat" id="lat" class="form-control"></td>
 </tr>
-<td>Nomor Telepon</td>
+<td style="padding-left:30px;">Nomor Telepon</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="telp" id="telp" class="form-control"></td>
 <td>Longitude</td>

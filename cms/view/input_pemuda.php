@@ -2,11 +2,8 @@
 <html>
 <head>
 <meta name="generator" content="Bluefish 2.2.5" >
-<meta name="generator" content="Bluefish 2.2.5" >
 <?php include "view/head.php";?>
-<script type="text/javascript" src=
-"http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
-</script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 <script type="text/javascript">
     var map;
     //var caborOutput;
@@ -68,13 +65,13 @@
                         $('#lat').val(event.latLng.lat());
                         $('#lng').val(event.latLng.lng());
                 });
-                map.data.loadGeoJson('../../json/indonesia.json');
-                        map.data.setStyle(function(feature) {
-                        return({
-                        fillColor: feature.getProperty('color'),
-                        strokeWeight: 1
-                        });
-                        });
+                // map.data.loadGeoJson('../../json/indonesia_kab.json');
+                //         map.data.setStyle(function(feature) {
+                //         return({
+                //         fillColor: feature.getProperty('color'),
+                //         strokeWeight: 1
+                //         });
+                //         });
                         map.data.addListener('mouseover', function(event) {
                 map.data.revertStyle();
                 map.data.overrideStyle(event.feature, {strokeWeight: 2});
@@ -90,7 +87,7 @@
                         $('#lat').val(event.latLng.lat());
                         $('#lng').val(event.latLng.lng());
                 });
-                map.data.loadGeoJson('../../json/indonesia.json');
+                map.data.loadGeoJson('../../json/indonesia_kab.json');
                         map.data.setStyle(function(feature) {
                         return({
                         fillColor: feature.getProperty('color'),
@@ -415,19 +412,21 @@ value="0">Pilih Propinsi</option>
 <hr>
 <table width="100%">
 <tr>
-<td>Nama Pemuda</td>
+<td style="padding-left:20px">Nama Pemuda</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input tabindex="1" required="required" style="width:230px; height:34px;" type="text" name="nama-pemuda" id="nama-pemuda" class="form-control"></td>
 <td >Keterangan</td>
 <td  style="padding:10px 20px 10px 20px;">:</td>
-<td rowspan="2"><textarea tabindex="1" required="required" style="width:230px;" rows="4" name="keterangan" id="keterangan" class="form-control"></textarea></td>
-
+<td><textarea tabindex="1" required="required" style="width:230px;" rows="2" name="keterangan" id="keterangan" class="form-control"></textarea></td>
 </tr>
 <tr>
-<td>Jenis Kelamin</td>
+<td style="padding-left:20px">Jenis Kelamin</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><label class="radio-inline"><input tabindex="2" type="radio" name="jenkel" id="jenkel" value="1"> Laki-laki</label>
 <label class="radio-inline"><input tabindex="3" type="radio" name="jenkel" id="jenkel" value="2"> Perempuan</label></td>
+<td >Alamat</td>
+<td style="padding:10px 20px 10px 20px;">:</td>
+<td><textarea class="form-control" rows="2" tabindex="1" required="required" style="width:230px;" id="autocomplete" name="alamat" onFocus="geolocate()" style="resize: none;"></textarea></td>
 </tr>
 <tr>
 <td style="padding-top:20px;" colspan="6" class="text-center">

@@ -18,7 +18,7 @@ if(isset($_POST['id_propinsi'])) {
 
 while($array = $result->fetch_assoc())
   {
-		$rows[] = [$array['id_atlet'],$array["atlet"],$array["cabor"],$array["pelatih"],$array["propinsi"],$array["jk"],$array["lat"],$array["lng"]];
+		$rows[] = [$array['id_atlet'],$array["atlet"],$array["cabor"],$array["pelatih"],$array["propinsi"],$array["jk"],$array["lat"],$array["lng"],$array["alamat"]];
   }
   echo json_encode($rows);
   }

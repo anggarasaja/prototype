@@ -5,10 +5,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title>GIS Kemenpora V2</title>
-		<meta name="description" content="A sidebar menu as seen on the Google Nexus 7 website" />
-		<meta name="keywords" content="google nexus 7 menu, css transitions, sidebar, side menu, slide out menu" />
-		<meta name="author" content="root" />
-		<link rel="shortcut icon" href="../favicon.ico">
+		<meta name="description" content="Geographic Information System Kemenpora V2" />
+		<meta name="keywords" content="Sistem Informasi Geografi, SIG, Geographic Information System, GIS, Kemenpora" />
+		<meta name="author" content="root-x" />
+		<link rel="shortcut icon" href="icon/icon.png">
 		<link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
@@ -16,12 +16,12 @@
 		
 		<script src="js/modernizr.custom.js"></script>
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 		<script type="text/javascript" src="js/markerclusterer.js"></script>
 		
 		<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-   <link href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
-    <script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+   		<link href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    	<script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 				<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		
@@ -55,6 +55,7 @@
 		var decodedDataChart;
 		var decodedDataTable;
 		var table;
+		var autocomplete;
 
 		function HybridControl(controlDiv, map) {
 	  		controlDiv.style.paddingTop = '5px';
@@ -110,12 +111,32 @@
 		}
 		
 		function pageLoad(){
+			autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+      		{ 
+      			types: ['geocode'],
+      			componentRestrictions: {country: "ID"} 
+      		});
   			map = new google.maps.Map(document.getElementById('gmap_city'),
   		   {
       		zoom: 5,
       	 	mapTypeId: google.maps.MapTypeId.HYBRID
  		   });
- 		   		   
+ 		   	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+				var place = autocomplete.getPlace();
+			    if (!place.geometry) {
+			      return;
+			    }
+
+			    if (place.geometry.viewport) {
+			      map.fitBounds(place.geometry.viewport);
+          		  map.setCenter(place.geometry.location);
+          		  map.setZoom(10);
+			    } else {
+			      map.setCenter(place.geometry.location);
+			      map.setZoom(15);  // Why 17? Because it looks good.
+			    }
+			    map.setPosition(place.geometry.location);
+		  	});   
  		   var hybridControlDiv = document.createElement('div');
   			var hybridControl = new HybridControl(hybridControlDiv, map);
   			hybridControlDiv.index = 1;
@@ -323,6 +344,14 @@
 					setMarkersknpi(knpi);	
 				}
 			});
+			$.ajax({
+				type:"POST",
+				url : "ajax/load_sarpras.php",
+				dataType: 'json',
+				success: function (sarpras) {			
+					setMarkerssarpras(sarpras);	
+				}
+			});
 			
 			$.ajax({url: "ajax/load_cabor.php",
 	   	success: function(output) {
@@ -334,7 +363,7 @@
          }
      		});
 			
-			map.data.loadGeoJson('json/indonesia.json');
+			map.data.loadGeoJson('json/indonesia_kab.json');
 			map.data.setStyle(function(feature) {
     			return({
       			fillColor: feature.getProperty('color'),
@@ -347,10 +376,11 @@
   			});
   			map.data.addListener('click', function(event) {
     			lettermap =	event.feature.getProperty('letter');
-    			id_prop =	event.feature.getProperty('prop');
+    			wilayah =	event.feature.getProperty('wilayah');
+    			status =	event.feature.getProperty('status');
 				details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Propinsi</h2><table>'+
 				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lettermap+'</td></tr>'+
-				'<tr><td>Nama propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+id_prop+'</td></tr></table>'
+				'<tr><td>Nama wilayah</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+status+' '+wilayah+'</td></tr></table>'
         	});
 	    	$('#city_list').change(function(){
       		var coordinate = $('option:selected',this).data('latlng')
@@ -526,6 +556,49 @@
     			createMarkersknpi(beach[0], beach[1], beach[2]);
     		}
 		}
+
+		function createMarkerssarpras(nam, lat, lon, prp, alm) {
+			var image = {
+    			url: 'icon/sarpras.png',
+  			};
+			var newmarker = new google.maps.Marker({
+      		position: new google.maps.LatLng(lat, lon),
+        		map: map,
+        		icon: image,
+        		zIndex: 10
+    		});
+    		google.maps.event.addListener(newmarker, 'click', function() {
+					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Sarana Prasarana</h2><table>'+
+					'<tr><td>Nama Sarpras</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+nam+'</td></tr>'+
+					'<tr><td>Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lat+'</td></tr>'+
+					'<tr><td>Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lon+'</td></tr>'+
+					'<tr><td>Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+prp+'</td></tr>'+
+ 					'<tr><td>Alamat</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+alm+'</td></tr></table>';
+				});
+    		$('#sarpras').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+			$('#toggleall').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+		}
+					
+		function setMarkerssarpras(locations) {
+			for (var i = 0; i < locations.length; i++) {
+    			var beach = locations[i];
+    			createMarkerssarpras(beach[0], beach[1], beach[2], beach[3], beach[4]);
+    		}
+		}
 		
 		function setHeatmaps(locations) {
 			heatmaps = [];
@@ -548,7 +621,19 @@
   			for(var i=0, n=checkboxes.length;i<n;i++) {
     			checkboxes[i].checked = source.checked;
   			}
-		}  
+		}
+		function geolocate() {
+  			if (navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(function(position) {
+      				var geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      				var circle = new google.maps.Circle({
+        				center: geolocation,
+        				radius: position.coords.accuracy
+      				});
+      			autocomplete.setBounds(circle.getBounds());
+    			});
+  			}
+		}	
 	</script>
 	<script type="text/javascript" src="js/searchatlet.js"></script>
 	</head>
@@ -560,21 +645,24 @@
 					<nav class="gn-menu-wrapper">
 						<div class="gn-scroller">
 							<ul class="gn-menu">
-								<li class="gn-search-item">
-									<input placeholder="Search Atlet" type="text" class="gn-search" id="search_atlet" onkeyup="searchtext()"/>
-									<a class="gn-icon gn-icon-search"><span>Search</span></a>
+								<li class="gn-icon gn-icon-search">
+									<input placeholder="Search Atlet" type="text" class="gn-search" id="search_atlet" onkeyup="searchtext()" style="padding-left:0; margin-left:-4px; width:70%;"/>
 								</li>
 								<ul id="search_list_atlet"></ul>
-								<li><span class="gn-icon gn-icon-download"><input id="toggleall" name="Profil Prov" type="checkbox" value="Profil Prov" onclick="toggle(this)" checked="active"> Select All</span>
+								<li class="gn-icon gn-icon-download">
+									<input placeholder="Search Place" type="text" class="gn-search" id="autocomplete" onFocus="geolocate()" style="padding-left:0; margin-left:-4px; width:70%;" />
+								</li>
+								<li><span class="gn-icon gn-icon-cog"><input id="toggleall" name="Profil Prov" type="checkbox" value="Profil Prov" onclick="toggle(this)" checked="active"> Select All</span>
 									<ul class="gn-submenu">
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/diamond.png" style="margin-top:-5px;margin-left:4px;"> Atlet</span></li>
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png" style="margin-top:-5px;margin-left:4px;"> Knpi</span></li>
+										<li><span style="margin-left:60px; color:#5f6f81;"><input id="sarpras" class="togglebox" name="sarpras" type="checkbox" value="sarpras" checked="active"><img width="14" height="14" src="icon/sarpras.png" style="margin-top:-5px;margin-left:4px;"> Sarana Prasarana</span></li>
 									</ul>
 								</li>
-								<li><a class="gn-icon gn-icon-help" href="dokumentasi/" target="_blank">Documentation</a></li>								
-								<li><a id="aboutus" class="gn-icon gn-icon-article">About Us</a></li>
-								<li><a class="gn-icon gn-icon-archive">Archives</a></li>
-								<li><a class="gn-icon gn-icon-cog">Settings</a></li>									
+								<li><a class="gn-icon gn-icon-article" href="dokumentasi/" target="_blank">Documentation</a></li>								
+								<li><a id="aboutus" class="gn-icon gn-icon-help">About Us</a></li>
+								<!-- <li><a class="gn-icon gn-icon-archive">Archives</a></li>
+								<li><a class="gn-icon gn-icon-cog">Settings</a></li> -->
 							</ul>
 						</div>
 					</nav>
