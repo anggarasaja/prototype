@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="generator" content="Bluefish 2.2.5" >
+<meta name="generator" content="Bluefish 2.2.6" >
 <?php include "view/head.php";?>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 <script type="text/javascript">
@@ -48,7 +48,16 @@
         ],      
                         "data" : op,
                     });
-                    
+                    var tableTools = new $.fn.dataTable.TableTools( table, {
+        		"buttons": [
+            	"copy",
+            	"csv",
+            	"xls",
+            	"pdf",
+            	{ "type": "print", "buttonText": "Print me!" }
+        		]
+    		});
+		   $('div#button-table').append($( tableTools.fnContainer() ));
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
@@ -443,8 +452,11 @@ class="btn btn-warning"><input type="submit" value="Submit" style=
 "margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#D0FAD0; text-align:center;">
 <label>Daftar pemuda yang sudah ada</label></div>
 <div class="row" id="datatable" style=
-"margin:0;padding: 0 5px;background-color:#D0FAD0; border-radius: 0 0 10px 10px">
+"margin:0;padding: 0 5px;background-color:#D0FAD0;">
 </div>
+<div id="button-table" style="background-color:#D0FAD0">
+								Ekspor data ke : 
+							</div>
 </div>
 </div>
 </div>

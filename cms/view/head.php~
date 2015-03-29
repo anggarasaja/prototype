@@ -32,7 +32,6 @@ include "config/application.php";
      
       <script type="text/javascript" src="<?=$url_rewrite?>js/jquery-ui.js"></script> 
      <link href="<?=$url_rewrite?>css/jquery-ui.css" rel="stylesheet">
-     <link href="<?=$url_rewrite?>css/dataTables.tableTools.css" rel="stylesheet">
      <!-- SB Admin CSS - Include with every page -->
 <link href="<?=$url_rewrite?>css/sb-admin.css" rel="stylesheet">
      <link href="<?=$url_rewrite?>css/custom.css" rel="stylesheet">

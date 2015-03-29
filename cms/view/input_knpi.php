@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="generator" content="Bluefish 2.2.5" >
-<meta name="generator" content="Bluefish 2.2.5" >
+<meta name="generator" content="Bluefish 2.2.6" >
+<meta name="generator" content="Bluefish 2.2.6" >
 <?php include "view/head.php";?>
 <script type="text/javascript" src=
 "http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
@@ -60,6 +60,16 @@
         ],      
                         "data" : op,
                     });
+ 					var tableTools = new $.fn.dataTable.TableTools( table, {
+        		"buttons": [
+            	"copy",
+            	"csv",
+            	"xls",
+            	"pdf",
+            	{ "type": "print", "buttonText": "Print me!" }
+        		]
+    		});
+		   $('div#button-table').append($( tableTools.fnContainer() ));
                     
             },
           error: function (xhr, ajaxOptions, thrownError) {
@@ -554,9 +564,11 @@ class="btn btn-warning"><input type="submit" value="Submit" style=
 <div class="informasibox" style=
 "margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FDFDAA; text-align:center;">
 <label>Daftar KNPI yang sudah ada</label></div>
-<div class="row" id="datatable" style=
-"margin:0;padding: 0 5px;background-color:#FDFDAA; border-radius: 0 0 10px 10px">
+<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FDFDAA;">
 </div>
+<div id="button-table" style="background-color:#FDFDAA">
+								Ekspor data ke : 
+							</div>
 </div>
 </div>
 </div>

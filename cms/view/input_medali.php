@@ -59,7 +59,16 @@
 							],      
 							"data" : op,
 						});
-		                    
+		            var tableTools = new $.fn.dataTable.TableTools( table, {
+        		"buttons": [
+            	"copy",
+            	"csv",
+            	"xls",
+            	"pdf",
+            	{ "type": "print", "buttonText": "Print me!" }
+        		]
+    		});
+		   $('div#button-table').append($( tableTools.fnContainer() ));
 					},
 					error: function (xhr, ajaxOptions, thrownError) {
 						alert(xhr.status + " "+ thrownError);
@@ -534,8 +543,11 @@
 								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FFFF00; text-align:center;">
 									<label>Daftar Medali yang sudah ada</label>
 								</div>
-								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00; border-radius: 0 0 10px 10px">
+								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00;">
 								</div>
+								<div id="button-table" style="background-color:#FFFF00">
+								Ekspor data ke : 
+							</div>
 							</div>
 						</div>
 					</div>

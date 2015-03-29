@@ -512,7 +512,7 @@
 								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FFFF00; text-align:center;">
 									<label>Daftar Sarpras yang sudah ada</label>
 								</div>
-								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00;">
+								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00; border-radius: 0 0 10px 10px">
 								</div>
 								<div id="button-table" style="background-color:#FFFF00">
 								Ekspor data ke : 

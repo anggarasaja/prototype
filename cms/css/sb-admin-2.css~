@@ -149,13 +149,6 @@ div.DTTT_container {
   margin-top: 10px;
 }
 
-#button-table{
-  /* margin-bottom: 0; */
-  padding: 0 5px;
-  background-color: #FDDAAA;
-  border-radius: 0 0 10px 10px;
-  padding-bottom: 1px;
-}
 .btn-outline {
     color: inherit;
     background-color: transparent;
