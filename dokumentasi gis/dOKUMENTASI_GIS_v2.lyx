@@ -1,0 +1,2556 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\usepackage{picinpar}
+%\usepackage[nogrey,times]{bigchapter}
+%\usepackage[T1]{fontenc}
+\usepackage[scaled]{helvet}
+\renewcommand*{\familydefault}{\sfdefault}
+%\usepackage{sectsty}
+%\chapterfont{\centering}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{Laporan Akhir Penyempurnaan Sistem Aplikasi Pelaporan Berbasis Web}}
+\fancyhead[LO]{\textit{Laporan Akhir Penyempurnaan Sistem Aplikasi Pelaporan Berbasis Web}}
+\fancypagestyle{plain}{ %
+\fancyhf{} % remove everything
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % remove lines as well
+\renewcommand{\footrulewidth}{0pt}}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language bahasa
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman utopia
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 90
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Indeks
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 25mm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 1.9cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language swedish
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{made-hypen-2012.tex} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+sloppy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+DOKUMENTASI PENGGUNAAN
+\begin_inset Newline newline
+\end_inset
+
+ GEOGRAPHICAL INFORMATION SYSTEM(GIS)
+\begin_inset Newline newline
+\end_inset
+
+KEMENTERIAN PEMUDA DAN OLAHRAGA REPUBLIK INDONESIA
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Overview Sistem
+\end_layout
+
+\begin_layout Standard
+Keseluruhan tahapan yang telah dijabarkan pada Bab 1 akan menghasilkan sebuah
+ perbaikan sistem informasi terutama dalam membantu pengelolaan data spasial
+ di lingkungan Kemenpora.
+\end_layout
+
+\begin_layout Standard
+Sistem yang baru dikembangkan ini telah mengadopsi teknologi yang telah
+ berkembangan saat ini.
+ Hal ini sangat penting mengingat kegiatan pengelolaan data spasial memerlukan
+ dukungan teknologu yang baik.
+ Dengan terintegerasinya sistem serta teknologi , memudahkan pengguna akhir
+ untuk melakukan analisa data sehinga tujuan akhir pembuatan sistem yaitu
+ peningkatan efisiensi dan efektifitas pengelolaan data spasial menjadi
+ lebih myudah.
+\end_layout
+
+\begin_layout Section
+Arsitektur Website
+\end_layout
+
+\begin_layout Standard
+Arsitektur sistem yang dikembangkan ini menggunakan perangkat lunak open
+ source dengan menggunakan teknologi cloud computing serta menggunaka 
+\emph on
+Open Source Software (OSS
+\emph default
+) antara lain :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar/new-menpora-gis.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Arsitektur Sistem
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Arsitektur-Sistem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Berdasarkan gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Arsitektur-Sistem"
+
+\end_inset
+
+ terlihat bahwa sistem dikembangkan telah diterapkan dalam sistem cloud
+ computing Kemenpora sehingga proses untuk backup data menjadi lebih mudah
+ sehingga dapat menjamin integritas data.
+ Adapun arsitektur website untuk aplikasi ini adalah sebagai berikut:
+\end_layout
+
+\begin_layout Itemize
+Penggunaan Apache Web Server sebagai backend dari aplikasi ini 
+\end_layout
+
+\begin_layout Itemize
+Penggunaan Maria DB sebagai backend database server
+\end_layout
+
+\begin_layout Itemize
+Penggunaan PHP programming language sebagai bahasa pemograman utama.
+ 
+\end_layout
+
+\begin_layout Itemize
+Penggunaan HTML Purifier sebagai salah satu library keamanan untuk website
+ ini.
+ 
+\end_layout
+
+\begin_layout Standard
+Pengembangan revitalisasi sistem pelaporan ini dibuat secara detail berdasarkan
+ definisi kebutuhan yang berkembang serta aturan-aturan yang berlaku di
+ lingkungan Kemenpora.
+ Sistem pelaporan ini pun tidak hanya fokus terhadap workflow aplikasi namun
+ juga memperhatikan segi keamanan serta portabilitas bagi setiap pengguna
+ yang ada..
+\end_layout
+
+\begin_layout Section
+Sistem GIS
+\end_layout
+
+\begin_layout Standard
+Pada tampilan utama akan tersedia sebuah tampilan peta indonesia beserta
+ dengan jumlah data yang dimiliki dalam sistem.
+ Seperti yang terlihat dalam gambar
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Peta-Spasial-Indonesia"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/overview.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Peta Spasial Indonesia 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Peta-Spasial-Indonesia"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Berdasarkan gambar tersebut terdapat beberapa fitur yang tersedia dalam
+ aplikasi ini (ditandai dengan nomor pada setiap gambar).
+ Fasilitas tersebut adalah:
+\end_layout
+
+\begin_layout Enumerate
+Side Bar
+\end_layout
+
+\begin_layout Enumerate
+Main menu
+\end_layout
+
+\begin_layout Enumerate
+Quickview untuk memusatkan pencarian informasi dalam suatau daerah
+\end_layout
+
+\begin_layout Enumerate
+Enable layer untuk mengaktifkan serta men-nonaktifkan marker pada setiap
+ peta yang ada
+\end_layout
+
+\begin_layout Enumerate
+Informasi peta (menampilkan informasi setiap marker yang ada)
+\end_layout
+
+\begin_layout Subsection
+Side Bar
+\end_layout
+
+\begin_layout Standard
+Dalam menu detail berisi informasi mengenai setiap konfigurasi yang ada
+ pada sistem gis ini.
+ Seperti yang ditunjukkan pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Menu-Detail"
+
+\end_inset
+
+ seperti mengaktifkan marker untuk data atlet dan knpi atau kepemudaan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/menu.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Menu Detail 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Menu-Detail"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Quickview 
+\end_layout
+
+\begin_layout Standard
+Pada fasilitas ini setiap pengguna dapat melihat detail per daerah dengan
+ memilih provinsi yang diinginkan seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Contoh-hasil-tampilan"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/show-spesific-kalbar.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Contoh hasil tampilan quickview
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Contoh-hasil-tampilan"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Enable Layer
+\end_layout
+
+\begin_layout Standard
+Fasilitas ini berfungsi untuk menghilangkan layer bewarna yang berguna sebagai
+ pembagian batas wilayah untuk indonesia pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Enable-Layer-Diaktifkan"
+
+\end_inset
+
+ dang gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Enable-Layer-Dinonaktifkan"
+
+\end_inset
+
+ menunjukkan hasil pada peta jika layer dinonaktifkan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/show-marker.png
+	width 55page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Enable Layer Diaktifkan
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Enable-Layer-Diaktifkan"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/show-marker-disabled.png
+	width 55page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Enable Layer Dinonaktifkan
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Enable-Layer-Dinonaktifkan"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Informasi Potensi Atlet
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/Documentasi-Heatmaps.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Wilayah dan Informasi Potensi Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Wilayah-dan-Informasi-Potensi-Atlet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fasilitas ini untuk melihat informasi suatu wilayah yang memiliki potensi
+ atlet dari masing-masing cabang olahraga berdasarkan tahun dan juga jenis
+ kejuaraan, untuk menampilkan fitur potensi atlet ini dapat mengikuti urutan
+ pada gambar dengan penjelasan yang terdapat pada langkah - langkah berikut
+ :
+\end_layout
+
+\begin_layout Enumerate
+Pilih potensi Cabang Olahraga
+\end_layout
+
+\begin_layout Enumerate
+Pilih tahun
+\end_layout
+
+\begin_layout Enumerate
+Pilih jenis kejuaraan
+\end_layout
+
+\begin_layout Enumerate
+Apabila terdapat potensi pada Cabang Olahraga serta tahun dan jenis kejuaraan
+ maka wilayah potensi akan ditampilkan pada Peta
+\end_layout
+
+\begin_layout Enumerate
+Informasi lengkap mengenai wilayah potensi atlet
+\end_layout
+
+\begin_layout Subsection
+Informasi Marker
+\end_layout
+
+\begin_layout Subsubsection
+Marker
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/example-marker.png
+	width 60page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Marker
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Marker"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Marker berbentuk lingkaran dengan angka di dalamnya menunjuk bahwa ada atlet
+ pada daerah tersebut sejumlah angka yang tertera (seperti no 1 pada gambar
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Marker"
+
+\end_inset
+
+).
+ Pada menu sidebar terdapat fitur untuk menghilangkan marker pada peta seperti:
+\end_layout
+
+\begin_layout Itemize
+Marker dengan logo KNPI akan menunjukan informasi knpi pada daerah tersebut
+ jika di-klik (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Men-nonaktifkan marker KNPI"
+
+\end_inset
+
+) maka akan menghilangkan marker knpi pada peta(gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mengaktifkan-Marker-Atlet"
+
+\end_inset
+
+ )
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/choice-knpi-disabled.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Men-nonaktifkan marker KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Men-nonaktifkan marker KNPI"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/enable-atlet-disabled-knpi.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mengaktifkan Marker Atlet dan Menonaktfikan Marker KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mengaktifkan-Marker-Atlet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Untuk menonaktifkan data (marker) atlet dapat dilakukan dengan menglik logo
+ atlet (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mengaktifkan-Marker-Atlet"
+
+\end_inset
+
+ )maka akan menghilangkan data atlet yang ada pada peta (seperti pada gambar
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/choice-atlet-disabled.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Men-nonaktifkan marker atlet 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Men-nonaktifkan-marker-atlet"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/knpi-enabled-disabled-atlet.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mengaktifkan Marker KNPI dan Menonaktfikan Marker Atlet"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Informasi Marker
+\end_layout
+
+\begin_layout Standard
+Untuk melihat informasi marker dari setiap daerah, bisa dilihat dengan cara
+ meng-klik marker.
+ Klik marker yang berbentuk lingkaran untuk memperbesar peta ke propinsi
+ yang dituju atau bisa dengan memilih propinsi dengan menggunakan quikview
+ pada pada menu bar.
+ Contoh hasil informasi marker adalah seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Informasi-Marker"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/detail-provinis-spesifik.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Informasi Marker
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Informasi-Marker"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+CMS
+\end_layout
+
+\begin_layout Standard
+Untuk melalukan pengelolaan data maka dalam sistem ini telah mendukung penambaha
+n data spasial dengan memanfaatkan teknologi Content Management Sistem sehingga
+ data-data spasial dapat ditambah serta diperbaiki sesuai dengan perkembangan
+ data dan informasi yang ada(seperti pada gambar ).
+ Adapun fitur CMS tersebut adalah sebagai berikut:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar2/table-cms.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CMS GIS 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CMS-Gis"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penambahan Data Atlet
+\end_layout
+
+\begin_layout Standard
+Untuk mengaktifkan penambahan data dapat dilakukan dengan beberapa tahapan.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/cms-view.png
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Penambahan Data pada CMS 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Penambahan-Data-pada"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Penambahan-Data-pada"
+
+\end_inset
+
+), tahapan ditunjukkan dengan nomor:
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan provinsi
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan Cabang Olahraga
+\end_layout
+
+\begin_layout Enumerate
+Penentuan peta dengan mengklik dua kali pada peta yang tampil
+\end_layout
+
+\begin_layout Enumerate
+Data akan tampil pada kolom longitude dan latitude
+\end_layout
+
+\begin_layout Enumerate
+Mengisi form pada peta yang adaa.
+\end_layout
+
+\begin_layout Enumerate
+Validasi data dengan menekan tombol submit.
+\end_layout
+
+\begin_layout Subsection
+Pengaturan Data Atlet
+\end_layout
+
+\begin_layout Standard
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan
+ cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling
+ kanan.
+ Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan
+ seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Pengaturan-data"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/before-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengaturan Data Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pengaturan-data"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jika data sudah selesai diubah, klik update untuk merubah data secara permanen.
+ Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data
+ dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/after-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Perubahan Data Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-Perubaha"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penghapusan Data Atlet
+\end_layout
+
+\begin_layout Standard
+Untuk penghapusan data atlet dapat dilakukan dengan cara menekan tombol
+ bergambar pensil pada kolom paling kanan.
+ Kemudian tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/before-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Penghapusan Data Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Penghapusan-data-atlet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Akan Muncul 
+\shape italic
+Pop Up Dialog
+\shape default
+ yang memastikan untuk menghapus data atlet yang sudah ada.
+ Jika sudah yakin untuk menghapus, maka tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/dialog-delete.png
+	width 30page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pop Up Penghapusan Data Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "pop-up-penghapusan-data-atlet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notifikasi keberhasilan penghapusan data akan muncul.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/after-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Penghapusan Data Atlet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-penghpusan-atlet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penambahan Data Pelatih
+\end_layout
+
+\begin_layout Standard
+Untuk menambah data pelatih, klik menu 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data
+\begin_inset Quotes srd
+\end_inset
+
+ pada menu di sebelah kiri dan pilih 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data Pelatih
+\begin_inset Quotes srd
+\end_inset
+
+ kemudian akan tampil form seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pelatih-input.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Form Data Pelatih
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:form-data-pelatih"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih"
+
+\end_inset
+
+), tahapan ditunjukkan dengan nomor:
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan provinsi
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan Cabang Olahraga
+\end_layout
+
+\begin_layout Enumerate
+Memasukkan nama pelatih dan jenis kelamin pelatih
+\end_layout
+
+\begin_layout Enumerate
+Tekan 
+\begin_inset Quotes sld
+\end_inset
+
+submit
+\begin_inset Quotes srd
+\end_inset
+
+ untuk menambahkan data.
+\end_layout
+
+\begin_layout Enumerate
+Data akan tampil pada tabel yang berada dibawah form.
+\end_layout
+
+\begin_layout Subsection
+Pengaturan Data Pelatih
+\end_layout
+
+\begin_layout Standard
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan
+ cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling
+ kanan.
+ Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan
+ seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Pengaturan-data-pelatih"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pelatih-before-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengaturan Data Pelatih
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pengaturan-data-pelatih"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jika data sudah selesai diubah, klik 
+\begin_inset Quotes sld
+\end_inset
+
+update
+\begin_inset Quotes srd
+\end_inset
+
+ untuk merubah data secara permanen.
+ Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data
+ dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/after-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Perubahan Data
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-Perubaha-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penghapusan Data Pelatih
+\end_layout
+
+\begin_layout Standard
+Untuk penghapusan data pelatih dapat dilakukan dengan cara menekan tombol
+ bergambar pensil pada kolom paling kanan.
+ Kemudian tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pelatih-before-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Penghapusan Data Pelatih
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Penghapusan-data-pelatih"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Akan Muncul 
+\shape italic
+Pop Up Dialog
+\shape default
+ yang memastikan untuk menghapus data pelatih yang sudah ada.
+ Jika sudah yakin untuk menghapus, maka tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pelatih-delete-dialog.png
+	width 30page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pop Up Penghapusan Data Pelatih
+\begin_inset CommandInset label
+LatexCommand label
+name "pop-up-penghapusan-data-atlet-pelatih"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notifikasi keberhasilan penghapusan data akan muncul.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pelatih-after-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Penghapusan Data Pelatih
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-penghpusan-pelatih"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penambahan Data Pemuda
+\end_layout
+
+\begin_layout Standard
+Untuk menambah data pemuda, klik menu 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data
+\begin_inset Quotes srd
+\end_inset
+
+ pada menu di sebelah kiri dan pilih 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data Pemuda
+\begin_inset Quotes srd
+\end_inset
+
+ kemudian akan tampil form seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-input.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Form Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:form-data-pelatih-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih-1"
+
+\end_inset
+
+), tahapan ditunjukkan dengan nomor:
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan provinsi dan pengisian data pemuda
+\end_layout
+
+\begin_layout Enumerate
+Tekan 
+\begin_inset Quotes sld
+\end_inset
+
+submit
+\begin_inset Quotes srd
+\end_inset
+
+ untuk menambahkan data ke dalam tabel secara permanen
+\end_layout
+
+\begin_layout Subsection
+Pengaturan Data Pemuda
+\end_layout
+
+\begin_layout Standard
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan
+ cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling
+ kanan.
+ Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan
+ seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Pengaturan-data-pelatih-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-before-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengaturan Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pengaturan-data-pelatih-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jika data sudah selesai diubah, klik 
+\begin_inset Quotes sld
+\end_inset
+
+update
+\begin_inset Quotes srd
+\end_inset
+
+ untuk merubah data secara permanen.
+ Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data
+ dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-after-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Perubahan Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-Perubaha-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penghapusan Data Pemuda
+\end_layout
+
+\begin_layout Standard
+Untuk penghapusan data pemuda dapat dilakukan dengan cara menekan tombol
+ bergambar pensil pada kolom paling kanan.
+ Kemudian tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-before-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Penghapusan Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Penghapusan-data-pelatih-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Akan Muncul 
+\shape italic
+Pop Up Dialog
+\shape default
+ yang memastikan untuk menghapus data pemuda yang sudah ada.
+ Jika sudah yakin untuk menghapus, maka tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-dialog-delete.png
+	width 30page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pop Up Penghapusan Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "pop-up-penghapusan-data-atlet-pelatih-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notifikasi keberhasilan penghapusan data akan muncul.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/pemuda-after-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Penghapusan Data Pemuda
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-penghpusan-pelatih-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penambahan Data KNPI
+\end_layout
+
+\begin_layout Standard
+Untuk menambah data pelatih, klik menu 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data
+\begin_inset Quotes srd
+\end_inset
+
+ pada menu di sebelah kiri dan pilih 
+\begin_inset Quotes sld
+\end_inset
+
+Input Data KNPI
+\begin_inset Quotes srd
+\end_inset
+
+ kemudian akan tampil form seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih-2"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi-input.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Form Data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:form-data-pelatih-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tahapan tersebut adalah sebagai berikut (seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:form-data-pelatih-2"
+
+\end_inset
+
+), tahapan ditunjukkan dengan nomor:
+\end_layout
+
+\begin_layout Enumerate
+Pemilihan provinsi dan pengisian data KNPI
+\end_layout
+
+\begin_layout Enumerate
+Klik 2 kali pada peta untuk menambahkan lokasi latitude dan longitude KNPI
+\end_layout
+
+\begin_layout Enumerate
+Tekan 
+\begin_inset Quotes sld
+\end_inset
+
+submit
+\begin_inset Quotes srd
+\end_inset
+
+ untuk menambahkan data ke dalam tabel secara permanen.
+\end_layout
+
+\begin_layout Subsection
+Pengaturan Data KNPI
+\end_layout
+
+\begin_layout Standard
+Untuk melakukan pengaturan data maupun perubahan data dapat di lakukan dengan
+ cukup menggunakan daftar dan menekan tombol bergambar pensil di kolom paling
+ kanan.
+ Kemudian akan muncul form yang dapat diatur sesuai dengan yang diinginkan
+ seperti pada gambar 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Pengaturan-data-pelatih-2"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi_before-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pengaturan Data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pengaturan-data-pelatih-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jika data sudah selesai diubah, klik 
+\begin_inset Quotes sld
+\end_inset
+
+update
+\begin_inset Quotes srd
+\end_inset
+
+ untuk merubah data secara permanen.
+ Akan muncul notifikasi berwarna hijau jika data berhasil diubah dan data
+ dalam tabel akan dirubah menjadi data yang baru seperti pada gambar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi-after-update.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Perubahan Data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-Perubaha-1-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Penghapusan Data KNPI
+\end_layout
+
+\begin_layout Standard
+Untuk penghapusan data KNPI dapat dilakukan dengan cara menekan tombol bergambar
+ pensil pada kolom paling kiri.
+ Kemudian tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi-before-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Penghapusan Data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Penghapusan-data-pelatih-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Akan Muncul 
+\shape italic
+Pop Up Dialog
+\shape default
+ yang memastikan untuk menghapus data KNPI yang sudah ada.
+ Jika sudah yakin untuk menghapus, maka tekan 
+\begin_inset Quotes sld
+\end_inset
+
+Hapus
+\begin_inset Quotes srd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi-dialog-delete.png
+	width 30page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pop up penghapusan data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "pop-up-penghapusan-data-atlet-pelatih-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notifikasi keberhasilan penghapusan data akan muncul.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename gambar3/knpi-after-delete.png
+	width 75page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Notifikasi Keberhasilan Penghapusan Data KNPI
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Notifikasi-Keberhasilan-penghpusan-pelatih-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -38,7 +38,8 @@
             { "title": "Nama Pelatih" },
             { "title": "Cabang Olahraga" },
             { "title": "Jenis Kelamin" },
-            { "title": "Propinsi", },
+            { "title": "Propinsi" },
+            { "title": "Alamat", },
                                 {
                 
                 "orderable":      false,
@@ -228,6 +229,7 @@
         var cabor_row;
         var jenkel_row;
         var propinsi_row;
+        var alamat_row;
         
         var tr = $(this).closest('tr');
         //alert(tr);
@@ -237,6 +239,7 @@
         cabor_row = row.data()[2];
         jenkel_row = row.data()[3];
         propinsi_row = row.data()[4];
+        alamat_row = row.data()[5];
                         
         if ( row.child.isShown() ) {
             // This row is already open - close it
@@ -262,6 +265,7 @@
                                                                         return $(this).text() == row.data()[4];
                                                                 }).first().attr("value");
                                 $("#city_list-update-"+id_row +"").val(value2);
+                                $("#alamat-update-"+id_row +"").val(alamat_row);
 
                                 if(row.data()[3] == "Perempuan"){
                                         $('#jenkel-update-'+id_row +'-perempuan').prop("checked", true);
@@ -562,7 +566,8 @@ $('#lat').keyup(function () {
                         		namapelatih: $('#nama-pelatih').val(), 
                         		jenkel: $('#jenkel:checked').val(), 
                         		cabor: $('#cabor').val(), 
-                        		propinsi: $('#city_list').val() 
+                                propinsi: $('#city_list').val(), 
+                        		alamat: $('#autocomplete').val() 
                         	},
                         	function () {
                         		 $('#alert-input-success').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;<\/a>Data berhasil ditambah.<\/div>');
@@ -602,6 +607,7 @@ $('#lat').keyup(function () {
                 $('#pelatih').val('');
                 $('#lat').val('');
                 $('#lng').val('');
+                $('#autocomplete').val('');
                         });
                 }
     });
@@ -672,6 +678,10 @@ $('#lat').keyup(function () {
                                                                         '<label class="radio-inline">'+
                                                                                 '<input tabindex="2" type="radio" name="jenkel-update-'+d[0] +'" class="jenkel-update-'+d[0] +'" id="jenkel-update-'+d[0] +'-perempuan" value="2"><label class="input-radio" for="jenkel-update-'+d[0] +'-perempuan">Perempuan<\/label><\/input>'+
                                                                         '<\/label><\/td>'+
+
+            '<td  style="padding : 10px">alamat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td colspan="4"><textarea style="width:100%" class="form-control" id="alamat-update-'+d[0] +'" name="alamat-update-'+d[0] +'"></textarea></td>'+
+        
   
         '<\/tr>'+      
         '<tr>'+

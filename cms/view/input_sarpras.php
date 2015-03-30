@@ -4,9 +4,7 @@
 		<meta name="generator" content="Bluefish 2.2.6" >
 		<meta name="generator" content="Bluefish 2.2.6" >
 		<?php include "view/head.php";?>
-		<script type="text/javascript" src=
-		"http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
-		</script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 		<script type="text/javascript">
 			var map;
 			var propinsiValue;
@@ -71,13 +69,36 @@
 					error: function (xhr, ajaxOptions, thrownError) {
 						alert(xhr.status + " "+ thrownError);
 					}
-				});  
+				});
+				autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+        { 
+          types: ['geocode'],
+          componentRestrictions: {country: "ID"} 
+        });  
 				map = new google.maps.Map(document.getElementById('gmap_city'),
 				{
 					zoom: 5,
 		  			mapTypeId: google.maps.MapTypeId.ROADMAP,
 		 			center: new google.maps.LatLng(-1.5,117)
 		   	});
+				google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+          map.setCenter(place.geometry.location);
+          map.setZoom(13);
+        }
+        else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(15);  // Why 17? Because it looks good.
+        }
+        placeMarker(place.geometry.location);
+        $('#lat').val(place.geometry.location.lat());
+        $('#lng').val(place.geometry.location.lng());
+      });
 		   	map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
 		    	google.maps.event.addListener(map, 'dblclick', function(event) {
 		      	placeMarker(event.latLng);	function placeMarker(location) {
@@ -133,7 +154,14 @@
 		      	map.data.revertStyle();
 		    		map.data.overrideStyle(event.feature, {strokeWeight: 2});
 		    	});     
-				
+				$.ajax({
+			type:"POST",
+			url : "../../ajax/load_sarpras.php",
+			dataType: 'json',
+			success: function (atlet) {			
+				setMarkers(atlet);	
+			}
+		});
 				$('.cabor').html('<option value="">--Loading--<\/option>');
 				$.ajax({url: "<?php echo $url_rewrite.'core/input_sarpras/read_cabor.php'; ?>",
         			success: function(output) {
@@ -396,7 +424,36 @@
 		    		});
 		  		}
 			}
-		        
+		     
+	function createMarkers(namatlet, lat, lon) {
+		var image = {
+   		url: '../../icon/sarpras.png',
+  		};
+		var newmarker = new google.maps.Marker({
+     		position: new google.maps.LatLng(lat, lon),
+     		map: map,
+     		icon: image
+   	});
+   	markers.push(newmarker); 
+   	newmarker['infowindow'] = new google.maps.InfoWindow({
+    		content: namatlet
+    	});
+    	google.maps.event.addListener(newmarker, 'mouseover', function() {
+      	this['infowindow'].open(map, this);
+    	});
+    	google.maps.event.addListener(newmarker, 'mouseout', function() {
+      	this['infowindow'].close();
+    	});
+	}
+
+	function setMarkers(locations) {
+		for (var i = 0; i < locations.length; i++) {
+   		var beach = locations[i];
+   		createMarkers(beach[0], beach[1], beach[2]);
+   	}
+		var mcOptions = {gridSize: 50, maxZoom: 7};
+   	var mc = new MarkerClusterer(map, markers, mcOptions);
+	}   
 		</script>
 		<title>Input Sarpras</title>
 	</head>
@@ -405,7 +462,7 @@
 			<?php include "view/default/right_menu.php";?>
 			<div id="page-wrapper" style="min-height:850px;">
 				<div class="row">
-					<div class="col-lg-12" style="margin-bottom:-20px;"><label class="page-header title-page" style="background-color:#FFD700;">Input Data Sarpras</label></div>
+					<div class="col-lg-12" style="margin-bottom:-20px;"><label class="page-header title-page" style="background-color:whitesmoke;">Input Data Sarpras</label></div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -460,16 +517,16 @@
 										<div class="row" style="margin-top:25px">
 											<div class="col-md-6">
 												<div class="form-group">
-											      <label for="nama" class="col-md-2">Nama :</label>
-											      <div class="col-md-10">
+											      <label for="nama" class="col-md-3">Nama :</label>
+											      <div class="col-md-9">
 											      	<input type="text" class="form-control" id="nama" name="nama">
 											      </div>
 											    </div>
 											    
 											    <div class="form-group">
-											      <label for="email" class="col-md-2">Alamat :</label>
-											      <div class="col-md-10">
-											      	<textarea name="alamat" id="alamat" class="form-control"></textarea>
+											      <label for="email" class="col-md-3">Alamat :</label>
+											      <div class="col-md-9">
+											      	<textarea class="form-control" rows="2" tabindex="1" required="required" id="autocomplete" name="alamat" onFocus="geolocate()" style="resize: none;"></textarea>
 											      </div>
 											    </div>
 											</div>
@@ -509,12 +566,12 @@
 								</div>
 								<div id="alert-hapus" style="margin-top:10px"></div>
 								<div id="alert-update" style="margin-top:10px"></div>
-								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FFFF00; text-align:center;">
+								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:whitesmoke; text-align:center;">
 									<label>Daftar Sarpras yang sudah ada</label>
 								</div>
-								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00;">
+								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:whitesmoke;">
 								</div>
-								<div id="button-table" style="background-color:#FFFF00">
+								<div id="button-table" style="background-color:whitesmoke">
 								Ekspor data ke : 
 							</div>
 							</div>

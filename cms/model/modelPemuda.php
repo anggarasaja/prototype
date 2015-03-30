@@ -23,12 +23,14 @@ class modelPemuda extends mysql_db {
 			$id_cabor = $data['id_cabor'];
 			$pemuda = $data['pemuda'];
 			$id_jk = $data['id_jk']; 
-			$keterangan = $data["keterangan"];
+            $keterangan = $data["keterangan"];
+			$alamat = $data["alamat"];
 			
           $query = "Insert into tbl_pemuda
                          set id_propinsi='$id_propinsi',
                          pemuda='$pemuda',
                          id_jk='$id_jk',
+                         alamat='$alamat',
                          keterangan = '$keterangan'";
                     
          $result = $this->query($query);
@@ -38,7 +40,7 @@ class modelPemuda extends mysql_db {
      
      	
      	public function readAllPemuda(){
-     		$query = "select tbl_pemuda.id_pemuda, tbl_pemuda.pemuda, tbl_jk.jk, tbl_propinsi.propinsi, tbl_pemuda.keterangan from tbl_pemuda join tbl_jk on tbl_pemuda.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pemuda.id_propinsi = tbl_propinsi.id_propinsi";
+     		$query = "select tbl_pemuda.id_pemuda, tbl_pemuda.pemuda, tbl_pemuda.alamat, tbl_jk.jk, tbl_propinsi.propinsi, tbl_pemuda.keterangan from tbl_pemuda join tbl_jk on tbl_pemuda.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pemuda.id_propinsi = tbl_propinsi.id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -49,7 +51,7 @@ class modelPemuda extends mysql_db {
      	}
      	
      	public function readAllPemuda_prop($id_propinsi){
-     		$query = "select tbl_pemuda.id_pemuda, tbl_pemuda.pemuda, tbl_jk.jk, tbl_propinsi.propinsi, tbl_pemuda.keterangan from tbl_pemuda join tbl_jk on tbl_pemuda.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pemuda.id_propinsi = tbl_propinsi.id_propinsi where tbl_pemuda.id_propinsi = $id_propinsi";
+     		$query = "select tbl_pemuda.id_pemuda, tbl_pemuda.pemuda, tbl_pemuda.alamat, tbl_jk.jk, tbl_propinsi.propinsi, tbl_pemuda.keterangan from tbl_pemuda join tbl_jk on tbl_pemuda.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pemuda.id_propinsi = tbl_propinsi.id_propinsi where tbl_pemuda.id_propinsi = $id_propinsi";
      		$result = $this->query($query);
         //  echo $result;
           //Wrap Output Query

@@ -419,7 +419,7 @@
 			<?php include "view/default/right_menu.php";?>
 			<div id="page-wrapper" style="min-height:850px;">
 				<div class="row">
-					<div class="col-lg-12" style="margin-bottom:-20px;"><label class="page-header title-page" style="background-color:#FFD700;">Input Data Medali</label></div>
+					<div class="col-lg-12" style="margin-bottom:-20px;"><label class="page-header title-page" style="background-color:#DD8888;">Input Data Medali</label></div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -540,12 +540,12 @@
 								</div>
 								<div id="alert-hapus" style="margin-top:10px"></div>
 								<div id="alert-update" style="margin-top:10px"></div>
-								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#FFFF00; text-align:center;">
+								<div class="informasibox" style="margin-top:10px;height:24px;border-radius:10px 10px 0px 0px;width:100%; background-color:#DD8888; text-align:center;">
 									<label>Daftar Medali yang sudah ada</label>
 								</div>
-								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#FFFF00;">
+								<div class="row" id="datatable" style="margin:0;padding: 0 5px;background-color:#DD8888;">
 								</div>
-								<div id="button-table" style="background-color:#FFFF00">
+								<div id="button-table" style="background-color:#DD8888">
 								Ekspor data ke : 
 							</div>
 							</div>

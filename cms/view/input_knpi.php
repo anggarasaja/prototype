@@ -4,9 +4,7 @@
 <meta name="generator" content="Bluefish 2.2.6" >
 <meta name="generator" content="Bluefish 2.2.6" >
 <?php include "view/head.php";?>
-<script type="text/javascript" src=
-"http://maps.google.com/maps/api/js?sensor=true&amp;language=in">
-</script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=visualization,places&language=id"></script>
 <script type="text/javascript">
     var map;
     var propinsiValue;
@@ -74,13 +72,36 @@
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
-          }});  
+          }});
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+        { 
+          types: ['geocode'],
+          componentRestrictions: {country: "ID"} 
+        });
           map = new google.maps.Map(document.getElementById('gmap_city'),
                         {
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 center: new google.maps.LatLng(-1.5,117)
                         });
+          google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+          map.setCenter(place.geometry.location);
+          map.setZoom(13);
+        }
+        else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(15);  // Why 17? Because it looks good.
+        }
+        placeMarker(place.geometry.location);
+        $('#lat').val(place.geometry.location.lat());
+        $('#lng').val(place.geometry.location.lng());
+      });
                 map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
                 google.maps.event.addListener(map, 'dblclick', function(event) {
                         placeMarker(event.latLng);	function placeMarker(location) {
@@ -532,7 +553,7 @@ value="0">Pilih Propinsi</option>
 </tr>
 <td rowspan="2" style="padding-left:30px;">Alamat</td>
 <td rowspan="2" style="padding:10px 20px 10px 20px;">:</td>
-<td rowspan="2"><textarea class="form-control" rows="3" tabindex="1" required="required" style="width:230px;" id="alamat" name="alamat"></textarea></td>
+<td rowspan="2"><textarea class="form-control" rows="3" tabindex="1" required="required" style="width:230px;" id="autocomplete" name="alamat"></textarea></td>
 <td>Logo</td>
 <td style="padding:10px 20px 10px 20px;">:</td>
 <td><input type="file" id="logo" name="logo" style="width:230px; height:34px;"class="form-control"></td>

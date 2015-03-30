@@ -19,7 +19,7 @@
    var table;
    function pageLoad(){
 
-    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet" style="font-size:13px;"></table>' );
+    	$('#datatable').html( '<table cellpadding="10" cellspacing="5" border="0" class="table table-striped table-hover" width="100%" id="dataTablesAtlet"></table>' );
  		$.ajax({url: '<?php echo $url_rewrite.'core/input_atlet/read_all_atlet.php'; ?>',
       	type: 'POST',
       	data: {id_propinsi:0},
@@ -274,6 +274,7 @@
         var atlet_row;
         var lat_row;
         var lng_row;
+        var alamat_row;
 			
         var tr = $(this).closest('tr');
         //alert(tr);
@@ -286,7 +287,8 @@
         	jenkel_row = row.data()[5];
         	propinsi_row = row.data()[4];
         	lat_row = row.data()[6];
-        	lng_row = row.data()[7];
+          lng_row = row.data()[7];
+        	alamat_row = row.data()[8];
         	
         if ( row.child.isShown() ) {
             // This row is already open - close it
@@ -311,7 +313,8 @@
             var value2 = $("#city_list-update-"+id_row +" option").filter(function() {
   									return $(this).text() == propinsi_row;
 								}).first().attr("value");
-				$("#city_list-update-"+id_row +"").val(value2);
+        $("#city_list-update-"+id_row +"").val(value2);
+				$("#alamat-update-"+id_row +"").val(alamat_row);
 								
 				$('#pelatih-update-'+id_row +'').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');	
 				
@@ -395,7 +398,8 @@
 										propinsi: $('#city_list-update-'+id_row +'').val(), 
 										pelatih: $('#pelatih-update-'+id_row +'').val(), 
 										lat: $('#lat-update-'+id_row +'').val(), 
-										lng: $('#lng-update-'+id_row +'').val() 
+                    lng: $('#lng-update-'+id_row +'').val(), 
+										alamat: $('#alamat-update-'+id_row +'').val() 
 										} );
 
       /* Alerts the results */
@@ -418,7 +422,8 @@
 									$('#city_list-update-'+id_row+' option:selected').text(),
 									jk,
 									$('#lat-update-'+id_row +'').val(), 
-									$('#lng-update-'+id_row+'').val()
+                  $('#lng-update-'+id_row+'').val(),
+									$('#alamat-update-'+id_row+'').val()
 								], tr[0] );
         		//$('#dataTablesAtlet').dataTable().fnDraw();
         		 var propinsiValue = $('#city_list').val();
@@ -921,6 +926,11 @@ $('#lat').keyup(function () {
         '<tr>'+
             '<td  style="padding : 10px">keterangan</td><td style="padding:10px 20px 10px 20px;">:</td>'+
             '<td colspan="4"><textarea style="width:100%" class="form-control" id="keterangan-update-'+d[0] +'" name="keterangan-update-'+d[0] +'"></textarea></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<tr>'+
+            '<td  style="padding : 10px">alamat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td colspan="4"><textarea style="width:100%" class="form-control" id="alamat-update-'+d[0] +'" name="alamat-update-'+d[0] +'"></textarea></td>'+
         '</tr>'+
         '<tr>'+
             '<td colspan="3"><div class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"></div></td>'+

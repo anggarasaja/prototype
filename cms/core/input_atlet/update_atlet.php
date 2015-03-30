@@ -10,6 +10,7 @@ $propinsi = $purifier->purify($_POST['propinsi']);
 $pelatih = $purifier->purify($_POST['pelatih']);
 $lat = $purifier->purify($_POST['lat']);
 $lng = $purifier->purify($_POST['lng']);
+$alamat = $purifier->purify($_POST['alamat']);
 
 
 $data_form= array(
@@ -20,7 +21,8 @@ $data_form= array(
 	"id_propinsi" =>$propinsi,
 	"id_pelatih" =>$pelatih,
 	"lat"=>$lat,
-	"lng"=>$lng
+	"lng"=>$lng,
+	"alamat"=>$alamat
 );
 
 $ATLET->updateAtlet($data_form);

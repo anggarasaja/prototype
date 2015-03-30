@@ -36,8 +36,9 @@
                                 { "title": "ID" },
             { "title": "Nama Pemuda" },
             { "title": "Jenis Kelamin" },
-            { "title": "Propinsi", },
-            { "title": "Keterangan", },
+            { "title": "Propinsi" },
+            { "title": "Keterangan" },
+            { "title": "Alamat" },
             
                                 {
                 
@@ -61,13 +62,36 @@
             },
           error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status + " "+ thrownError);
-          }});  
+          }});
+          autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+        { 
+          types: ['geocode'],
+          componentRestrictions: {country: "ID"} 
+        });  
           map = new google.maps.Map(document.getElementById('gmap_city'),
                         {
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 center: new google.maps.LatLng(-1.5,117)
                         });
+          google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+          map.setCenter(place.geometry.location);
+          map.setZoom(13);
+        }
+        else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(15);  // Why 17? Because it looks good.
+        }
+        placeMarker(place.geometry.location);
+        $('#lat').val(place.geometry.location.lat());
+        $('#lng').val(place.geometry.location.lng());
+      });
                 map.setOptions({draggable: true, zoomControl: true, scrollwheel: false, disableDoubleClickZoom: true});
                 google.maps.event.addListener(map, 'dblclick', function(event) {
                         //alert(event.latLng);
@@ -205,7 +229,8 @@
 	        var pemuda_row ;
 	        //var cabor_row;
 	        var jenkel_row;
-	        var propinsi_row;
+            var propinsi_row;
+	        var alamat_row;
 	        
 	        var tr = $(this).closest('tr');
 	        //alert(tr);
@@ -215,7 +240,8 @@
 	        //cabor_row = row.data()[2];
 	        jenkel_row = row.data()[2];
 	        propinsi_row = row.data()[3];
-	        keterangan_row = row.data()[4];
+            keterangan_row = row.data()[4];
+	        alamat_row = row.data()[5];
 	                        
 	        if ( row.child.isShown() ) {
 	            // This row is already open - close it
@@ -241,6 +267,7 @@
                 }).first().attr("value");
                 
                  $("#city_list-update-"+id_row +"").val(value2);
+                 $("#alamat-update-"+id_row +"").val(alamat_row);
                  if(row.data()[3] == "Perempuan"){
                  $('#jenkel-update-'+id_row +'-perempuan').prop("checked", true);
                          
@@ -540,7 +567,8 @@ $('#lat').keyup(function () {
                         		jenkel: $('#jenkel:checked').val(), 
                         		//cabor: $('#cabor').val(), 
                         		propinsi: $('#city_list').val(),
-                        		keterangan: $('#keterangan').val()
+                                keterangan: $('#keterangan').val(),
+                        		alamat: $('#autocomplete').val()
                         	},
                         	function () {
                         		 $('#alert-input-success').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;<\/a>Data berhasil ditambah.<\/div>');
@@ -580,6 +608,7 @@ $('#lat').keyup(function () {
                 $('#pemuda').val('');
                 $('#lat').val('');
                 $('#lng').val('');
+                $('#autocomplete').val('');
                         });
                 }
     });
@@ -647,6 +676,8 @@ $('#lat').keyup(function () {
         '<tr>'+
              '<td style="padding : 10px">Keterangan<\/td><td style="padding:10px 20px 10px 20px;">:<\/td>'+
             '<td><textarea tabindex="1"  style="width:230px;" type="text" name="keterangan-update-'+d[0] +'" id="keterangan-update-'+d[0] +'" class="form-control"><\/textarea><\/td>'+
+            '<td  style="padding : 10px">alamat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td colspan="4"><textarea style="width:100%" class="form-control" id="alamat-update-'+d[0] +'" name="alamat-update-'+d[0] +'"></textarea></td>'+
          '<\/tr>'+ 
         '<tr>'+
             '<td colspan="3"><div class="text-center"><input type="submit" value="Update" style="width:110px; height:34px;" class="btn btn-primary"><\/div><\/td>'+

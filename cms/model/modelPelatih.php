@@ -22,12 +22,14 @@ class modelPelatih extends mysql_db {
 			$id_propinsi = $data['id_propinsi'];
 			$id_cabor = $data['id_cabor'];
 			$pelatih = $data['pelatih'];
-			$id_jk = $data['id_jk']; 
+            $id_jk = $data['id_jk']; 
+			$alamat = $data['alamat']; 
 			
           $query = "Insert into tbl_pelatih
                          set id_propinsi='$id_propinsi',
                          id_cabor='$id_cabor',
                          pelatih='$pelatih',
+                         alamat='$alamat',
                          id_jk='$id_jk'";
                     
          $result = $this->query($query);
@@ -58,7 +60,7 @@ class modelPelatih extends mysql_db {
      	}
      	
      	public function readAllPelatih(){
-     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi";
+     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_pelatih.alamat, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -69,7 +71,7 @@ class modelPelatih extends mysql_db {
      	}
      	
      	public function readAllPelatih_prop($id_propinsi){
-     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_propinsi = $id_propinsi";
+     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_pelatih.alamat, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_propinsi = $id_propinsi";
      		$result = $this->query($query);
         //  echo $result;
           //Wrap Output Query
@@ -79,7 +81,7 @@ class modelPelatih extends mysql_db {
      	}
      	
      	public function readAllPelatih_cabor($id_cabor){
-     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_cabor=$id_cabor";
+     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_pelatih.alamat, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_cabor=$id_cabor";
      		
      		$result = $this->query($query);
         //  echo $result;
@@ -90,7 +92,7 @@ class modelPelatih extends mysql_db {
      	}
 
      	public function readAllPelatih_caborProp($id_propinsi,$id_cabor){
-     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_cabor=$id_cabor and tbl_pelatih.id_propinsi=$id_propinsi";
+     		$query = "select tbl_pelatih.id_pelatih, tbl_pelatih.pelatih, tbl_pelatih.alamat, tbl_cabor.cabor, tbl_jk.jk, tbl_propinsi.propinsi from tbl_pelatih join tbl_cabor on tbl_pelatih.id_cabor = tbl_cabor.id_cabor join tbl_jk on tbl_pelatih.id_jk = tbl_jk.id_jk join tbl_propinsi on tbl_pelatih.id_propinsi = tbl_propinsi.id_propinsi where tbl_pelatih.id_cabor=$id_cabor and tbl_pelatih.id_propinsi=$id_propinsi";
      		
      		$result = $this->query($query);
         //  echo $result;
