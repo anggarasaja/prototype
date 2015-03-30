@@ -274,6 +274,7 @@
         var atlet_row;
         var lat_row;
         var lng_row;
+        var alamat_row;
 			
         var tr = $(this).closest('tr');
         //alert(tr);
@@ -287,6 +288,7 @@
         	propinsi_row = row.data()[4];
         	lat_row = row.data()[6];
         	lng_row = row.data()[7];
+        	alamat_row = row.data()[8];
         	
         if ( row.child.isShown() ) {
             // This row is already open - close it
@@ -312,6 +314,9 @@
   									return $(this).text() == propinsi_row;
 								}).first().attr("value");
 				$("#city_list-update-"+id_row +"").val(value2);
+				
+				$("#alamat-update-"+id_row +"").val(alamat_row);
+				
 								
 				$('#pelatih-update-'+id_row +'').html('<option value="">Pilih Cabang Olahraga dulu ! </option>');	
 				
@@ -379,6 +384,7 @@
      				     error: function (xhr, ajaxOptions, thrownError) {
     			        alert(xhr.status + " "+ thrownError);
     					      }});
+    					      
 				$('#update-atlet-'+id_row +'').submit(function(event) {
 					      	event.preventDefault();
       	$('#alert-update').empty();
@@ -390,6 +396,7 @@
 					var posting = $.post(url, {
 										id_atlet: id_row, 
 										namaatlet: $('#nama-atlet-update-'+id_row +'').val(), 
+										alamat: $('#alamat-update-'+id_row +'').val(), 
 										jenkel: $('.jenkel-update-'+id_row +':checked').val(), 
 										cabor: $('#cabor-update-'+id_row +'').val(), 
 										propinsi: $('#city_list-update-'+id_row +'').val(), 
@@ -418,7 +425,8 @@
 									$('#city_list-update-'+id_row+' option:selected').text(),
 									jk,
 									$('#lat-update-'+id_row +'').val(), 
-									$('#lng-update-'+id_row+'').val()
+									$('#lng-update-'+id_row+'').val(),
+									$('#alamat-update-'+id_row +'').val()
 								], tr[0] );
         		//$('#dataTablesAtlet').dataTable().fnDraw();
         		 var propinsiValue = $('#city_list').val();
@@ -889,6 +897,10 @@ $('#lat').keyup(function () {
   										'<input tabindex="2" type="radio" name="jenkel-update-'+d[0] +'" class="jenkel-update-'+d[0] +'" id="jenkel-update-'+d[0] +'-perempuan" value="2"><label class="input-radio" for="jenkel-update-'+d[0] +'-perempuan">Perempuan</label></input>'+
 									'</label></td>'+
   
+        '</tr>'+
+        '<tr>'+
+            '<td  style="padding : 10px">Alamat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
+            '<td colspan="4"><textarea style="width:100%" class="form-control" id="alamat-update-'+d[0] +'" name="alamat-update-'+d[0] +'"></textarea></td>'+
         '</tr>'+
         '<tr>'+
             '<td style="padding : 10px">Lat</td><td style="padding:10px 20px 10px 20px;">:</td>'+
