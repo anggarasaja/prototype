@@ -149,9 +149,10 @@ class modelAtlet extends mysql_db {
 			$id_jk = $data['id_jk'];
 			$id_pelatih = $data['id_pelatih'];
 			$lat = $data['lat'];
-			$lng = $data['lng'];  
+            $lng = $data['lng'];  
+			$alamat = $data['alamat'];  
 			
-			$query ="UPDATE tbl_atlet SET atlet = '$atlet' , id_pelatih = '$id_pelatih' , id_propinsi = '$id_propinsi' , id_cabor = '$id_cabor' , id_jk = '$id_jk' , lat= '$lat' , lng = '$lng' WHERE id_atlet= $id_atlet";    	
+			$query ="UPDATE tbl_atlet SET atlet = '$atlet' , id_pelatih = '$id_pelatih' , id_propinsi = '$id_propinsi' , id_cabor = '$id_cabor' , id_jk = '$id_jk' , lat= '$lat' , lng = '$lng', alamat = '$alamat' WHERE id_atlet= $id_atlet";    	
 			
 			$result = $this->query($query);
 			

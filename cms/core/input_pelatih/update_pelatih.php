@@ -7,6 +7,7 @@ $id_pelatih = $purifier->purify($_POST['id_pelatih']);
 $jenkel = $purifier->purify($_POST['jenkel']);
 $cabor = $purifier->purify($_POST['cabor']);
 $propinsi = $purifier->purify($_POST['propinsi']);
+$alamat = $purifier->purify($_POST['alamat']);
 
 
 $data_form= array(
@@ -15,6 +16,7 @@ $data_form= array(
 	"id_jk"=> $jenkel,
 	"id_cabor" =>$cabor,
 	"id_propinsi" =>$propinsi,
+	"alamat" =>$alamat,
 );
 
 $PELATIH->updatePelatih($data_form);

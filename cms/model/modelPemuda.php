@@ -68,10 +68,11 @@ class modelPemuda extends mysql_db {
      		$id_propinsi = $data['id_propinsi'];
 			$id_jk = $data['id_jk'];
 			$pemuda = $data['pemuda'];  
-			$keterangan = $data['keterangan'];
+            $keterangan = $data['keterangan'];
+			$alamat = $data['alamat'];
 			echo $keterangan;
 			
-			$query ="UPDATE tbl_pemuda SET pemuda = '$pemuda' , id_propinsi = $id_propinsi , id_jk = $id_jk , keterangan = '$keterangan'  WHERE id_pemuda = $id_pemuda";    	
+			$query ="UPDATE tbl_pemuda SET pemuda = '$pemuda' , id_propinsi = $id_propinsi , id_jk = $id_jk , keterangan = '$keterangan', alamat = '$alamat'  WHERE id_pemuda = $id_pemuda";    	
 			
 			$result = $this->query($query);
 			

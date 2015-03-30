@@ -287,7 +287,8 @@
                                                                                 namapelatih: $('#nama-pelatih-update-'+id_row +'').val().trim(), 
                                                                                 cabor: $('#cabor-update-'+id_row +'').val(),
                                                                                 jenkel: $('.jenkel-update-'+id_row +':checked').val(), 
-                                                                                propinsi: $('#city_list-update-'+id_row +'').val()
+                                                                                propinsi: $('#city_list-update-'+id_row +'').val(),
+                                                                                alamat: $('#alamat-update-'+id_row +'').val()
                                                                                 
                                                                                 },function() {
                                                                                         $('#alert-update-'+id_row +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;<\/a>Data berhasil diubah.<\/div>');
@@ -311,7 +312,8 @@
                                                                         $('#nama-pelatih-update-'+id_row +'').val().trim(),
                                                                         $('#cabor-update-'+id_row +' option:selected').text(), 
                                                                         jk,
-                                                                        $('#city_list-update-'+id_row +' option:selected').text()
+                                                                        $('#city_list-update-'+id_row +' option:selected').text(),
+                                                                         $('#alamat-update-'+id_row +'').val()
                                                                 ]).draw();
                         //$('#dataTablesAtlet').dataTable().fnDraw();
                          var propinsiValue = $('#city_list').val();

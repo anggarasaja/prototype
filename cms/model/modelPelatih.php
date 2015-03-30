@@ -107,9 +107,10 @@ class modelPelatih extends mysql_db {
      		$id_propinsi = $data['id_propinsi'];
 			$id_cabor = $data['id_cabor'];
 			$id_jk = $data['id_jk'];
-			$pelatih = $data['pelatih'];  
+            $pelatih = $data['pelatih'];  
+			$alamat = $data['alamat'];  
 			
-			$query ="UPDATE tbl_pelatih SET pelatih = '$pelatih' , id_propinsi = $id_propinsi , id_cabor = $id_cabor , id_jk = $id_jk WHERE id_pelatih = $id_pelatih";    	
+			$query ="UPDATE tbl_pelatih SET pelatih = '$pelatih' , id_propinsi = $id_propinsi , id_cabor = $id_cabor , id_jk = $id_jk, alamat = '$alamat' WHERE id_pelatih = $id_pelatih";    	
 			
 			$result = $this->query($query);
 			

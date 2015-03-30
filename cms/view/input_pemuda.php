@@ -291,7 +291,8 @@
 		                 //cabor: $('#cabor-update-'+id_row +'').val(),
 		                 jenkel: $('.jenkel-update-'+id_row +':checked').val(), 
 		                 propinsi: $('#city_list-update-'+id_row +'').val(), 
-		                 keterangan: $('#keterangan-update-'+id_row +'').val()
+                         keterangan: $('#keterangan-update-'+id_row +'').val(),
+		                 alamat: $('#alamat-update-'+id_row +'').val()
 		                 
 		              	},function() {
 		               	$('#alert-update-'+id_row +'').fadeTo(2000, 500).slideUp(500).html('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;<\/a>Data berhasil diubah.<\/div>');
@@ -314,7 +315,9 @@
 	                              //$('#cabor-update-'+id_row +' option:selected').text(), 
 	                              jk,
 	                              $('#city_list-update-'+id_row +' option:selected').text(),
-	                              $('#keterangan-update-'+id_row +'').val().trim(),
+                                  $('#keterangan-update-'+id_row +'').val().trim(),
+	                              $('#alamat-update-'+id_row +'').val().trim()
+
 	                      ]).draw();
                         //$('#dataTablesAtlet').dataTable().fnDraw();
                          var propinsiValue = $('#city_list').val();
