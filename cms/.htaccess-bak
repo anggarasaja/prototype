@@ -1,0 +1,10 @@
+RewriteEngine on
+
+ Rewriterule ^content/?                            \/prototype/cms/isi.php
+ Rewriterule ^proses/?                            \/prototype/cms/aksi.php
+
+ #Rewriterule ^api/?                            \/gundar/inaCorner/cms/api.php
+
+
+ Rewriterule ^login/?                            \/prototype/cms/core/login_proses.php
+ Rewriterule ^quit/?                            \/prototype/cms/logout.php

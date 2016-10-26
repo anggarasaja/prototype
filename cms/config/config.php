@@ -35,17 +35,17 @@ $REQUEST="prototype/cms/content";
 $PROSES_REQUEST="prototype/cms/proses";
 
 $domain = "localhost";
-$path="/srv/www/htdocs/prototype/cms/";
+$path="/var/www/html/prototype/cms/";
 
-$path_upload="/srv/www/htdocs/prototype/img/";
-$path_upload_album="/srv/www/htdocs/prototype/album";
+$path_upload="/var/www/html/prototype/cms/files/";
+$path_upload_album="/var/www/html/prototype/album";
 
 class config {
 
      public $db_host = "localhost";
      public $db_user = "root";
-     public $db_pass = "";
-     public $database = "gis_v2";
+     public $db_pass = "admin";
+     public $database = "gis";
      public $url_rewrite_class = "http://localhost/prototype/cms";
      public $session_expired_time = ""; //in second
      public $hashing_number = "d4t4b4s3_m3np0r41235";

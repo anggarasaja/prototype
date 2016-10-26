@@ -40,11 +40,17 @@ else
          case 'data_sarpras':
                include "view/input_sarpras.php";
                break;
+         case 'data_pelopor':
+               include "view/input_pelopor.php";
+               break;
           case 'data_medali':
                include "view/input_medali.php";
                break;
           case 'manage_admin':
                include "view/manage_admin.php";
+               break;
+          case 'import_file':
+               include "view/import_file.php";
                break;
 
           

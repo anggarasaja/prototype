@@ -58,12 +58,15 @@
                                   <li><a href="<?=$url_rewrite?>content/data_knpi"><i class="fa fa-info-circle fa-fw"></i> Input Data KNPI</a></li>
                                   <li><a href="<?=$url_rewrite?>content/data_medali"><i class="fa fa-info-circle fa-fw"></i> Input Data Medali</a></li>
                                   <li><a href="<?=$url_rewrite?>content/data_sarpras"><i class="fa fa-info-circle fa-fw"></i> Input Data Sarana & Prasarana</a></li>
+                                  <li><a href="<?=$url_rewrite?>content/data_pelopor"><i class="fa fa-info-circle fa-fw"></i> Input Data Pelopor Pemuda</a></li>
                              </ul>
+                        </li>
+                        <li>
+                            <a href="<?=$url_rewrite?>content/import_file"><i class="fa fa-file-excel-o fa-fw"></i> Import File Excel</a>
                         </li>
                         <li>
                             <a href="<?=$url_rewrite?>content/manage_admin"><i class="fa fa-users fa-fw"></i> Manage Admin</a>
                         </li>
-
                     </ul>
                     
                     <!-- /#side-menu -->

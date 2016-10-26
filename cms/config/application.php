@@ -20,6 +20,7 @@ require_once __DIR__ . '/../model/modelKNPI.php';
 require_once __DIR__ . '/../model/modelAdmin.php';
 require_once __DIR__ . '/../model/modelMedali.php';
 require_once __DIR__ . '/../model/modelSarpras.php';
+require_once __DIR__ . '/../model/modelPelopor.php';
 
 //Akhir Model
 
@@ -46,6 +47,7 @@ $KNPI = new modelKNPI();
 $ADMIN = new modelAdmin();
 $MEDALI = new modelMedali();
 $SARPRAS = new modelSarpras();
+$PELOPOR = new modelPelopor();
 //$data= $_SESSION['cookies']; 
 //setcookie($cookie_name, $data, time() + $cookie_time);
 

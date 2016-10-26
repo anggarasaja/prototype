@@ -1,5 +1,5 @@
 <?php
-	$conn = mysqli_connect('localhost', 'root','4dmin885dm', 'gis_v2');
+	$conn = mysqli_connect('localhost', 'root','admin', 'gis_v2');
 	if(mysqli_connect_errno()) {
 		echo "gagal terkoneksi dengan mysql: ". mysqli_connect_error();
 	}

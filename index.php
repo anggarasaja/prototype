@@ -352,6 +352,14 @@
 					setMarkerssarpras(sarpras);	
 				}
 			});
+			$.ajax({
+				type:"POST",
+				url : "ajax/load_pelopor.php",
+				dataType: 'json',
+				success: function (pelopor) {			
+					setMarkerspelopor(pelopor);	
+				}
+			});
 			
 			$.ajax({url: "ajax/load_cabor.php",
 	   	success: function(output) {
@@ -599,6 +607,49 @@
     			createMarkerssarpras(beach[0], beach[1], beach[2], beach[3], beach[4]);
     		}
 		}
+
+		function createMarkerspelopor(nam, lat, lon, prp, alm) {
+			var image = {
+    			url: 'icon/pelopor.png',
+  			};
+			var newmarker = new google.maps.Marker({
+      		position: new google.maps.LatLng(lat, lon),
+        		map: map,
+        		icon: image,
+        		zIndex: 10
+    		});
+    		google.maps.event.addListener(newmarker, 'click', function() {
+					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Pelopor Pemuda</h2><table>'+
+					'<tr><td>Nama pelopor</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+nam+'</td></tr>'+
+					'<tr><td>Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lat+'</td></tr>'+
+					'<tr><td>Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lon+'</td></tr>'+
+					'<tr><td>Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+prp+'</td></tr>'+
+ 					'<tr><td>Alamat</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+alm+'</td></tr></table>';
+				});
+    		$('#pelopor').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+			$('#toggleall').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+		}
+					
+		function setMarkerspelopor(locations) {
+			for (var i = 0; i < locations.length; i++) {
+    			var beach = locations[i];
+    			createMarkerspelopor(beach[0], beach[1], beach[2], beach[3], beach[4]);
+    		}
+		}
 		
 		function setHeatmaps(locations) {
 			heatmaps = [];
@@ -657,6 +708,7 @@
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="atlet" class="togglebox" name="Profil Prov" type="checkbox" value="Profil Prov" checked="active"><img width="14" height="14" src="icon/diamond.png" style="margin-top:-5px;margin-left:4px;"> Atlet</span></li>
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png" style="margin-top:-5px;margin-left:4px;"> Knpi</span></li>
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="sarpras" class="togglebox" name="sarpras" type="checkbox" value="sarpras" checked="active"><img width="14" height="14" src="icon/sarpras.png" style="margin-top:-5px;margin-left:4px;"> Sarana Prasarana</span></li>
+										<li><span style="margin-left:60px; color:#5f6f81;"><input id="pelopor" class="togglebox" name="pelopor" type="checkbox" value="pelopor" checked="active"><img width="14" height="14" src="icon/pelopor.png" style="margin-top:-5px;margin-left:4px;"> Pelopor Pemuda</span></li>
 									</ul>
 								</li>
 								<li><a class="gn-icon gn-icon-article" href="dokumentasi/" target="_blank">Documentation</a></li>								
@@ -775,12 +827,14 @@
 		<div style="font-size:12px; position:absolute; right:30.6%;  width: 130px; top:96px; height:120px; background-color:white; z-index:0; padding:0px 12px;"><h4 style="text-align:center; padding:0px;">Tahun</h4>
 			<select id="year_list" style="border-radius:20px; background-color:white; padding-left:3px;">
 				<option value="0">--Pilih Tahun--</option>				
-				<option selected="selected" value="2009">2009</option>
+				<option value="2009">2009</option>
 				<option value="2010">2010</option>
 				<option value="2011">2011</option>
 				<option value="2012">2012</option>
 				<option value="2013">2013</option>
 				<option value="2014">2014</option>
+				<option value="2015">2015</option>
+				<option value="2016" selected>2016</option>
 			</select><br><br>
 			<input type="radio" name="kejuaraan"  value="0" style="vertical-align:middle;" checked> Daerah<br>
 			<input type="radio" name="kejuaraan" value="1" style="vertical-align:middle;"> Nasional
