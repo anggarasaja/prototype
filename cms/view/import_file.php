@@ -60,7 +60,10 @@
 							</td>						
 						</tr>
 					<tr>
-						<td style="padding:10px 20px;" colspan="3" class="text-center"><input type="reset" value="Reset" style="width:110px; height:34px;margin-left: 190px;margin-right:10px" class="btn btn-warning"><input type="submit" value="Submit" style="width:110px; height:34px;" class="btn btn-primary"></td>
+						<td style="padding:10px 30px;" colspan="3" class="text-right">
+              <input type="reset" value="Reset" class="btn btn-warning">
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </td>
 					</tr>
  				</table>				
 				</div>
