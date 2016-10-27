@@ -26,9 +26,8 @@ $id = $_POST['Login'];
 //echo "ID=$id";
 if ( isSet($id)) {
      $user_name1 = $_POST['username'];
-     $user_pass1 = $_POST['password'];
-     $pass = $_POST['password'];
-
+     $user_pass1 = $UTILITY->sha512($_POST['password']);
+     
      if (!$user_pass1 || !$user_name1) {
           $UTILITY->popup_message("Maaf anda harus login terlebih dahulu!");
           $UTILITY->location_goto(".");
