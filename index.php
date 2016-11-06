@@ -360,6 +360,14 @@
 					setMarkerspelopor(pelopor);	
 				}
 			});
+			$.ajax({
+				type:"POST",
+				url : "ajax/load_ppikor.php",
+				dataType: 'json',
+				success: function (ppikor) {			
+					setMarkersppikor(ppikor);	
+				}
+			});
 			
 			$.ajax({url: "ajax/load_cabor.php",
 	   	success: function(output) {
@@ -651,6 +659,49 @@
     		}
 		}
 		
+		function createMarkersppikor(nam, lat, lon, prp, alm) {
+			var image = {
+    			url: 'icon/ppikor.png',
+  			};
+			var newmarker = new google.maps.Marker({
+      		position: new google.maps.LatLng(lat, lon),
+        		map: map,
+        		icon: image,
+        		zIndex: 10
+    		});
+    		google.maps.event.addListener(newmarker, 'click', function() {
+					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">PPIKor Kemenpora</h2><table>'+
+					'<tr><td>Nama Pemuda</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+nam+'</td></tr>'+
+					'<tr><td>Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lat+'</td></tr>'+
+					'<tr><td>Longitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lon+'</td></tr>'+
+					'<tr><td>Propinsi</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+prp+'</td></tr>'+
+ 					'<tr><td>Alamat</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+alm+'</td></tr></table>';
+				});
+    		$('#ppikor').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+			$('#toggleall').click(function(){
+    			if (this.checked) {
+        			newmarker.setMap(map);
+    			}
+    			else {
+    				newmarker.setMap(null);
+    			}
+			});
+		}
+					
+		function setMarkersppikor(locations) {
+			for (var i = 0; i < locations.length; i++) {
+    			var beach = locations[i];
+    			createMarkersppikor(beach[0], beach[1], beach[2], beach[3], beach[4]);
+    		}
+		}
+
 		function setHeatmaps(locations) {
 			heatmaps = [];
 			for (var i = 0; i < locations.length; i++) {
@@ -709,6 +760,7 @@
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="knpi" class="togglebox" name="KNPI" type="checkbox" value="KNPI" checked="active"><img width="14" height="14" src="icon/knpi.png" style="margin-top:-5px;margin-left:4px;"> Knpi</span></li>
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="sarpras" class="togglebox" name="sarpras" type="checkbox" value="sarpras" checked="active"><img width="14" height="14" src="icon/sarpras.png" style="margin-top:-5px;margin-left:4px;"> Sarana Prasarana</span></li>
 										<li><span style="margin-left:60px; color:#5f6f81;"><input id="pelopor" class="togglebox" name="pelopor" type="checkbox" value="pelopor" checked="active"><img width="14" height="14" src="icon/pelopor.png" style="margin-top:-5px;margin-left:4px;"> Pelopor Pemuda</span></li>
+										<li><span style="margin-left:60px; color:#5f6f81;"><input id="ppikor" class="togglebox" name="ppikor" type="checkbox" value="ppikor" checked="active"><img width="14" height="14" src="icon/ppikor.png" style="margin-top:-5px;margin-left:4px;"> PPIKor</span></li>
 									</ul>
 								</li>
 								<li><a class="gn-icon gn-icon-article" href="dokumentasi/" target="_blank">Documentation</a></li>								

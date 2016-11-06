@@ -55,7 +55,8 @@
                  <option value="tbl_knpi">KNPI</option>
                  <option value="tbl_medali">Medali</option>
                  <option value="tbl_sarpras">Sarana dan Prasarana</option> -->
-								 <option value="tbl_pelopor">Pelopor Pemuda</option>
+                 <option value="tbl_pelopor">Pelopor Pemuda</option>
+								 <option value="tbl_ppikor">PPIKor</option>
 							</select>
 							</td>						
 						</tr>

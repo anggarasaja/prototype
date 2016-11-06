@@ -21,6 +21,7 @@ require_once __DIR__ . '/../model/modelAdmin.php';
 require_once __DIR__ . '/../model/modelMedali.php';
 require_once __DIR__ . '/../model/modelSarpras.php';
 require_once __DIR__ . '/../model/modelPelopor.php';
+require_once __DIR__ . '/../model/modelPpikor.php';
 
 //Akhir Model
 
@@ -48,6 +49,7 @@ $ADMIN = new modelAdmin();
 $MEDALI = new modelMedali();
 $SARPRAS = new modelSarpras();
 $PELOPOR = new modelPelopor();
+$PPIKOR = new modelPpikor();
 //$data= $_SESSION['cookies']; 
 //setcookie($cookie_name, $data, time() + $cookie_time);
 
