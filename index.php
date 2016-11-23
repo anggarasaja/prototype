@@ -9,7 +9,6 @@
 		<meta name="keywords" content="Sistem Informasi Geografi, SIG, Geographic Information System, GIS, Kemenpora" />
 		<meta name="author" content="root-x" />
 		<link rel="shortcut icon" href="icon/icon.png">
-		<link href="<?=$url_rewrite?>css/jquery.dataTables.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
@@ -51,6 +50,7 @@
 		var markers = [];
 		var heatmaps = [];
 		var heatmap;
+		var markCluster;
 		var chartMedali;
 		var decodedDataChart;
 		var decodedDataTable;
@@ -153,12 +153,25 @@
 				type:"POST",
 				url : "ajax/load_atlet.php",
 				dataType: 'json',
-				success: function (atlet) {			
+				data: {year:$('#year_list').val()},
+				success: function (atlet) {
 					setMarkers(atlet);	
 				}
 			});
 			$('#year_list').change(function() {
-				heatmap.setMap(null);
+				if (typeof heatmap != "undefined"){
+					heatmap.setMap(null);
+				}
+				$.ajax({
+					type:"POST",
+					url : "ajax/load_atlet.php",
+					dataType: 'json',
+					data: {year:$('#year_list').val()},
+					success: function (atlet) {			
+						setMapOnAll();		
+						setMarkers(atlet);	
+					}
+				});
 			});
 			$('#cabor_list').click(function() {
 				heatmap.setMap(null);
@@ -224,7 +237,9 @@
 				
 			});
 
-			$('#year_list').change(function(e) {		
+			$('#year_list').change(function(e) {
+				if ($("#cabor_list").val() != 0) {
+
 				var selectvalue = $(this).val();
 				var yearCab = $('option:selected',this).val();
 				var valueCab = $('#cabor_list').val();
@@ -276,8 +291,7 @@
      				error: function (xhr, ajaxOptions, thrownError) {
     			      alert(xhr.status + " "+ thrownError);
     			}});
-    			
-				
+				}
 			});
 			
 			$('input[name="kejuaraan"]').click(function(e) {		
@@ -469,7 +483,14 @@
 				});
  
 		}
-		
+		function setMapOnAll() {
+			markCluster.setMap(null);
+			markCluster.clearMarkers();
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+            markers.length = 0;
+		}
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
 			var image = {
     			url: 'icon/diamond.png',
@@ -497,14 +518,6 @@
     		google.maps.event.addListener(newmarker, 'mouseout', function() {
       		this['infowindow'].close();
     		});
-    		$('#atlet').click(function(){
-    			if (this.checked) {
-        			newmarker.setMap(map);
-    			}
-    			else {
-    				newmarker.setMap(null);
-    			}
-			});
 		}
 		
 		function setMarkers(locations) {
@@ -512,22 +525,22 @@
     			var beach = locations[i];
     			createMarkers(beach[0], beach[1], beach[2],beach[3],beach[4],beach[5],beach[6]);
     		}
-			var mcOptions = {gridSize: 50, maxZoom: 7};
-   		var mc = new MarkerClusterer(map, markers, mcOptions);
+		var mcOptions = {gridSize: 50, maxZoom: 7};
+   		markCluster = new MarkerClusterer(map, markers, mcOptions);
    		$('#atlet').click(function(){
     			if (this.checked) {
-        			mc.addMarkers(markers);
+        			markCluster.addMarkers(markers);
     			}
     			else {
-    				mc.clearMarkers();
+    				markCluster.clearMarkers();
     			}
 			});
 			$('#toggleall').click(function(){
     			if (this.checked) {
-        			mc.addMarkers(markers);
+        			markCluster.addMarkers(markers);
     			}
     			else {
-    				mc.clearMarkers();
+    				markCluster.clearMarkers();
     			}
 			});    		
 		}		
