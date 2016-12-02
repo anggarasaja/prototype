@@ -3,7 +3,7 @@
 	if(mysqli_connect_errno()) {
 		echo "gagal terkoneksi dengan mysql: ". mysqli_connect_error();
 	}
-	$sql = sprintf("SELECT * FROM tbl_pelopor");
+	$sql = sprintf("SELECT * FROM tbl_pelopor WHERE tahun = '$_POST[year]'");
 	$query = mysqli_query($conn, $sql);
 	if ($query) {
 		$jsonData = array();

@@ -48,6 +48,9 @@
 
 		var map;
 		var markers = [];
+		var markerPelopor = [];
+		var markerPpikor = [];
+		var markerKnpi = [];
 		var heatmaps = [];
 		var heatmap;
 		var markCluster;
@@ -170,6 +173,36 @@
 					success: function (atlet) {			
 						setMapOnAll();		
 						setMarkers(atlet);	
+					}
+				});
+				$.ajax({
+					type:"POST",
+					url : "ajax/load_pelopor.php",
+					dataType: 'json',
+					data: {year:$('#year_list').val()},
+					success: function (pelopor) {	
+						setMapOnAllPelopor();		
+						setMarkerspelopor(pelopor);	
+					}
+				});
+				$.ajax({
+					type:"POST",
+					url : "ajax/load_ppikor.php",
+					dataType: 'json',
+					data: {year:$('#year_list').val()},
+					success: function (ppikor) {
+						setMapOnAllPpikor();			
+						setMarkersppikor(ppikor);	
+					}
+				});
+				$.ajax({
+					type:"POST",
+					url : "ajax/load_knpi.php",
+					dataType: 'json',
+					data: {year:$('#year_list').val()},
+					success: function (knpi) {	
+						setMapOnAllKnpi();		
+						setMarkersknpi(knpi);	
 					}
 				});
 			});
@@ -354,6 +387,7 @@
 				type:"POST",
 				url : "ajax/load_knpi.php",
 				dataType: 'json',
+				data: {year:$('#year_list').val()},
 				success: function (knpi) {			
 					setMarkersknpi(knpi);	
 				}
@@ -370,6 +404,7 @@
 				type:"POST",
 				url : "ajax/load_pelopor.php",
 				dataType: 'json',
+				data: {year:$('#year_list').val()},
 				success: function (pelopor) {			
 					setMarkerspelopor(pelopor);	
 				}
@@ -378,6 +413,7 @@
 				type:"POST",
 				url : "ajax/load_ppikor.php",
 				dataType: 'json',
+				data: {year:$('#year_list').val()},
 				success: function (ppikor) {			
 					setMarkersppikor(ppikor);	
 				}
@@ -491,6 +527,24 @@
 			}
             markers.length = 0;
 		}
+		function setMapOnAllPelopor() {
+			for (var i = 0; i < markerPelopor.length; i++) {
+				markerPelopor[i].setMap(null);
+			}
+            markerPelopor.length = 0;
+		}
+		function setMapOnAllPpikor() {
+			for (var i = 0; i < markerPpikor.length; i++) {
+				markerPpikor[i].setMap(null);
+			}
+            markerPpikor.length = 0;
+		}
+		function setMapOnAllKnpi() {
+			for (var i = 0; i < markerKnpi.length; i++) {
+				markerKnpi[i].setMap(null);
+			}
+            markerKnpi.length = 0;
+		}
 		function createMarkers(namatlet, lat, lon, jkel, cabor, prop, pel) {
 			var image = {
     			url: 'icon/diamond.png',
@@ -555,6 +609,7 @@
         		icon: image,
         		zIndex: 10
     		});
+    		markerKnpi.push(newmarker);
     		google.maps.event.addListener(newmarker, 'click', function() {
 					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">KNPI</h2><table>'+
 					'<tr><td>Latitude</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+lat+'</td></tr>'+
@@ -639,6 +694,7 @@
         		icon: image,
         		zIndex: 10
     		});
+    		markerPelopor.push(newmarker);
     		google.maps.event.addListener(newmarker, 'click', function() {
 					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">Pelopor Pemuda</h2><table>'+
 					'<tr><td>Nama pelopor</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+nam+'</td></tr>'+
@@ -682,6 +738,7 @@
         		icon: image,
         		zIndex: 10
     		});
+    		markerPpikor.push(newmarker);
     		google.maps.event.addListener(newmarker, 'click', function() {
 					details.innerHTML = '<h2 style="margin-bottom:30px; margin-top:0px;">PPIKor Kemenpora</h2><table>'+
 					'<tr><td>Nama Pemuda</td><td style="padding:10px 20px 10px 20px;">:</td><td>'+nam+'</td></tr>'+
